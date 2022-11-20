@@ -6,7 +6,7 @@ const cors = require('cors');
 
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
-const {oneByOne,endBlinkRed, blinkRed,blinkGreen,tryRed,tryGreen,endBlinkGreen, blinkYellow,tryYellow,endBlinkYellow,servo, flowingLeds,sensor } = require('./raspberryfun');
+const {endBlink,oneByOne,endBlinkRed, blinkRed,blinkGreen,tryRed,tryGreen,endBlinkGreen, blinkYellow,tryYellow,endBlinkYellow,servo, flowingLeds,sensor } = require('./raspberryfun');
 
 const router = require('./router');
 
@@ -44,9 +44,14 @@ io.on('connection', (socket) => {
     if(message === 'blink red'){
       blinkRed()
     }
+    
     if(message === 'all'){
       oneByOne()
     }
+    if(message === 'exit'){
+      endBlink()
+    }
+    
     else if(message === 'red'){
       tryRed()
     }

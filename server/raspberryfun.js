@@ -1,19 +1,19 @@
 
-function oneByOne(){
-  setTimeout( flowingLeds,0)
-  setTimeout( servo, 5000)
-  setTimeout(blinkRed,25000)
-  setTimeout(blinkGreen,30000)
-  setTimeout(blinkYellow,35000)
-  setTimeout(tryRed,40000)
-  setTimeout(endBlinkRed,45000)
-  setTimeout(tryGreen,45000)
-  setTimeout(endBlinkGreen,50000)
-  setTimeout(tryYellow,50000)
-  setTimeout(endBlinkYellow,55000)
-  setTimeout(sensor, 55000)
+// function oneByOne(){
+//   setTimeout( flowingLeds,0)
+//   setTimeout( servo, 5000)
+//   setTimeout(blinkRed,25000)
+//   setTimeout(blinkGreen,30000)
+//   setTimeout(blinkYellow,35000)
+//   setTimeout(tryRed,40000)
+//   setTimeout(endBlinkRed,45000)
+//   setTimeout(tryGreen,45000)
+//   setTimeout(endBlinkGreen,50000)
+//   setTimeout(tryYellow,50000)
+//   setTimeout(endBlinkYellow,55000)
+//   setTimeout(sensor, 55000)
   
-}
+// }
 function blinkRed(){
   var Gpio = require('onoff').Gpio; 
   var LED = new Gpio(4, 'out'); 
@@ -33,21 +33,95 @@ function blinkLED() {
 }
 setTimeout(endBlink, 5000); 
 }
+
 function tryRed(){
   var Gpio = require('onoff').Gpio; 
   var LED = new Gpio(4, 'out'); 
-  if (LED.readSync() === 0) { 
-    LED.writeSync(1);   
-  }
-
-
+  return new Promise((resolve) => {
+    setTimeout(()=> {
+      if (LED.readSync() === 0) { 
+    LED.writeSync(1);   }
+  
+    },10)
+  resolve()})
 }
 function endBlinkRed() {
   var Gpio = require('onoff').Gpio; 
   var LED = new Gpio(4, 'out');
-  LED.writeSync(0); 
-  LED.unexport(); 
+  return new Promise((resolve) => {
+    setTimeout(()=> {
+      
+    LED.writeSync(0); 
+    LED.unexport(); 
+      resolve()
+},3000)})
 }
+function tryGreen(){
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(17, 'out'); 
+  return new Promise((resolve) => {
+    setTimeout(()=> {
+      if (LED.readSync() === 0) { 
+    LED.writeSync(1);   }
+  
+    },10)
+  resolve()})}
+function endBlinkGreen() {
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(17, 'out');
+  return new Promise((resolve) => {
+    setTimeout(()=> {
+      
+    LED.writeSync(0); 
+    LED.unexport(); 
+    resolve()
+},3000)
+  })}
+  function tryYellow(){
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(27, 'out'); 
+  return new Promise((resolve) => {
+    setTimeout(()=> {
+      if (LED.readSync() === 0) { 
+    LED.writeSync(1);   }
+  
+    },10)
+  resolve()})}
+function endBlinkYellow() {
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(27, 'out');
+  return new Promise((resolve) => {
+    setTimeout(()=> {
+      
+    LED.writeSync(0); 
+    LED.unexport(); 
+    resolve()
+},3000)
+  })}
+
+async function oneByOne() {
+  await tryRed();
+  await endBlinkRed();
+  await tryGreen();
+  await endBlinkGreen();
+  await tryYellow();
+  await endBlinkYellow();
+}
+// function tryRed(){
+//   var Gpio = require('onoff').Gpio; 
+//   var LED = new Gpio(4, 'out'); 
+//   if (LED.readSync() === 0) { 
+//     LED.writeSync(1);   
+//   }
+
+
+// }
+// function endBlinkRed() {
+//   var Gpio = require('onoff').Gpio; 
+//   var LED = new Gpio(4, 'out');
+//   LED.writeSync(0); 
+//   LED.unexport(); 
+// }
 
 
 
@@ -71,19 +145,19 @@ function blinkLED() {
 }
 setTimeout(endBlink, 5000); 
 }
-function tryGreen(){
-  var Gpio = require('onoff').Gpio; 
-  var LED = new Gpio(17, 'out'); 
-  if (LED.readSync() === 0) { 
-    LED.writeSync(1); 
-  }
-}
- function endBlinkGreen() { 
-  var Gpio = require('onoff').Gpio; 
-  var LED = new Gpio(17, 'out'); 
-  LED.writeSync(0); 
-  LED.unexport(); 
- }
+// function tryGreen(){
+//   var Gpio = require('onoff').Gpio; 
+//   var LED = new Gpio(17, 'out'); 
+//   if (LED.readSync() === 0) { 
+//     LED.writeSync(1); 
+//   }
+// }
+//  function endBlinkGreen() { 
+//   var Gpio = require('onoff').Gpio; 
+//   var LED = new Gpio(17, 'out'); 
+//   LED.writeSync(0); 
+//   LED.unexport(); 
+//  }
 
 
 function blinkYellow(){
@@ -105,19 +179,19 @@ function blinkLED() {
 }
 setTimeout(endBlink, 5000); 
 }
-function tryYellow(){
-  var Gpio = require('onoff').Gpio; 
-  var LED = new Gpio(27, 'out'); 
-  if (LED.readSync() === 0) { 
-    LED.writeSync(1); 
-  }
-}
-function endBlinkYellow() { 
-  var Gpio = require('onoff').Gpio; 
-  var LED = new Gpio(27, 'out'); 
-  LED.writeSync(0); 
-  LED.unexport();
-}
+// function tryYellow(){
+//   var Gpio = require('onoff').Gpio; 
+//   var LED = new Gpio(27, 'out'); 
+//   if (LED.readSync() === 0) { 
+//     LED.writeSync(1); 
+//   }
+// }
+// function endBlinkYellow() { 
+//   var Gpio = require('onoff').Gpio; 
+//   var LED = new Gpio(27, 'out'); 
+//   LED.writeSync(0); 
+//   LED.unexport();
+// }
 
 
 
@@ -196,11 +270,14 @@ function measureDistance(callback) {
 
   trigger.trigger(10, 1); 
 }
-setInterval(function () {
+const end = setInterval(function () {
   measureDistance(function (distance) {
     console.log(distance + 'cm');
   });
 }, 1000);
+setTimeout(() => {
+  clearInterval(end);
+}, 20000)
 
 }
 
@@ -229,11 +306,6 @@ setTimeout(() => {
   clearInterval(end);
 }, 20000)
 
-function stopServo(){
-  
-  console.log('Servo stopped')
-}
-setTimeout(stopServo,10000)
 }
 
 
