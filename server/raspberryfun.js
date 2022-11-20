@@ -15,37 +15,37 @@ function oneByOne(){
   
 }
 function blinkRed(){
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
-  var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
-function blinkLED() { //function to start blinking
-  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-    LED.writeSync(1); //set pin state to 1 (turn LED on)
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(4, 'out'); 
+  var blinkInterval = setInterval(blinkLED, 250); 
+function blinkLED() { 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1); 
     
   } else {
-    LED.writeSync(0); //set pin state to 0 (turn LED off)
+    LED.writeSync(0); 
   }
 }
-  function endBlink() { //function to stop blinking
-  clearInterval(blinkInterval); // Stop blink intervals
-  LED.writeSync(0); // Turn LED off
-  LED.unexport(); // Unexport GPIO to free resources
+  function endBlink() { 
+  clearInterval(blinkInterval); 
+  LED.writeSync(0); 
+  LED.unexport(); 
 }
-setTimeout(endBlink, 5000); //stop blinking after 5 seconds
+setTimeout(endBlink, 5000); 
 }
 function tryRed(){
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
-  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-    LED.writeSync(1); //set pin state to 1 (turn LED on)  
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(4, 'out'); 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1);   
   }
 
 
 }
-function endBlinkRed() { //function to stop blinking
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(4, 'out'); //use GPIO pin 4, and specify that it is output
-  LED.writeSync(0); // Turn LED off
+function endBlinkRed() {
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(4, 'out');
+  LED.writeSync(0); 
   LED.unexport(); 
 }
 
@@ -53,71 +53,70 @@ function endBlinkRed() { //function to stop blinking
 
 
 function blinkGreen(){
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(17, 'out'); //use GPIO pin 4, and specify that it is output
-  var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
-function blinkLED() { //function to start blinking
-  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-    LED.writeSync(1); //set pin state to 1 (turn LED on)
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(17, 'out'); 
+  var blinkInterval = setInterval(blinkLED, 250); 
+function blinkLED() { 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1); 
     
   } else {
-    LED.writeSync(0); //set pin state to 0 (turn LED off)
+    LED.writeSync(0); 
   }
 }
-  function endBlink() { //function to stop blinking
-  clearInterval(blinkInterval); // Stop blink intervals
-  LED.writeSync(0); // Turn LED off
-  LED.unexport(); // Unexport GPIO to free resources
+  function endBlink() { 
+  clearInterval(blinkInterval); 
+  LED.writeSync(0); 
+  LED.unexport(); 
 }
-setTimeout(endBlink, 5000); //stop blinking after 5 seconds
+setTimeout(endBlink, 5000); 
 }
 function tryGreen(){
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(17, 'out'); //use GPIO pin 4, and specify that it is output
-  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-    LED.writeSync(1); //set pin state to 1 (turn LED on)  
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(17, 'out'); 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1); 
   }
 }
- function endBlinkGreen() { //function to stop blinking
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(17, 'out'); //use GPIO pin 4, and specify that it is output
-  LED.writeSync(0); // Turn LED off
-  LED.unexport(); // Unexport GPIO to free resources
+ function endBlinkGreen() { 
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(17, 'out'); 
+  LED.writeSync(0); 
+  LED.unexport(); 
  }
 
 
 function blinkYellow(){
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(27, 'out'); //use GPIO pin 4, and specify that it is output
-  var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
-function blinkLED() { //function to start blinking
-  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-    LED.writeSync(1); //set pin state to 1 (turn LED on)
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(27, 'out'); 
+  var blinkInterval = setInterval(blinkLED, 250); 
+function blinkLED() { 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1); 
     
   } else {
-    LED.writeSync(0); //set pin state to 0 (turn LED off)
+    LED.writeSync(0); 
   }
 }
-  function endBlink() { //function to stop blinking
-  clearInterval(blinkInterval); // Stop blink intervals
-  LED.writeSync(0); // Turn LED off
-  LED.unexport(); // Unexport GPIO to free resources
+  function endBlink() { 
+  clearInterval(blinkInterval); 
+  LED.writeSync(0); 
+  LED.unexport(); 
 }
-setTimeout(endBlink, 5000); //stop blinking after 5 seconds
+setTimeout(endBlink, 5000); 
 }
 function tryYellow(){
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(27, 'out'); //use GPIO pin 4, and specify that it is output
- //function to start blinking
-  if (LED.readSync() === 0) { //check the pin state, if the state is 0 (or off)
-    LED.writeSync(1); //set pin state to 1 (turn LED on)  
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(27, 'out'); 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1); 
   }
 }
-function endBlinkYellow() { //function to stop blinking
-  var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-  var LED = new Gpio(27, 'out'); //use GPIO pin 4, and specify that it is output
-  LED.writeSync(0); // Turn LED off
-  LED.unexport(); // Unexport GPIO to free resources
+function endBlinkYellow() { 
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(27, 'out'); 
+  LED.writeSync(0); 
+  LED.unexport();
 }
 
 
@@ -145,11 +144,11 @@ function flowingLeds() {
   if (dir == "up") indexCount++ 
 };
 
-function unexportOnClose() { //function to run when exiting program
-  clearInterval(flowInterval); //stop flow interwal
-  leds.forEach(function(currentValue) { //for each LED
-    currentValue.writeSync(0); //turn off LED
-    currentValue.unexport(); //unexport GPIO
+function unexportOnClose() {
+  clearInterval(flowInterval); 
+  leds.forEach(function(currentValue) {
+    currentValue.writeSync(0); 
+    currentValue.unexport(); 
   });
 };
 process.on('SIGINT', unexportOnClose);
@@ -171,10 +170,10 @@ function sensor(){
   trigger = new Gpio(23, {mode: Gpio.OUTPUT}),
   echo = new Gpio(24, {mode: Gpio.INPUT, alert: true});
 
-// The number of microseconds it takes sound to travel 1cm at 20 degrees celcius
+
 var MICROSECDONDS_PER_CM = 1e6/34321;
 
-trigger.digitalWrite(0); // Make sure trigger is low
+trigger.digitalWrite(0); 
 
 function measureDistance(callback) {
   var startTick;
@@ -187,7 +186,7 @@ function measureDistance(callback) {
       startTick = tick;
     } else {
       endTick = tick;
-      diff = (endTick >> 0) - (startTick >> 0); // Unsigned 32 bit arithmetic
+      diff = (endTick >> 0) - (startTick >> 0); 
       callback(diff / 2 / MICROSECDONDS_PER_CM);
       echo.removeListener('alert', alertHandler);
     }
@@ -195,10 +194,8 @@ function measureDistance(callback) {
 
   echo.on('alert', alertHandler);
 
-  trigger.trigger(10, 1); // Set trigger high for 10 microseconds
+  trigger.trigger(10, 1); 
 }
-
-// Trigger a distance measurement once per second
 setInterval(function () {
   measureDistance(function (distance) {
     console.log(distance + 'cm');
