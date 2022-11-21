@@ -28,27 +28,6 @@ setTimeout(() => {
 
 }
 
-function blinkRed(){
-  var Gpio = require('onoff').Gpio; 
-  var LED = new Gpio(4, 'out'); 
-  return new Promise((resolve) => { 
-    var blinkInterval = setInterval(blinkLED, 250); 
-function blinkLED() { 
-  if (LED.readSync() === 0) { 
-    LED.writeSync(1); 
-    
-  } else {
-    LED.writeSync(0); 
-  }
-}
-setTimeout(() => {
-clearInterval(blinkInterval); 
-  LED.writeSync(0); 
-  LED.unexport(); 
-  resolve()
-},5000)
-  })
-}
 
 function blinkGreen(){
   var Gpio = require('onoff').Gpio; 
@@ -70,6 +49,27 @@ clearInterval(blinkInterval);
   resolve()
 },5000)
   }) 
+}
+function blinkRed(){
+  var Gpio = require('onoff').Gpio; 
+  var LED = new Gpio(4, 'out'); 
+  return new Promise((resolve) => { 
+    var blinkInterval = setInterval(blinkLED, 250); 
+function blinkLED() { 
+  if (LED.readSync() === 0) { 
+    LED.writeSync(1); 
+    
+  } else {
+    LED.writeSync(0); 
+  }
+}
+setTimeout(() => {
+clearInterval(blinkInterval); 
+  LED.writeSync(0); 
+  LED.unexport(); 
+  resolve()
+},5000)
+  })
 }
 function blinkYellow(){
   var Gpio = require('onoff').Gpio; 
