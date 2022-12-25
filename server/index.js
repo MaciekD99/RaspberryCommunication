@@ -1,110 +1,139 @@
-const http = require('http');
-const express = require('express');
-const socketio = require('socket.io');
-const cors = require('cors');
+const http = require('http')
+const express = require('express')
+const socketio = require('socket.io')
+const cors = require('cors')
+const messageRoute = require('./messageRoute')
+const mongoose = require('mongoose')
 
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
+const {
+    oneByOne,
+    endBlinkRed,
+    blinkRed,
+    blinkGreen,
+    tryRed,
+    tryGreen,
+    endBlinkGreen,
+    blinkYellow,
+    tryYellow,
+    endBlinkYellow,
+    servo,
+    flowingLeds,
+    sensor,
+} = require('./raspberryfun')
 
-
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
-const {endBlink,oneByOne,endBlinkRed, blinkRed,blinkGreen,tryRed,tryGreen,endBlinkGreen, blinkYellow,tryYellow,endBlinkYellow,servo, flowingLeds,sensor } = require('./raspberryfun');
-
-const router = require('./router');
-
-
+const router = require('./router')
 
 const PORT = process.env.PORT || 5000
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
 
-app.use(cors());
-app.use(router);
-let createdTime = Date.now();
+app.use(cors())
+app.use(router)
+app.use('/messages', messageRoute)
+let createdTime = Date.now()
 
 io.on('connection', (socket) => {
-  socket.on('join', ({ name, room }, callback) => {
-    const { error, user } = addUser({ id: socket.id, name, room });
+    socket.on('join', ({ name, room }, callback) => {
+        const { error, user } = addUser({ id: socket.id, name, room })
 
-    if(error) return callback(error);
+        if (error) return callback(error)
 
-    socket.join(user.room);
+        socket.join(user.room)
 
-    // socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`, createdTime});
-    // socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
+        // socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`, createdTime});
+        // socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
 
-    io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+        io.to(user.room).emit('roomData', {
+            room: user.room,
+            users: getUsersInRoom(user.room),
+        })
 
-    callback();
-  });
+        callback()
+    })
 
-  
+    socket.on('sendMessage', async (message, callback) => {
+        const user = getUser(socket.id)
 
-  socket.on('sendMessage', (message, callback) => {
-    const user = getUser(socket.id);
-    if(message === 'blink red'){
-      blinkRed()
-    }
-    
-    if(message === 'all'){
-      oneByOne()
-    }
-    if(message === 'exit'){
-      endBlink()
-    }
-    
-    else if(message === 'red'){
-      tryRed()
-    }
-    else if(message === 'stop red'){
-      endBlinkRed()
-    }
-    else if(message === 'blink green'){
-      blinkGreen()
-    }
-    
-    else if(message ==='green'){
-      tryGreen()
-    }
-    else if (message ==='stop green'){
-      endBlinkGreen()
-    }
-    else if(message === 'blink yellow'){
-      blinkYellow()
-    }
-    
-    else if(message ==='yellow'){
-      tryYellow()
-    }
-    else if(message ==='stop yellow'){
-      endBlinkYellow()
-    }
-    else if(message ==='flowing leds'){
-      flowingLeds()
-    }
-    else if(message ==='run servo'){
-      servo()
-    }
-    else if(message ==='sensor'){
-      sensor()
-    }
-    
-    
+        switch(message) {
+          case 'blink red': {
+           await blinkRed();
+            break;
+          }
+          case 'all': {
+            await oneByOne();
+            break;
+          }
+          case 'sensor': {
+            await sensor();
+            break;
+          }
+          case 'run servo': {
+            await servo();
+            break;
+          }
+          case 'flowing leds': {
+await flowingLeds()
+break;
+          }
+          case 'stop yellow': {
+            await  endBlinkYellow();
+            break;
+          }
+          case 'yellow': {
+            await tryYellow();
+            break;
+          }
+          case 'blink yellow': {
+            await blinkYellow();
+            break;
+          }
+          case 'stop green': {
+            await endBlinkGreen();
+            break;
+          }
+          case 'green': {
+            await tryGreen();
+            break;
+          }
+          case 'blink green': {
+            await blinkGreen();
+            break;
+          }
+          case 'red': {
+            await tryRed();
+            break;
+          }
+          case 'stop red': {
+            await endBlinkRed();
+            break;
+          }
+        }
 
-    io.to(user.room).emit('message', { user: user.name, text: message,createdTime });
+        io.to(user.room).emit('message', {
+            user: user.name,
+            text: message,
+            createdTime,
+        })
 
-    callback();
-  });
+        callback()
+    })
 
-  socket.on('disconnect', () => {
-    const user = removeUser(socket.id);
+    socket.on('disconnect', () => {
+        const user = removeUser(socket.id)
 
-    if(user) {
-      io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
-      io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
-    }
-  })
-});
+        if (user) {
+            io.to(user.room).emit('message', {
+                user: 'Admin',
+                text: `${user.name} has left.`,
+            })
+            io.to(user.room).emit('roomData', {
+                room: user.room,
+                users: getUsersInRoom(user.room),
+            })
+        }
+    })
+})
 
-
-server.listen(PORT, () => console.log(`Server has started on port ${PORT}`));
-
+server.listen(PORT, () => console.log(`Server has started on port ${PORT}`))
