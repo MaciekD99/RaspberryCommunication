@@ -3,8 +3,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const cors = require('cors')
 const messageRoute = require('./messageRoute')
-const mongoose = require('mongoose')
-
+const { Archiver } = require('./archiver')
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users')
 const {
     oneByOne,
@@ -28,7 +27,8 @@ const PORT = process.env.PORT || 5000
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
-
+const archive = new Archiver()
+archive.start()
 app.use(cors())
 app.use(router)
 app.use('/messages', messageRoute)
@@ -50,67 +50,73 @@ io.on('connection', (socket) => {
             users: getUsersInRoom(user.room),
         })
 
+        const archiveMessages = archive.fetch(user.room)
+        for (const message of archiveMessages) {
+            io.to(user.room).emit('message', message)
+        }
+
         callback()
     })
 
     socket.on('sendMessage', async (message, callback) => {
         const user = getUser(socket.id)
 
-        switch(message) {
-          case 'blink red': {
-           await blinkRed();
-            break;
-          }
-          case 'all': {
-            await oneByOne();
-            break;
-          }
-          case 'sensor': {
-            await sensor();
-            break;
-          }
-          case 'run servo': {
-            await servo();
-            break;
-          }
-          case 'flowing leds': {
-await flowingLeds()
-break;
-          }
-          case 'stop yellow': {
-            await  endBlinkYellow();
-            break;
-          }
-          case 'yellow': {
-            await tryYellow();
-            break;
-          }
-          case 'blink yellow': {
-            await blinkYellow();
-            break;
-          }
-          case 'stop green': {
-            await endBlinkGreen();
-            break;
-          }
-          case 'green': {
-            await tryGreen();
-            break;
-          }
-          case 'blink green': {
-            await blinkGreen();
-            break;
-          }
-          case 'red': {
-            await tryRed();
-            break;
-          }
-          case 'stop red': {
-            await endBlinkRed();
-            break;
-          }
+        switch (message) {
+            case 'blink red': {
+                blinkRed()
+                break
+            }
+            case 'all': {
+                oneByOne()
+                break
+            }
+            case 'sensor': {
+                sensor()
+                break
+            }
+            case 'run servo': {
+                servo()
+                break
+            }
+            case 'flowing leds': {
+                flowingLeds()
+                break
+            }
+            case 'stop yellow': {
+                endBlinkYellow()
+                break
+            }
+            case 'yellow': {
+                tryYellow()
+                break
+            }
+            case 'blink yellow': {
+                blinkYellow()
+                break
+            }
+            case 'stop green': {
+                endBlinkGreen()
+                break
+            }
+            case 'green': {
+                tryGreen()
+                break
+            }
+            case 'blink green': {
+                blinkGreen()
+                break
+            }
+            case 'red': {
+                tryRed()
+                break
+            }
+            case 'stop red': {
+                endBlinkRed()
+                break
+            }
         }
 
+        await archive.archive(message, user.name, createdTime, user.room)
         io.to(user.room).emit('message', {
             user: user.name,
             text: message,
