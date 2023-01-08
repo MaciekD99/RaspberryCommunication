@@ -1,0 +1,716 @@
+Celem rozdziału jest przedstawienie środowiska i bibliotek umożliwiających programowanie z użyciem urządzenia Raspberry Pi.
+
+\section{Środowisko programistyczne}
+W celu realizacji założeń projektowych, program został wykonany przy użyciu środowiska programistycznego Visual Studio Code. JavaScript jest językiem programowym, który jest popularny wśród programistów i istnieje wiele gotowych bibliotek i frameworków, które można wykorzystać do tworzenia aplikacji. Visual Studio Code jest środowiskiem, które ma dobrą obsługę JavaScriptu i Node.js, gwarantując narzędzia do podpowiadania składni i automatycznego uzupełniania kodu IntelliSense, a także narzędzia do debugowania i testowania aplikacji. Visual Studio Code również umożliwia korzystanie z niego na różnych systemach operacyjnych takich jak Linux czy Windows. Raspberry Pi ma wbudowany system operacyjny Linux dzięki czemu środowisko to idealnie się wkomponuje w tworzeniu aplikacji na tym urządzeniu. Aplikacja składa się z dwóch głównych elementów. Jest to serwer i klient. Część serwerowa to część aplikacji, która działa na serwerze i odpowiada za przetwarzanie i przechowywanie danych oraz obsługę żądań użytkowników. Została napisana w języku programowania JavaScript przy użyciu Node.js. Część klienta to część aplikacji, która działa na urządzeniu użytkownika i odpowiada za wyświetlenie interfejsu użytkownika oraz komunikację z serwerem. Została ona napisana również w języku programowania JavaScript przy użyciu biblioteki React.js. Visual Studio Code pozwala na łatwą obsługę i zarządzanie strukturą plików co będzie pomocne przy tak dużych zasobach drzewa programu.
+
+\section{Język JavaScript}
+JavaScript jest językiem skryptowym co oznacza, że jest on interpretowany przez przeglądarkę internetową, a nie kompilowany do binarnego kodu. JavaScript umożliwia tworzenie dynamicznych stron internetowych, a także pozwala na projektowanie interfejsów użytkownika. JavaScript można używać w różnych aplikacjach gdzie wymagane jest sterowanie sprzętem czy serwerem. Za pomocą szerokiego asortymentu frameworków, programiści mogą tworzyć aplikacje mobilne i internetowe. Najpopularniejszymi stosowanymi bibliotekami są React.js i Node.js. JavaScript jest językiem programowania, który może byś stosowany po stronie klienta gdzie znajduje się cały front-end aplikacji, ale również dzięki Node.js, JavaScript może być stosowany po stronie serwera czyli back-endu. Te dwie główne cechy sprawiają, że przy stosowaniu JavaScriptu możemy tworzyć dynamiczne i interaktywne aplikacje internetowe. Dzięki możliwości programowania Raspberry Pi za pomocą języka Javascript, jesteśmy w stanie tworzyć aplikacje i skrypty, które będą działać na tym urządzeniu. Istnieje wiele gotowych bibliotek, które pozwalają na połączenie i obsługę różnych elementów i urządzeń zewnętrznych podłączonych do Raspberry Pi. Sterowanie pinami GPIO przy użyciu języka programowania Javascript wymaga zaimportowania odpowiednich bibliotek. JavaScript również jest zgodny z innymi systemami operacyjnymi w tym również z Linuxem, który jest domyślnym systemem operacyjnym dla Raspberry Pi.
+
+\section{Node.js}
+Node.js to platforma oparta na języku JavaScript, która służy do budowy back-endu aplikacji oraz umożliwia uruchamianie kodu JavaScript poza przeglądarką internetową, np. na serwerze. Idealnie odnajduje swoje zastosowanie przy tworzeniu aplikacji sieciowych takich jak serwery internetowe. Node.js jest używany głównie do uzyskiwania dostępu do baz danych czy obsługi żądań. Programowanie stosowane w Node.js jest lekkie i wydajne co sprawia, że idealnie się odnajduje w programowaniu urządzeń o niewielkich zasobach sprzętowych jak Raspberry Pi. Node.js został zaprojektowany do wykonania optymalizacji przepustowości i skalowalności w aplikacjach internetowych przez co jest idealnym rozwiązaniem dla tworzenia aplikacji internetowych czasu rzeczywistego. Swoje szerokie zastosowanie może zawdzięczać menadżerowi pakietów węzłów npm, który zapewnia dostęp do setek tysięcy pakietów i bibliotek. Express.js to biblioteka oparta na platformie Node.js i pozwala na tworzenie aplikacji serwerowych. Jej głównym zadaniem jest udostępnianie szeregu narzędzi do obsługi protokołów sieciowych oraz umożliwienie łatwego tworzenia aplikacji serwerowych z wykorzystaniem technologii middleware. Express.js może być używany z Raspberry Pi do tworzenia aplikacji serwerowych, który umożliwia dostęp do zasobów za pośrednictwem odpowiedniego protokołu. Również express.js stosuje się do tworzenia serwera sieciowego, który umożliwi komunikację między urządzeniami zewnętrznymi. Główną funkcją, którą nam udostępnia biblioteka Express.js jest możliwość tworzenia aplikacji, które wykorzystują funkcję Raspberry Pi, takie jak porty GPIO do obsługi urządzeń zewnętrznych. Platforma Node.js udostępnia nam kilka modułów potrzebnych do obsługi urządzenia Raspberry Pi:
+\begin{itemize}  
+	\item \textbf{Moduł on-off}, umożliwia nam obsługę wejść/wyjść cyfrowych dla urządzeń zewnętrznych. Może być używany do sterowania np. diodami LED czy przełącznikami poprzez interfejsy takie jak GPIO lub inne interfejsy cyfrowe jak I2C lub SPI. Moduł on-off umożliwia programowi dostęp do funkcji wejść/wyjść cyfrowych systemu operacyjnego. Może być używana z systemem operacyjnym Windows czy Linux dzięki czemu idealnie odnajduje się przy programowaniu z użyciem Raspberry Pi. Moduł on-off zapewnia również rejestrowanie zdarzeń zmiany stanu wejścia i wyjścia i reagować na nie. Dzięki temu modułowi jesteśmy w stanie integrować urządzenia zewnętrzne z aplikacjami Node.js, a także tworzyć projekty z wykorzystaniem Raspberry Pi i innych urządzeń z interfejsem GPIO.
+	\\
+	\item \textbf{Moduł pigpio}, biblioteka ta korzysta z frameworka Node.js. Moduł pigpio może być używana w celu kontrolowania i monitorowania sygnałów z wejść/wyjść cyfrowych oraz modulację szerokości impulsów na Raspberry Pi. Dzięki tej bibliotece jesteśmy w stanie tworzyć projekty z użyciem urządzeń elektronicznych takie jak diody LED czy serwomechanizmy, które są podłączone do portów GPIO urządzenia Raspberry Pi. Biblioteka pigpio znalazła szerokie zastosowanie w aplikacjach gdzie wymagane jest sterowanie urządzeniami elektrycznymi lub elektronicznymi.
+	\\
+\end{itemize}
+
+\section{React.js}
+React.js to biblioteka Javascript, która swoje główne zastosowanie ma przy tworzeniu interfejsów użytkownika po stronie front-endu. Pozwala tworzyć dynamiczne aplikacje, w których interfejs użytkownika reaguje na zmiany wprowadzone w aplikacji. Swoje szerokie zastosowanie znajduje tam gdzie aplikacje opierają swoje funkcjonowanie na interakcjach użytkownika z elementami interfejsu użytkownika. React.js może idealnie współpracować z urządzeniem Raspberry Pi poprzez kontrolowanie urządzeń zewnętrznych podłączonych do tego urządzenia lub wyświetlania danych za pomocą odpowiedniego interfejsu użytkownika. Głównym warunkiem korzystania React.js na Raspberry Pi jest zainstalowanie odpowiedniej wersji Node.js. React.js umożliwia tworzenie interfejsu użytkownika za pomocą komponentów, które mogą być stosowane wielokrotnie przy projektowaniu różnych elementów. Główną zaletą stosowania React.js przy programowaniu z użyciem urządzenia Raspberry Pi jest tworzenie aplikacji, które muszą reagować na zmiany danych w czasie rzeczywistym.
+\section{Wdrożenie aplikacji}
+Relacja klient-serwer jest podstawowym modelem architektury systemów komputerowych, w którym oba te podmioty są różnymi urządzeniami bądź programami. Współpracują one ze sobą w celu umożliwienia użytkownikowi wymiany danych bądź korzystania z określonych usług. Aplikacje czasu rzeczywistego mają to do siebie, że serwer zazwyczaj odpowiada za przetwarzanie i przechowywanie danych oraz udostępnianie ich klientom. Klienci są odpowiedzialni za wyświetlenie tych danych i wykorzystanie ich według własnych założeń. Strona klienta i serwera komunikują się ze sobą za pomocą protokołów sieciowych takich jak WebSockets. w celu umożliwienia przepływu danych pomiędzy nimi. Aplikacje czasu rzeczywistego są często wykorzystywane w komunikacji tekstowej, aby umożliwić użytkownikom szybką i efektywną wymianę informacji. Użytkownicy mogą szybko uzyskać oczekiwaną odpowiedź z strony serwera po przesłaniu danego żądania, nie tracąc czasu na opóźnienia w przesyłaniu informacji. Takie aplikacje często znajdują swoje zastosowanie w sytuacjach, w których szybka i dokładna wymiana danych jest istotna. W stworzonej aplikacji, kluczowym elementem przesyłania żądania do mikrokontrolera jest uzyskanie jak najszybszej odpowiedzi urządzenia w postaci odpowiedniego działania elementów zainstalowanych po stronie mikrokomputera. Komunikacja przy pomocy relacji klient-serwer idealnie odnajduje swoje zastosowanie.
+\section{Model drzewa programu}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\caption{Struktura programu}
+	\label{fig:6}
+\end{figure}
+Struktura programu składa się z dwóch katalogów: 
+
+\begin{itemize}  
+	\item \textbf{ Klient}, odpowiedzialny za nawiązanie połączenia z serwerem oraz odbieranie i wysyłanie danych za pomocą Socket.IO. Po stronie klienta zaimplementowane są interfejsy użytkownika umożliwiające komunikacje z urządzeniem.
+	\\
+	\item \textbf{ Serwer}, odpowiedzialny za utrzymanie połączenia sieciowego z klientem i przesyłanie oraz odbieranie danych za pomocą Socket.IO. Serwer umożliwia odpowiadanie na żądania i przetwarzanie danych na odpowiednie czynności. Po stronie serwera zaimplementowany jest cały mechanizm umożliwiający komunikację tekstową. 
+	\\
+\end{itemize}
+\section{Implementacja strony klienta}
+Strona klienta została zaimplementowana przy użyciu biblioteki React.js, która służy przede wszystkim do tworzenia interfejsu użytkownika dla aplikacji webowych. Główną zaletą korzystania z tego modułu jest możliwość tworzenia komponentów. Odpowiadają one za wyrenderowanie i zarządzanie fragmentem stworzonego widoku. Komponenty są najważniejszym elementem projektowania oprogramowania, które opisują jak dana aplikacja ma działać i wyglądać. Są one w pełni niezależne od siebie co umożliwia ich wielokrotne użytkowanie w różnych miejscach aplikacji. Dzięki temu kod staje się bardziej modularny i łatwiejszy do zarządzania. Komponenty są tworzone za pomocą składni JSX, która umożliwia zapisanie kodu HTML w plikach JavaScript. W celu łatwiejszej implementacji interfejsów użytkownika zostało stworzone 6 komponentów:
+\begin{itemize}  
+	\item \textbf{ Logowanie}, komponent ten zwraca widok dołączenia użytkownika do komunikatora tekstowego. Jest on pierwszym interfejsem użytkownika podczas włączenia aplikacji.
+	\\
+	\item \textbf{ Czat}, komponent ten zwraca widok komunikatora tekstowego odpowiedzialnego za wysyłanie żądań do urządzenia. Komponent ten zwraca funkcję, która zawiera elementy nawigacji, zbioru wiadomości i komunikacji i renderują widok drugiego interfejsu użytkownika po wprowadzeniu danych do dołączeniu do komunikatora
+	\\
+\item \textbf{ Nawigacja}, komponent ten zwraca widok zawierający informacje o aktualnie wybranym pokoju przez użytkownika. Wchodzi on w skład drugiego interfejsu użytkownika, który renderuje widok komunikatora
+	\\
+\item \textbf{ Komunikacja}, komponent ten zwraca widok zawierający pole tekstowe oraz przycisk wysyłania wiadomości w aplikacji. Wchodzi on w skład drugiego interfejsu użytkownika, który renderuje widok komunikatora
+	\\
+\item \textbf{ Zbiór wiadomości}, komponent zwraca widok wyrenderowanej listy wiadomości
+	\\
+\item \textbf{ Wiadomość}, komponent ten zwraca widok wyrenderowania pojedynczej wiadomości
+	\\
+\end{itemize}
+
+\subsection{Komponent logowania}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/logowanie"}
+	\caption{Interfejs logowania}
+	\label{fig:7}
+\end{figure}
+Komponent Logowania wyświetla formularz, w którym użytkownik może wprowadzić swoją nazwę i nazwę pokoju do którego chce dołączyć. Za pomocą przycisku „Sign In” może on przejść do komunikatora tekstowego. Nazwa użytkownika jest dowolna. Klient może dołączyć do pokoju, z którego korzystają już inni użytkownicy, a także może stworzyć swój własny oddzielny pokój. 
+\begin{lstlisting}[caption=Implementacja komponentu logowania ]
+export default function SignIn() {
+    const [name, setName] = useState('')
+    const [room, setRoom] = useState('')
+
+    return (
+        <div className="joinOuterContainer">
+            <div className="joinInnerContainer">
+                <h1 className="heading">Chat</h1>
+                <div>
+                    <input
+                        placeholder="Name"
+                        className="joinInput"
+                        type="text"
+                        onChange={(event) => setName(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <input
+                        placeholder="Room"
+                        className="joinInput mt-20"
+                        type="text"
+                        onChange={(event) => setRoom(event.target.value)}
+                    />
+                </div>
+                {!name || !room ? null : (
+                    <Link
+                        onClick={(e) =>
+                            !name || !room ? e.preventDefault() : null
+                        }
+                        to={`/chat?name=${name}&room=${room}`}
+                    >
+                        <button className={'button mt-20'} type="submit">
+                            Sign In
+                        </button>
+                    </Link>
+                )}
+            </div>
+        </div>
+    )}
+\end{lstlisting}
+
+Komponent Logowania składa się z dwóch funkcji useState oraz metody, która zwraca widok interfejsu użytkownika umożliwiającego dołączenie do czatu. Poprzez zastosowanie funkcji useState, jesteśmy zdolni do przechowywania stworzonych parametrów nazwy użytkownika i pokoju. Wartości stanów są zmienne i mogą być używane do przechowywania danych wewnątrz komponentu i reagowania na zmiany tych danych. Funkcja useState zwraca tablicę z dwoma elementami, pierwszym z nich pełni rolę aktualnego stan, a drugim jest wartość funkcji do jego zmiany. W przypadku ustalenia nazwy użytkownika, aktualny stan zmiennej przechowujemy w elemencie name – nazwa użytkownika. Za pomocą elementu setName – jesteśmy w stanie zmieniać  nazwę użytkownika, której zmienna przyjmuje typ string. Adekwatna sytuacja występuje również w przypadku funkcji useState przy przypisaniu nazwy pokoju. Komponent ten zwraca funkcję, która renderuje formularz z dwiema sekcjami tekstowymi umożliwiającymi wprowadzenie nazwy użytkownika i nazwy pokoju komunikatora, a także przycisk do dołączenia. Kiedy użytkownik wprowadzi swoją nazwę to stan „name” funkcji useState jest aktualizowana. Adekwatna sytuacja występuje przy wprowadzeniu nazwy pokoju. W komponencie zaimplementowano również mechanizm, który umożliwia przekierowanie użytkownika do strony komunikatora poprzez kliknięcie przycisku. Do spełnienia tej czynności, wymagane jest wypełnienie sekcji z nazwą użytkownika i pokoju. Jeżeli jedno z pól tekstowych jest niewypełnione, niemożliwe jest przejście do komunikatora. Wymagane jest wpisanie obu danych w celu uzyskania dostępu do komponentu czatu.
+\subsection{Komponent komunikatora}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/komunikator"}
+	\caption{Widok komponentu komunikatora}
+	\label{fig:9}
+\end{figure} 
+Komponent czatu wyświetla komunikator tekstowy, w którym użytkownik może wprowadzać swoje żądania i komunikować się z maszyną. W jego skład wchodzą takie komponenty jak: 
+\begin{itemize}  
+\item \textbf{ Nawigacja}
+	\\
+\item \textbf{ Komunikacja}
+	\\
+\item \textbf{ Zbiór wiadomości}
+	\\
+\item \textbf{ Wiadomość}
+	\\
+\end{itemize}
+Każdy z tych fragmentów interfejsu spełnia swoje założenia co pozwala na wyrenderowanie widoku komunikatora. Komponent Nawigacji renderuje widok paska zawierającego nazwę pokoju oraz ikony z aktywnością pokoju i zamknięcia. Pierwsza z tych ikon wyświetlana jest zawsze i oznacza status dostępny w postaci zielonego koła. Po kliknięciu ikony zamknięcia zostaniemy ponownie przekierowany do komponentu logowania.
+\begin{lstlisting}[caption=Implementacja komponentu nawigacji ]
+const InfoBar = ({ room }) => (
+  <div className="infoBar">
+    <div className="leftInnerContainer">
+      <img className="onlineIcon" src={onlineIcon} alt="online icon" />
+      <h3>{room}</h3>
+    </div>
+    <div className="rightInnerContainer">
+      <a href="/"><img src={closeIcon} alt="close icon" /></a>
+    </div>
+  </div>
+);
+\end{lstlisting}
+Komponent Komunikacji służy do wysyłania wiadomości w aplikacji czatu. Element ten składa się z formularza zawierającego przycisk do wysyłania wiadomości i jedno pole tekstowe umożliwiające wpisanie wiadomości. Komponent otrzymuje 3 parametry : message, setMessage i sendMessage. Za pomocą zmiennej message ustalamy aktualny tekst wiadomości, funkcja setMessage pozwala nam na zmianę tekstu wiadomości w polu tekstowym, a parametr sendMessage jest wywoływany za pomocą przycisku, który umożliwia wysyłanie wiadomości. Pole tekstowe formularza kontrolowane jest przez zmienną message.
+\begin{lstlisting}[caption=Implementacja komponentu komunikacji ]
+const Input = ({message,setMessage, sendMessage }) => (
+        <form className='form'>
+            <input 
+                className='input'
+                type="text"
+                placeholder='Type a message...'
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                onKeyPress={(event) => event.key === 'Enter' ? sendMessage(event) : null }/>
+            <button className='sendButton' 
+		onClick={(e) => sendMessage(e)}><BiSend className='send' />
+	</button>
+        </form>
+)
+\end{lstlisting}
+
+Komponent o nazwie Zbiór Wiadomości renderuje nam widok, który wyświetla listę wysłanych poleceń w aplikacji. Komponent otrzymuje 2 parametry: messages i name. W tym elemencie zaimplementowany został komponent ScrollToBottom, który automatycznie przewija stronę do dołu, gdy dodawane są nowe elementy do listy. Jest to wbudowana funkcja, która udostępniana jest przez bibliotekę React.js. Za pomocą funkcji mapowania tworzony jest kolejny komponent Wiadomość dla każdego nowego wysłanego polecenia. Każdy z tych komponentów otrzymuje jedną wiadomość, nazwę użytkownika, a także unikalny klucz id. Przypisywanie unikalnego klucza id dla elementu jest ważne, ponieważ pomaga systemowi w efektywnym zarządzaniu stanem aplikacji i wykrywaniu ewentualnych zmian w komponentach.
+\begin{lstlisting}[caption=Implementacja komponentu zbiór wiadomościi ]
+import ScrollToBottom from 'react-scroll-to-bottom';
+const Messages = ({ messages, name }) => (
+  
+  <ScrollToBottom className="messages">
+    {messages.map((message, i) => <div key={i}><Message message={message} name={name}/></div>)}
+  </ScrollToBottom>
+);
+\end{lstlisting}
+
+Komponent Wiadomość wyświetla pojedynczą wiadomość w aplikacji. Element ten otrzymuje 2 argumenty: message i name. Za pomocą funkcji useState tworzony jest stan, który przechowuje aktualną datę i godzinę wysłanej wiadomości. Za pomocą funkcji useEffect ustawiana jest wartość stanu daty i godziny po uruchomieniu komponentu. 
+\begin{lstlisting}[caption=Implementacja komponentu z pojedynczą wiadomością ]
+const Message = ({ message: { text, user }, name }) => {
+const [currentDate, setCurrentDate] = useState('')
+
+    useEffect(() => {
+        var date = new Date().getDate() 
+        const monthNames = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ]
+        let monthIndex = new Date().getMonth()
+        let monthName = monthNames[monthIndex]
+        var year = new Date().getFullYear() //Current Year
+        var hours = new Date().getHours() //Current Hours
+        var min = new Date().getMinutes() //Current Minutes
+        if (min < 10) {
+            min = `0${min}`
+        }
+
+        if (date < 10) {
+            date = `0${date}`
+        }
+        setCurrentDate(
+            date + ' ' + monthName + ' ' + year + ', ' + hours + ':' + min
+        )
+    }, [currentDate])
+    let isSentByCurrentUser = false
+    const trimmedName = name.trim().toLowerCase()
+    if (user === trimmedName) {
+        isSentByCurrentUser = true
+    }
+    return isSentByCurrentUser ? (
+        <div className="messageContainer justifyEnd">
+            <p className="sentText pr-10">{trimmedName}</p>
+            <div className="messageBox backgroundBlue">
+                <p className="messageText colorWhite">{text}</p>
+                <p className="currentDate">{currentDate}</p>
+            </div>
+        </div>
+    ) : (
+        <div className="messageContainer justifyStart">
+            <div className="messageBox backgroundLight">
+                <p className="messageText colorDark">{text}</p>
+                <p className="currentDate enemy">{currentDate}</p>
+            </div>
+            <p className="sentText pl-10 ">{user}</p>
+        </div>
+    )}
+\end{lstlisting}
+
+Do interfejsu komunikatora może dołączyć wiele osób, które mogą wysyłać różne komendy. Pojawienie się wiadomości w komunikatorze zależne jest od tego czy została ona wysłana przez bieżącego użytkownika i w zależności od tego wyświetla ją w odpowiednim miejscu na ekranie (po lewej lub po prawej stronie). Wiadomość wysłana przez bieżącego użytkownika wyróżniona jest kolorem niebieskim, zaś wiadomości otrzymane od innych użytkowników wyróżnione są kolorem szarym. Przy wpisanej komendzie widać nazwę użytkownika, która tą wiadomość wysłała.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/interface2..2"}
+	\caption{Widok komunikatora po wpisaniu wiadomości przez dwóch użytkowników}
+	\label{fig:13}
+\end{figure}
+Komponent Czat korzysta z biblioteki Socket.IO do komunikacji z serwerem za pomocą WebSocketów. W komponencie zadeklarowane jest kilka stanów takich jak: name, room, users, message i messages, które zarządzane są przez funkcje useState. Za pomocą metody useEffect parsowane jest zapytanie z adresem URL przy użyciu biblioteki ‘query-string’. Następnie zapytanie te jest przekazywane do komponentu Czatu poprzez parametr `location`. Po parsowaniu zapytania, wartości name i room są używane do nawiązania połączenia z serwerem. Metoda „Join” pozwala na dołączenie do pokoju czatu. Drugim parametrem dla funkcji useEffect jest tablica zależności. Zawiera ona zmienną ENDPOINT oraz location.search. Jeżeli któryś z tych parametrów ulegnie zmianie, następuje ponowne wywołanie funkcji useEffect. 
+\begin{lstlisting}[caption=Implementacja funkcji dołączenia do komunikatora po stronie klienta]
+useEffect(() => {
+        const { name, room } = queryString.parse(location.search)
+        socket = io(ENDPOINT)
+        setRoom(room)
+        setName(name)
+        socket.emit('join', { name, room }, (error) => {
+            if (error) {
+                alert(error)
+            }})}, [ENDPOINT, location.search])
+\end{lstlisting}
+
+W celu nasłuchiwania wiadomości i danych pokoju przychodzących od serwera zaimplementowano kolejną funkcję useEffect. Funkcja socket.on przyjmująca argument ‘message’ nasłuchuje na wiadomości przychodzące od serwera. Używa parametru setMessages do aktualizowania stanu elementu messages przy wprowadzeniu nowej wiadomości. Funkcja socket.on przyjmująca argument ‘roomData’ nasłuchuje na dane pokoju przychodzące od serwera i dokonuje aktualizacji stanu parametru users. 
+\begin{lstlisting}[caption=Implementacja funkcji nasłuchiwania wiadomości i danych przychodzących od serwera]
+useEffect(() => {
+        socket.on('message', (message) => {
+            setMessages((messages) => [...messages, message])
+        })
+        socket.on('roomData', ({ users }) => {
+            setUsers(users)
+        })
+    }, [])
+\end{lstlisting}
+
+W celu możliwości wysyłania wiadomości do serwera zaimplementowano funkcję sendMessage. Wywoływana jest ona po wypełnieniu pola tekstowego wpisaną wiadomością. Zastosowano również operację przeciw automatycznemu renderowaniu się strony po każdej przesłanej komendzie. Wiadomość zostanie wysłana, za pomocą metody emit, gdzie następnie pole tekstowe zostanie wyczyszczone.
+\begin{lstlisting}[caption=Implementacja funkcji do wysyłania wiadomości]
+const sendMessage = (event) => {
+        event.preventDefault()
+        if (message) {
+            socket.emit('sendMessage', message, () => setMessage(''))
+       	}}
+\end{lstlisting}
+
+Wszystkie te komponenty wchodzą w skład tworzenia widoku aplikacji, który pełni funkcję komunikatora z urządzeniem Raspberry Pi. Interfejs ten umożliwi nam zdalną komunikację z urządzeniami podłączonymi do mikrokontrolera. Aplikacja pozwala na wysyłanie poleceń i odbieranie informacji z urządzenia za pośrednictwem połączenia sieciowego. Użytkownik może wysyłać wiadomości napisane w języku naturalnym do urządzeń za pomocą interfejsu komunikatora. Poprzez zdalne skonfigurowanie Raspberry Pi, urządzenie będzie odbierało polecenia z aplikacji komunikatora i wykonywało odpowiednie akcje, takie jak włączenie lub wyłączenie urządzeń podłączonych do określonych portów GPIO.
+\begin{lstlisting}[caption=Implementacja komponentu czatu]
+const Chat = ({ location }) => {
+    const [name, setName] = useState('')
+    const [room, setRoom] = useState('')
+    const [users, setUsers] = useState('')
+    const [message, setMessage] = useState('')
+    const [messages, setMessages] = useState([])
+
+	....	
+
+    return (
+        <div className="outerContainer">
+            <div className="container">
+                <InfoBar room={room} />
+                <Messages messages={messages} name={name} />
+                <Input
+                    message={message}
+                    setMessage={setMessage}
+                    sendMessage={sendMessage}
+                />
+            </div>
+        </div>
+    )
+}
+\end{lstlisting}
+\section{Zarządzanie ścieżką nawigacji}
+Ważnym aspektem w aplikacji jest również możliwość tworzenia trasy między komponentami i wędrowanie pomiędzy nimi. Każdy komponent zawiera adres URL, który odpowiada określonemu widokowi w aplikacji. Za pomocą biblioteki ‘react-router-dom’ możemy tworzyć ścieżkę nawigacji wskazująca, który interfejs ma zostać wyświetlony na stronie w odpowiedzi na zmianę adresu URL bez konieczności przeładowywania całej strony.
+\begin{lstlisting}[caption=Implementacja ścieżki nawigacji pomiędzy interfejsam]
+const App = () => {
+  return (
+    <Router>
+      <Route path="/" exact component={Join} />
+      <Route path="/chat" component={Chat} />
+    </Router>
+  );
+}
+\end{lstlisting}
+Aby móc wędrować pomiędzy komponentami Logowania i Czatu konieczne było stworzenie trasy z wyznaczoną ścieżką docelową. Komponent Nawigacji umożliwia aplikacji reagowanie na zmianę adresu URL w przeglądarce internetowej. Każdy z tych interfejsów zawiera swoją wyznaczoną ścieżkę, która jest potrzebna przy zmianie widoku aplikacji przez użytkownika. Zaimplementowana nawigacja umożliwia nam przechodzenie do interfejsu komunikatora po wprowadzeniu nazwy użytkownika i nazwy pokoju w komponencie Logowania. Znajdując się w interfejsie komunikatora również możemy przejść z powrotem do elementu z formularzem logowania poprzez kliknięcie przycisku zamknięcia. Znajduje się on w prawym górnym rogu okienku czatu.
+\section{Implementacja strony serwera}
+Strona serwera została zaimplementowana przy użyciu platformy Node.js. Umożliwia ona tworzenie szybkich i skalowalnych aplikacji sieciowych za pomocą języka JavaScript. Node.js używa modelu jednowątkowego do obsługi wielu żądań jednocześnie co oznacza, że jest on idealny do tworzenia aplikacji sieciowych takich jak serwery czy komunikatory tekstowe. Ważnym aspektem przy stosowaniu platformy Node.js jest możliwość tworzenia aplikacji w czasie rzeczywistym. Po stronie serwera zaimplementowany został cały mechanizm komunikacji z naszą maszyną, która umożliwia przede wszystkim przesyłanie oraz odbieranie danych.
+Biblioteka Express.js  jest narzędziem sieciowym dla Node.js, która umożliwia tworzenie aplikacji opartych na serwerze. Express.js umożliwia obsługę żądań oraz mapowanie adresów URL na odpowiednie funkcje obsługujące te żądania. Głównym zastosowaniem biblioteki express.js jest możliwość tworzenia serwera HTTP, który będzie odpowiadał na żądania aplikacji klienckich. Biblioteka express.js znajduje swoje szerokie zastosowanie przy tworzeniu aplikacji serwerowych. Poza możliwością tworzenia serwera http, express.js umożliwia również obsługę różnych żądań czy parsowanie przesyłanych żądań. Możliwa jest również obsługa sesji użytkowników, autoryzację, a także przechowywanie i udostępnianie danych.
+Node.js oferuje nam biblioteki http i express, które umożliwiają stworzenie serwera. Przy pomocy biblioteki Socket.IO tworzymy instancję serwera WebSocket. Następnie serwer nasłuchuje na wybranym porcie i loguje informację o uruchomieniu. Port to numer identyfikujący aplikację. Przy tworzeniu serwera konieczne jest ustalenie numeru portu, na którym możliwe będzie nasłuchiwanie i odbieranie połączeń od klientów. Użytkownicy mogą wysyłać zapytania do serwera poprzez podanie adresu IP serwera i numeru portu. Serwer odpowiada na żądania klientów poprzez wysłanie danych z powrotem do użytkownika poprzez ten sam port. Przy pomocy biblioteki express, serwer będzie nasłuchiwał żądań i odpowiadać na nie. 
+\begin{lstlisting}[caption=Implementacja serwera]
+const http = require('http')
+const express = require('express')
+const socketio = require('socket.io')
+const cors = require('cors')
+const PORT = process.env.PORT || 5000
+const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
+....
+server.listen(PORT, () => console.log(`Server has started on port ${PORT}`))
+\end{lstlisting}
+Poprzez zastosowanie biblioteki express.js możliwe jest utworzenie modułu ścieżki nawigacji przy wysyłaniu żądań. Obiekt ten służy do mapowania adresów URL z odpowiednimi funkcjami obsługi żądań. Moduł ten zawiera definicję trasy, która odpowiada żądaniom typu GET. Metoda ta stosowana jest w celu pobierania danych z serwera kiedy z nim się połączymy.
+\begin{lstlisting}[caption=Implementacja ścieżki serwera]
+const express = require("express");
+const router = express.Router();
+router.get("/", (req, res) => {
+  res.send("Server is up and running");
+});
+module.exports = router;
+\end{lstlisting}
+\section{Obsługa zdarzeń}
+Obsługa zdarzeń po stronie serwera to proces reagowania na zdarzenia, które występują w aplikacji. Przykłady takich zdarzeń obejmują żądania HTTP od użytkowników czy otrzymanie danych za pośrednictwem protokołu sieciowego. Aby obsłużyć zdarzenie po stronie serwera należy utworzyć zdarzenia nasłuchiwania, które w odpowiedzi wykonują określone zadania.
+\subsection{Zdarzenia nasłuchiwania}
+W celu odbierania zapytań od klientów i wysyłania odpowiedzi zwrotnych implementuje się zdarzenie nasłuchiwania po stronie serwera. Gdy serwer jest uruchomiony i nasłuchuje na określonym porcie, może otrzymywać zapytania od klientów poprzez wysyłanie danych na ten port. Serwer może obsługiwać wiele różnych żądań od klientów jednocześnie, dlatego implementuje się zdarzenie nasłuchiwania, które jest wywoływane za każdym razem gdy serwer otrzyma nowe żądanie od klienta. Zdarzenie to umożliwia serwerowi reagowanie na żądania klienta poprzez wysyłanie odpowiedzi zwrotnej. 
+Przy pomocy biblioteki Socket.IO rejestrowane jest zdarzenie dołączenia do komunikatora poprzez zastosowanie metody ‘socket.on’. Funkcja ta przyjmuje obiekt z danymi użytkownika i jest ona wywoływana za każdym razem kiedy wyrejestruje zdarzenie dołączenia do czatu. Następnie emitowane jest zdarzenie zawierające obiekt z danymi o pokoju i zalogowanych użytkownikach.
+\begin{lstlisting}[caption=Implementacja zdarzenia dołączenia i pobierania danych]
+io.on('connection', (socket) => {
+    socket.on('join', ({ name, room }, callback) => {
+        const { error, user } = addUser({ id: socket.id, name, room })
+        if (error) return callback(error)
+        socket.join(user.room)
+        io.to(user.room).emit('roomData', {
+            room: user.room,
+            users: getUsersInRoom(user.room),
+        })
+	....		
+
+        callback()
+    })
+	....
+})
+\end{lstlisting}
+
+Żeby zdarzenie dołączenia mogło być realizowane potrzebne jest zaimplementowanie operacji dodawania nowego użytkownika. Jest to potrzebne, żeby serwer mógł aktualizować listę użytkowników zarejestrowanych w aplikacji oraz sprawdzać wysyłane żądania. Przy pomocy funkcji dodawany jest nowy klient do listy użytkowników. Następnie pobierana jest jego nazwa, nazwa pokoju, w którym się znajduje, a także unikalny klucz identyfikatora.
+\begin{lstlisting}[caption=Implementacja funkcji dodawania użytkownika]
+const addUser = ({ id, name, room }) => {
+    name = name.trim().toLowerCase()
+    room = room.trim().toLowerCase()
+    const existingUser = users.find(
+        (user) => user.room === room && user.name === name
+    )
+    const user = { id, name, room }
+    users.push(user)
+    return { user }
+}
+\end{lstlisting}
+W celu umożliwienia wysyłania wiadomości przez użytkowników, implementuje się po stronie serwera zdarzenie wysyłania wiadomości. Funkcja ta jest wywoływana, gdy zdarzenie zostanie wyrejestrowane. Kiedy klient wysyła wiadomość do serwera, ten odbiera to zdarzenie i uruchamiana jest funkcja. Następnie serwer pobiera informacje o użytkowniku, który przesłał polecenie i emituje zdarzenie wiadomości do wszystkich użytkowników znajdujących się w tym samym pokoju. Funkcja ta działa jako most między klientem, a serwerem, umożliwiając im wymianę danych.
+\begin{lstlisting}[caption=Implementacja zdarzenia wysyłania wiadomości]
+socket.on('sendMessage', async (message, callback) => {
+        const user = getUser(socket.id)
+        	....
+        io.to(user.room).emit('message', {
+            user: user.name,
+            text: message,
+            createdTime,
+        })
+
+        callback()
+    })
+}
+\end{lstlisting}
+Do realizacji zdarzenia wysłania wiadomości, konieczne jest zidentyfikowanie, który użytkownik wykonał tą operacje. W tym celu pobierane są dane użytkownika po przypisanym unikalnym kluczu identyfikatora. Sprawdzane jest czy identyfikator użytkownika z tablicy jest równy identyfikatorowi przekazanemu jako argument użytkownika. Jeżeli warunek zostanie spełniony to następuje zwrócenie obiektu użytkownika, który wysłał wiadomość.
+\begin{lstlisting}[caption=Implementacja funkcji pobierania informacji o użytkowniku]
+const getUser = (id) => users.find((user) => user.id === id)
+\end{lstlisting}
+
+Również zaimplementowano zdarzenie rozłączania, które jest potrzebne do aktualizowania liczby uczestników korzystających z aplikacji. Funkcja ta jest wywoływana kiedy użytkownik rozłączy się z serwerem. Usuwane są informacje o użytkowniku z listy użytkowników i następnie wysyłany jest komunikat do pozostałych uczestników, informujący o jego opuszczeniu. Po rozłączeniu się klienta, aktualizowana jest lista użytkowników w pokoju.
+\begin{lstlisting}[caption=Implementacja zdarzenia rozłączania]
+socket.on('disconnect', () => {
+        const user = removeUser(socket.id)
+        if (user) {
+            io.to(user.room).emit('message', {
+                user: 'Admin',
+                text: `${user.name} has left.`,
+            })
+            io.to(user.room).emit('roomData', {
+                room: user.room,
+                users: getUsersInRoom(user.room),
+            })
+        }})
+\end{lstlisting}
+
+W celu aktualizacji listy użytkowników zaimplementowano metodę, która pozwoli na wykonanie tej operacji. Funkcja iteruje po tablicy obecnych użytkowników w pokoju, sprawdzając czy nazwa pokoju użytkownika jest zgodna z nazwą pokoju przekazanej do funkcji jako argument. Jeśli tak to użytkownik dodawany jest do nowej tablicy.
+\begin{lstlisting}[caption=Implementacja funkcji aktualizująca listę użytkowników]
+const getUsersInRoom = (room) => users.filter((user) => user.room === room)
+\end{lstlisting}
+
+Żeby zdarzenie rozłączenia mogło być realizowane, potrzebne jest zaimplementowanie operacji usuwania użytkownika. Funkcja w celu sprawdzenia, który użytkownik opuścił czat, przyjmuje parametr identyfikatora, który jest przypisywany każdemu użytkownikowi. Warunkiem jest sprawdzenie czy identyfikator przekazanego argumentu jako argument użytkownika jest równy identyfikatorowi użytkownika z tablicy. Jeśli tak, to zwracany jest indeks tego elementu i dochodzi do usunięcia użytkownika z listy. 
+\begin{lstlisting}[caption=Implementacja funkcji usuwania użytkownika]
+const removeUser = (id) => {
+    const index = users.findIndex((user) => user.id === id)
+    if (index !== -1) return users.splice(index, 1)[0]
+}
+\end{lstlisting}
+\section{Translacja komend do komunikacji z mikrokontrolerem}
+W celu umożliwienia komunikacji tekstowej z maszyną za pomocą aplikacji, potrzebne jest nasłuchiwanie zdarzeń wysyłania wiadomości przez serwer. Kiedy klient wysyła żądanie do serwera, ten pobiera informacje o wysłanej wiadomości i emituje ją w celu komunikacji z mikrokontrolerem.  Potrzebna jest lista komend napisanych w języku naturalnym, które będą odpowiadać wpisanym w aplikacji wiadomościom. Odpowiedzialne one będą za zadziałanie określonej funkcji uruchamiając dany element podłączony do maszyny.
+\begin{lstlisting}[caption=Translacja komend na odpowiednie funkcje]
+socket.on('sendMessage', async (message, callback) => {
+        const user = getUser(socket.id)
+        switch (message) {
+            case 'blink red': {
+                blinkRed()
+                break
+            }
+            case 'turn on all': {
+                turnOnAll()
+                break
+            }
+            case 'turn off all': {
+                turnOffAll()
+                break
+            }
+            case 'sequential': {
+                sequential()
+                break
+            }
+            case 'sensor': {
+                sensor()
+                break
+            }
+            case 'run servo': {
+                servo()
+                break
+            }
+            case 'flowing leds': {
+                flowingLeds()
+                break
+            }
+            case 'stop yellow': {
+                endBlinkYellow()
+                break
+            }
+            case 'yellow on': {
+                tryYellow()
+                break
+            }
+            case 'blink yellow': {
+                blinkYellow()
+                break
+            }
+            case 'stop green': {
+                endBlinkGreen()
+                break
+            }
+            case 'green on': {
+                tryGreen()
+                break
+            }
+            case 'blink green': {
+                blinkGreen()
+                break
+            }
+            case 'red on': {
+                tryRed()
+                break
+            }
+            case 'stop red': {
+                endBlinkRed()
+                break
+            }}
+	...
+        callback()
+    })
+\end{lstlisting}
+
+Gdy serwer otrzyma polecenie od klienta, sprawdzi co ta wiadomość zawiera i wywoła odpowiednią funkcję. Do implementacji określonych akcji w zależności od wprowadzonego wyrażenia zastosowano instrukcję wielokrotnego wyboru switch-case. Jest to konstrukcja decyzyjna, która umożliwia dokonanie wyboru spośród przypisanych opcji. Jeśli znaleziono pasującą wartość, kod zostanie wykonany dla tego przypadku. Instrukcja „switch” sprawdza przypisaną zmienną i porównuje ją z poszczególnymi przypadkami. Gdy zostanie odnaleziona pasująca opcja to kod jest realizowany dla tego przypadku. Instrukcja ta ma nieograniczony wybór opcji i zależna jest od projektanta. Dla zmiennej message, która jest odpowiedzialna za przechowywanie wartości wysyłanej wiadomości zostały przypisane komendy napisane w języku naturalnym. Przy pomocy zastosowanej instrukcji sprawdzana jest pasująca wiadomość, która odpowiedzialna jest za wywołanie danej funkcji. Następnie serwer nasłuchuje zdarzenie wysyłania wiadomości i przy komunikacji z urządzeniem Raspberry Pi, uruchamiany jest dany element elektroniczny. Jeżeli zostanie wpisana komenda, która nie znajduje się ujęta w instrukcji to jest ona zwrócona bez jakichkolwiek działań.
+\section{Implementacja działania elementów}
+W celu sprawdzenia działania komunikacji tekstowej poprzez wpisywanie w języku naturalnym odpowiednich komend, zaprojektowano stanowisko układu. W tym celu z zastosowaniem płytki prototypowej stworzono układ zawierający trzy diody LED wspomagane przez rezystor oraz serwomechanizm. Poprzez zastosowanie Raspberry Pi, płytka prototypowa umożliwia połączenie elementów elektronicznych z użyciem portów GPIO na płycie mikrokontrolera. Przy konstrukcji obwodu wybrano diody LED o kolorze żółtym, czerwonym oraz zielonym.
+UKŁAD
+\subsection{Włączenie diody LED}
+By umożliwić komunikację elementów elektronicznych z mikrokontrolerem należy je podłączyć do odpowiednich wyprowadzeń pinów GPIO. Poprzez zastosowanie biblioteki ‘onOff’ tworzony jest obiekt LED. Dioda o kolorze czerwonym została podłączona do pinu 4 jako wyjście. Sprawdzane jest kolejno czy stworzony obiekt ma wartość 0 co oznacza to, że element nie jest aktywny. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie diody LED. Identyczna funkcja zaimplementowana jest również dla dwóch pozostałych diod.
+\begin{lstlisting}[caption=Implementacja funkcji włączającej diodę]
+function tryRed() {
+    var LED = new onOff.Gpio(4, 'out')
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            if (LED.readSync() === 0) {
+                LED.writeSync(1)
+            }}, 10)
+        resolve()
+    })}
+\end{lstlisting}
+\subsection{Wyłączenie diody LED}
+W celu kontrolowania diody LED, zaimplementowano również funkcję, która pozwoli na jej wyłączenie. Jej sposób działania jest niemal identyczny co do włączenia elementu, tylko w przypadku wyłączenia, stan jest zmieniany z wartości 1 na 0. Element usuwany jest z listy eksportowanych pinów i po odłączeniu obiektu LED, zostaje on wyłączony.
+\begin{lstlisting}[caption=Implementacja funkcji wyłączającej diodę]
+function endBlinkRed() {
+    var LED = new onOff.Gpio(4, 'out')
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            LED.writeSync(0)
+            LED.unexport()
+            resolve()
+        }, 3000)
+    })}
+\end{lstlisting}
+\subsection{Włączenie wszystkich diod}
+W celu umożliwienia włączenia trzech diod LED stworzono nowe obiekty odpowiadające elementom. Zostały one podłączone do określonych pinów GPIO na wyjście układu. Sprawdzane jest kolejno czy stworzone obiekty mają wartość 0 co oznacza to, że elementy są nieaktywne. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie wszystkich trzech diod.
+ \begin{lstlisting}[caption=Implementacja funkcji włączająca wszystkie diody]
+function turnOnAll() {
+    var LED04 = new onOff.Gpio(4, 'out'),
+        LED17 = new onOff.Gpio(17, 'out'),
+        LED27 = new onOff.Gpio(27, 'out')
+        return new Promise((resolve) => {
+        setTimeout(() => {
+            if (
+                LED04.readSync() === 0 &&
+                LED17.readSync() === 0 &&
+                LED27.readSync() === 0
+            ) {
+                LED04.writeSync(1)
+                LED17.writeSync(1)
+                LED27.writeSync(1)
+            }}, 1)
+        resolve()
+    })
+}
+\end{lstlisting}
+
+\subsection{Wyłączenie wszystkich diod}
+W celu umożliwienia wyłączenia wszystkich trzech diod LED, sprawdzane jest czy zaimplementowane obiekty mają wartość 1 na wyjściu co oznacza to, że elementy są włączone i się świecą. Jeśli tak, to zmieniany jest stan na wyjściu na niski co powoduje wyłączenie wszystkich trzech diod. 
+ \begin{lstlisting}[caption=Implementacja funkcji wyłączająca wszystkie diody]
+function turnOffAll() {
+    var LED04 = new onOff.Gpio(4, 'out'),
+        LED17 = new onOff.Gpio(17, 'out'),
+        LED27 = new onOff.Gpio(27, 'out')
+        return new Promise((resolve) => {
+        	setTimeout(() => {
+	            LED04.writeSync(0)
+	            LED17.writeSync(0)
+	            LED27.writeSync(0)
+	            LED04.unexport()
+	            LED17.unexport()
+	            LED27.unexport()
+	            resolve()
+        }, 3000)
+    })}
+\end{lstlisting}
+
+\subsection{Naprzemienne włączanie diod}
+Aby umożliwić obsługę 3 diod LED, należy je podłączyć do trzech osobnych pinów GPIO. Czynność ta będzie potrzebna do osiągnięcia efektu płynącej diody. Wykonanie tej operacji ma na celu stworzenie wizualnego efektu ruchu. Możliwe jest to do osiągnięcia przy zastosowaniu szeregu diod LED, które są sekwencyjnie zapalane. W celu realizacji takiego efektu tworzone są trzy obiekty LED, które są odpowiedzialne za zarządzanie pinami GPIO o numerach, 4,17 i 27. Obiekty te zapisywane są do tablicy i następnie zerowane. W zależności od aktualnego indeksu utworzonej tablicy, zmieniana jest wartość stanu z 0 na 1 co powoduje włączenie diody. W momencie osiągnięcia pozycji ostatniego elementu tablicy, zmieniany jest kierunek włączania diod. Przy zastosowaniu funkcji interwałowej, możliwe jest powtarzanie się czynności włączania i wyłączania elementów o określony czas co daje efekt wizualnego ruchu diod. Po upływie 5 sekund, elementy usuwane są z listy eksportowanych pinów co powoduje odłączenie obiektu LED i zakończenie procesu.
+ \begin{lstlisting}[caption=Implementacja funkcji tworzącej efekt płynącej diody]
+function flowingLeds() {
+    var LED04 = new onOff.Gpio(4, 'out'),
+        LED17 = new onOff.Gpio(17, 'out'),
+        LED27 = new onOff.Gpio(27, 'out')
+    var leds = [LED04, LED17, LED27]
+    var indexCount = 0
+    dir = 'up'
+    return new Promise((resolve) => {
+        var flowInterval = setInterval(flowingLeds, 300)
+        function flowingLeds() {
+            leds.forEach(function (currentValue) {
+                currentValue.writeSync(0)
+            })
+            if (indexCount == 0) dir = 'up'
+            if (indexCount >= leds.length) dir = 'down'
+            if (dir == 'down') indexCount--
+            leds[indexCount].writeSync(1)
+            if (dir == 'up') indexCount++
+        }
+        setTimeout(() => {
+            clearInterval(flowInterval)
+            leds.forEach(function (currentValue) {
+                currentValue.writeSync(0)
+                currentValue.unexport()
+                resolve()
+            })}, 5000)
+    })}
+\end{lstlisting}
+
+\subsection{Miganie diodą LED}
+Aby uzyskać efekt migającej diody LED zaimplementowano funkcję wykorzystująca interwał czasowy. W tym celu utworzono obiekt, który został podłączony do pinu GPIO o numerze 4. Identyczna sekwencja została wykonana dla dwóch kolejnych diod o kolorze zielonym i żółtym. Za pomocą utworzonej funkcji sprawdzany jest stan diody. Jeżeli dioda jest wyłączona to zmieniany jest stan na wartość 1 co powoduje włączenie się elementu. Poprzez zastosowanie interwału czasowego możliwe jest powtarzanie się czynności co 250 milisekund. Powoduje to utworzenie efektu migającej diody LED.
+ \begin{lstlisting}[caption=Implementacja funkcji tworząca efekt migania pojedynczej diody LED]
+function blinkRed() {
+    const LED = new onOff.Gpio(4, 'out')
+    return new Promise((resolve) => {
+        const blinkInterval = setInterval(blinkLED, 250)
+        function blinkLED() {
+            if (LED.readSync() === 0) {
+                LED.writeSync(1)
+            } else {
+                LED.writeSync(0)
+            }}
+        setTimeout(() => {
+            clearInterval(blinkInterval)
+            LED.writeSync(0)
+            LED.unexport()
+            resolve()
+        }, 5000)
+    })}
+\end{lstlisting}
+\subsection{Sterowanie serwomechanizmem}
+Serwomechanizm to układ, który pozwala na precyzyjne pozycjonowanie elementu względem określonego punktu. Mechanizm ten składa się z silnika elektrycznego, przekładni i elementu ruchomego. W momencie gdy kontroler serwomechanizmu otrzymuje sygnał o zadanej pozycji, silnik obraca się w odpowiednim kierunku. W celu cyklicznego włączaniu i wyłączaniu sygnału elektrycznego można zastosować technikę modulacji szerokością impulsu. Sterowanie serwomechanizmem przy pomocy sygnałów PWM polega na cyklicznym podawaniu impulsu o zmiennej szerokości. Silnik serwomechanizmu jest wówczas włączany i wyłączany w odpowiednim momencie, co pozwala na uzyskanie pożądanego położenia elementu.
+ \begin{lstlisting}[caption=Implementacja funkcji sterująca serwomechanizmem]
+function servo() {
+    return new Promise((resolve) => {
+        let pulseWidth = 1000
+        const threshold = 20
+        let increment = threshold
+        const servoInterval = setInterval(() => {
+            motor.servoWrite(pulseWidth)
+            pulseWidth += increment
+            if (pulseWidth >= 2000) {
+                increment = -1 * threshold
+            } else if (pulseWidth <= 1000) {
+                increment = threshold
+            }
+        }, threshold)
+        setTimeout(() => {
+            clearInterval(servoInterval)
+            resolve()
+        }, 20000)
+    })}
+\end{lstlisting}
+W celu spełnienia założeń przy sterowaniu serwomechanizmem zaimplementowano funkcję. Wykorzystuje ona technikę sterowania sygnałami PWM. Przy zastosowaniu interwałów czasowych, szerokość impulsów zwiększa się co określoną jednostkę czasową. Jeżeli serwomechanizm osiągnie pozycję końcową następuje zmniejszanie się wartości szerokości impulsu przez co serwomechanizm zacznie się cofać do pozycji początkowej. Czynność ta jest powtarzana przez 20 sekund. Po tym czasie następuje wyczyszczenie interwału czasowego co zatrzymuje działanie serwomechanizmu.
+\subsection{Sekwencyjne wykonywanie komend}
+W celu implementacji sekwencyjnego uruchamiania elementów podłączonych do pinów GPIO mikrokontrolera zastosowano asynchroniczne funkcje. Sekwencyjne wywoływanie funkcji to sposób, który umożliwi wykonywanie zaimplementowanych metod po kolei. Kiedy jedna funkcja zostanie zakończona, następuje wywołanie kolejnej. Zastosowanie asynchronicznego mechanizmu pozwoli na zaimplementowanie funkcji, które będą się wykonywały jedna po drugiej. Kiedy pierwsza operacja zrealizuje swoją pracę, informacja o jej zakończeniu zostanie przekazana do kolejnej funkcji, która następnie wykona swoją pracę. Pozwoli to na osiągnięcie efektu sekwencyjnego wykonywania się poleceń. 
+ \begin{lstlisting}[caption=Sekwencyjne uruchamianie się funkcji]
+async function sequential() {
+    await turnOnAll()
+    await turnOffAll()
+    await tryRed()
+    await endBlinkRed()
+    await tryGreen()
+    await endBlinkGreen()
+    await tryYellow()
+    await endBlinkYellow()
+    await flowingLeds()
+    await blinkRed()
+    await blinkGreen()
+    await blinkYellow()
+    await servo()
+}
+\end{lstlisting}
+\section{Archiwizacja wpisanych poleceń}
+Archiwizacja wiadomości w aplikacjach opartych o komunikację tekstową jest używana, aby umożliwić użytkownikom przechowywanie i przeglądanie wiadomości, które zostały wysłane lub otrzymane w przeszłości. Jest to szczególnie przydatne, w przypadku osiągnięcia dostępu do ważnych informacji zawartych w konwersacji i możliwości nadzorowania danych zawartych w aplikacji. Archiwizacja pozwala także na lepsze zarządzanie dostępem do wiadomości i uniknięcie sytuacji, w której tracona jest zawartość istotnych danych. Możliwość zachowania archiwum wiadomości znajduje również swoje zastosowanie w zarządzaniu bazami danych, w dziale automatyki. W szczególności archiwizacja pozwala na zachowanie dostępu do poprzednich wersji danych, które zostały zmodyfikowane lub zaktualizowane. W niektórych przypadkach, możliwość zapisania informacji może być również ważna w kontekście utraty danych w wyniku awarii aplikacji lub innych problemów technicznych.
+ \begin{lstlisting}[caption=Implementacja funkcji archiwizującej wiadomości w komunikatorze]
+class Archiver {
+    #archivePath = './archivePath.json'
+    #archiveContent = {}
+    start() {
+        if (!fs.existsSync(this.#archivePath)) {
+            return this.#archiveContent
+        }
+        const archive = fs.readFileSync(this.#archivePath, 'utf8')
+        this.#archiveContent = JSON.parse(archive)
+    }
+    fetch(room) {
+        return this.#archiveContent[room] ? this.#archiveContent[room] : []
+    }
+    async archive(text, user, createdTime, room) {
+        if (!this.#archiveContent[room]) {
+            this.#archiveContent[room] = []
+        }
+        this.#archiveContent[room].push({ text, user, createdTime })
+        await fs.promises.writeFile(
+            this.#archivePath,
+            JSON.stringify(this.#archiveContent)
+        )}}}
+\end{lstlisting}
+
+W celu stworzenia archiwum danych zaimplementowano klasę, która pomoże zapisać wiadomości tekstowe w aplikacji. Ważnym aspektem jest sprawdzenie istnienia ścieżki pliku gdzie wiadomości mają być zapisane. Jeśli tak, zwracane jest archiwum dla danego pokoju. Aby móc dokonać archiwizacji wiadomości, potrzebna będzie możliwość dodania nowej wiadomości do archiwum. W tym celu zaimplementowano funkcję asynchroniczną ‘archieve’, która umożliwia wprowadzenie nowej wiadomości do stworzonego archiwum. 
+ \begin{lstlisting}[caption=Wykorzystanie zdarzenia dołączenia, aby uzyskać widok zawartości archiwum w aplikacji]
+io.on('connection', (socket) => {
+    socket.on('join', ({ name, room }, callback) => {
+	....
+        const archiveMessages = archive.fetch(user.room)
+        for (const message of archiveMessages) {
+            io.to(user.room).emit('message', message)
+        }
+        ....
+    })
+
+   	....
+    })
+
+  	....
+})
+\end{lstlisting}
+Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik dołącza do pokoju. W przypadku aplikacji, które powinno zawierać archiwizację danych, ta informacja może być wykorzystana do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia archiwizacji danych, a następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
+ \begin{lstlisting}[caption=Wykorzystanie zdarzenia wysyłania wiadomości do tworzenia archiwum]
+socket.on('sendMessage', async (message, callback) => {
+        const user = getUser(socket.id)
+
+      	....
+        await archive.archive(message, user.name, createdTime, user.room)
+       	....
+    })
+\end{lstlisting}
+
+Kiedy użytkownik wyśle wiadomość w aplikacji chcemy, aby trafiła do utworzonego archiwum. W tym celu potrzebne jest rejestrowanie tego zdarzenia, które zostanie wywołane gdy klient prześle polecenie do serwera. Kiedy zostanie wysłana wiadomości, zdarzenie zarejestruje tą czynność i zapisze całą zawartość do archiwum. 
+
+
+
+
