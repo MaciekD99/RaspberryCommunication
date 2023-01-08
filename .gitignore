@@ -2,3 +2,9 @@ node_modules
 server/node_modules
 client/node_modules
 server/archivePath.json
+
+/Engineering thesis/praca_inzynierska.aux
+/Engineering thesis/praca_inzynierska.synctex.gz
+/Engineering thesis/praca_inzynierska.toc
+/Engineering thesis/praca_inzynierska.bbl
+/Engineering thesis/praca_inzynierska.blg
