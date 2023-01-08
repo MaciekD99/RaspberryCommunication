@@ -1,2 +1,0 @@
-# RaspberryCommunication
-Praca Inżynierska
