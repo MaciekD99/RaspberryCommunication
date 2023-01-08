@@ -153,7 +153,7 @@ const Input = ({message,setMessage, sendMessage }) => (
 \end{lstlisting}
 
 Komponent o nazwie Zbiór Wiadomości renderuje nam widok, który wyświetla listę wysłanych poleceń w aplikacji. Komponent otrzymuje 2 parametry: messages i name. W tym elemencie zaimplementowany został komponent ScrollToBottom, który automatycznie przewija stronę do dołu, gdy dodawane są nowe elementy do listy. Jest to wbudowana funkcja, która udostępniana jest przez bibliotekę React.js. Za pomocą funkcji mapowania tworzony jest kolejny komponent Wiadomość dla każdego nowego wysłanego polecenia. Każdy z tych komponentów otrzymuje jedną wiadomość, nazwę użytkownika, a także unikalny klucz id. Przypisywanie unikalnego klucza id dla elementu jest ważne, ponieważ pomaga systemowi w efektywnym zarządzaniu stanem aplikacji i wykrywaniu ewentualnych zmian w komponentach.
-\begin{lstlisting}[caption=Implementacja komponentu zbiór wiadomościi ]
+\begin{lstlisting}[caption=Implementacja komponentu zbior wiadomosci ]
 import ScrollToBottom from 'react-scroll-to-bottom';
 const Messages = ({ messages, name }) => (
   
@@ -164,7 +164,7 @@ const Messages = ({ messages, name }) => (
 \end{lstlisting}
 
 Komponent Wiadomość wyświetla pojedynczą wiadomość w aplikacji. Element ten otrzymuje 2 argumenty: message i name. Za pomocą funkcji useState tworzony jest stan, który przechowuje aktualną datę i godzinę wysłanej wiadomości. Za pomocą funkcji useEffect ustawiana jest wartość stanu daty i godziny po uruchomieniu komponentu. 
-\begin{lstlisting}[caption=Implementacja komponentu z pojedynczą wiadomością ]
+\begin{lstlisting}[caption=Implementacja komponentu z pojedyncza wiadomoscia ]
 const Message = ({ message: { text, user }, name }) => {
 const [currentDate, setCurrentDate] = useState('')
 
@@ -232,7 +232,7 @@ Do interfejsu komunikatora może dołączyć wiele osób, które mogą wysyłać
 	\label{fig:13}
 \end{figure}
 Komponent Czat korzysta z biblioteki Socket.IO do komunikacji z serwerem za pomocą WebSocketów. W komponencie zadeklarowane jest kilka stanów takich jak: name, room, users, message i messages, które zarządzane są przez funkcje useState. Za pomocą metody useEffect parsowane jest zapytanie z adresem URL przy użyciu biblioteki ‘query-string’. Następnie zapytanie te jest przekazywane do komponentu Czatu poprzez parametr `location`. Po parsowaniu zapytania, wartości name i room są używane do nawiązania połączenia z serwerem. Metoda „Join” pozwala na dołączenie do pokoju czatu. Drugim parametrem dla funkcji useEffect jest tablica zależności. Zawiera ona zmienną ENDPOINT oraz location.search. Jeżeli któryś z tych parametrów ulegnie zmianie, następuje ponowne wywołanie funkcji useEffect. 
-\begin{lstlisting}[caption=Implementacja funkcji dołączenia do komunikatora po stronie klienta]
+\begin{lstlisting}[caption=Implementacja funkcji dolaczenia do komunikatora po stronie klienta]
 useEffect(() => {
         const { name, room } = queryString.parse(location.search)
         socket = io(ENDPOINT)
@@ -245,7 +245,7 @@ useEffect(() => {
 \end{lstlisting}
 
 W celu nasłuchiwania wiadomości i danych pokoju przychodzących od serwera zaimplementowano kolejną funkcję useEffect. Funkcja socket.on przyjmująca argument ‘message’ nasłuchuje na wiadomości przychodzące od serwera. Używa parametru setMessages do aktualizowania stanu elementu messages przy wprowadzeniu nowej wiadomości. Funkcja socket.on przyjmująca argument ‘roomData’ nasłuchuje na dane pokoju przychodzące od serwera i dokonuje aktualizacji stanu parametru users. 
-\begin{lstlisting}[caption=Implementacja funkcji nasłuchiwania wiadomości i danych przychodzących od serwera]
+\begin{lstlisting}[caption=Implementacja funkcji nasluchiwania wiadomosci i danych przychodzacych od serwera]
 useEffect(() => {
         socket.on('message', (message) => {
             setMessages((messages) => [...messages, message])
@@ -257,7 +257,7 @@ useEffect(() => {
 \end{lstlisting}
 
 W celu możliwości wysyłania wiadomości do serwera zaimplementowano funkcję sendMessage. Wywoływana jest ona po wypełnieniu pola tekstowego wpisaną wiadomością. Zastosowano również operację przeciw automatycznemu renderowaniu się strony po każdej przesłanej komendzie. Wiadomość zostanie wysłana, za pomocą metody emit, gdzie następnie pole tekstowe zostanie wyczyszczone.
-\begin{lstlisting}[caption=Implementacja funkcji do wysyłania wiadomości]
+\begin{lstlisting}[caption=Implementacja funkcji do wysylania wiadomosci]
 const sendMessage = (event) => {
         event.preventDefault()
         if (message) {
@@ -293,7 +293,7 @@ const Chat = ({ location }) => {
 \end{lstlisting}
 \section{Zarządzanie ścieżką nawigacji}
 Ważnym aspektem w aplikacji jest również możliwość tworzenia trasy między komponentami i wędrowanie pomiędzy nimi. Każdy komponent zawiera adres URL, który odpowiada określonemu widokowi w aplikacji. Za pomocą biblioteki ‘react-router-dom’ możemy tworzyć ścieżkę nawigacji wskazująca, który interfejs ma zostać wyświetlony na stronie w odpowiedzi na zmianę adresu URL bez konieczności przeładowywania całej strony.
-\begin{lstlisting}[caption=Implementacja ścieżki nawigacji pomiędzy interfejsam]
+\begin{lstlisting}[caption=Implementacja sciezki nawigacji pomiedzy interfejsami]
 const App = () => {
   return (
     <Router>
@@ -321,7 +321,7 @@ const io = socketio(server)
 server.listen(PORT, () => console.log(`Server has started on port ${PORT}`))
 \end{lstlisting}
 Poprzez zastosowanie biblioteki express.js możliwe jest utworzenie modułu ścieżki nawigacji przy wysyłaniu żądań. Obiekt ten służy do mapowania adresów URL z odpowiednimi funkcjami obsługi żądań. Moduł ten zawiera definicję trasy, która odpowiada żądaniom typu GET. Metoda ta stosowana jest w celu pobierania danych z serwera kiedy z nim się połączymy.
-\begin{lstlisting}[caption=Implementacja ścieżki serwera]
+\begin{lstlisting}[caption=Implementacja sciezki serwera]
 const express = require("express");
 const router = express.Router();
 router.get("/", (req, res) => {
@@ -334,7 +334,7 @@ Obsługa zdarzeń po stronie serwera to proces reagowania na zdarzenia, które w
 \subsection{Zdarzenia nasłuchiwania}
 W celu odbierania zapytań od klientów i wysyłania odpowiedzi zwrotnych implementuje się zdarzenie nasłuchiwania po stronie serwera. Gdy serwer jest uruchomiony i nasłuchuje na określonym porcie, może otrzymywać zapytania od klientów poprzez wysyłanie danych na ten port. Serwer może obsługiwać wiele różnych żądań od klientów jednocześnie, dlatego implementuje się zdarzenie nasłuchiwania, które jest wywoływane za każdym razem gdy serwer otrzyma nowe żądanie od klienta. Zdarzenie to umożliwia serwerowi reagowanie na żądania klienta poprzez wysyłanie odpowiedzi zwrotnej. 
 Przy pomocy biblioteki Socket.IO rejestrowane jest zdarzenie dołączenia do komunikatora poprzez zastosowanie metody ‘socket.on’. Funkcja ta przyjmuje obiekt z danymi użytkownika i jest ona wywoływana za każdym razem kiedy wyrejestruje zdarzenie dołączenia do czatu. Następnie emitowane jest zdarzenie zawierające obiekt z danymi o pokoju i zalogowanych użytkownikach.
-\begin{lstlisting}[caption=Implementacja zdarzenia dołączenia i pobierania danych]
+\begin{lstlisting}[caption=Implementacja zdarzenia dolaczenia i pobierania danych]
 io.on('connection', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
         const { error, user } = addUser({ id: socket.id, name, room })
@@ -353,7 +353,7 @@ io.on('connection', (socket) => {
 \end{lstlisting}
 
 Żeby zdarzenie dołączenia mogło być realizowane potrzebne jest zaimplementowanie operacji dodawania nowego użytkownika. Jest to potrzebne, żeby serwer mógł aktualizować listę użytkowników zarejestrowanych w aplikacji oraz sprawdzać wysyłane żądania. Przy pomocy funkcji dodawany jest nowy klient do listy użytkowników. Następnie pobierana jest jego nazwa, nazwa pokoju, w którym się znajduje, a także unikalny klucz identyfikatora.
-\begin{lstlisting}[caption=Implementacja funkcji dodawania użytkownika]
+\begin{lstlisting}[caption=Implementacja funkcji dodawania uzytkownika]
 const addUser = ({ id, name, room }) => {
     name = name.trim().toLowerCase()
     room = room.trim().toLowerCase()
@@ -366,7 +366,7 @@ const addUser = ({ id, name, room }) => {
 }
 \end{lstlisting}
 W celu umożliwienia wysyłania wiadomości przez użytkowników, implementuje się po stronie serwera zdarzenie wysyłania wiadomości. Funkcja ta jest wywoływana, gdy zdarzenie zostanie wyrejestrowane. Kiedy klient wysyła wiadomość do serwera, ten odbiera to zdarzenie i uruchamiana jest funkcja. Następnie serwer pobiera informacje o użytkowniku, który przesłał polecenie i emituje zdarzenie wiadomości do wszystkich użytkowników znajdujących się w tym samym pokoju. Funkcja ta działa jako most między klientem, a serwerem, umożliwiając im wymianę danych.
-\begin{lstlisting}[caption=Implementacja zdarzenia wysyłania wiadomości]
+\begin{lstlisting}[caption=Implementacja zdarzenia wysylania wiadomosci]
 socket.on('sendMessage', async (message, callback) => {
         const user = getUser(socket.id)
         	....
@@ -381,12 +381,12 @@ socket.on('sendMessage', async (message, callback) => {
 }
 \end{lstlisting}
 Do realizacji zdarzenia wysłania wiadomości, konieczne jest zidentyfikowanie, który użytkownik wykonał tą operacje. W tym celu pobierane są dane użytkownika po przypisanym unikalnym kluczu identyfikatora. Sprawdzane jest czy identyfikator użytkownika z tablicy jest równy identyfikatorowi przekazanemu jako argument użytkownika. Jeżeli warunek zostanie spełniony to następuje zwrócenie obiektu użytkownika, który wysłał wiadomość.
-\begin{lstlisting}[caption=Implementacja funkcji pobierania informacji o użytkowniku]
+\begin{lstlisting}[caption=Implementacja funkcji pobierania informacji o uzytkowniku]
 const getUser = (id) => users.find((user) => user.id === id)
 \end{lstlisting}
 
 Również zaimplementowano zdarzenie rozłączania, które jest potrzebne do aktualizowania liczby uczestników korzystających z aplikacji. Funkcja ta jest wywoływana kiedy użytkownik rozłączy się z serwerem. Usuwane są informacje o użytkowniku z listy użytkowników i następnie wysyłany jest komunikat do pozostałych uczestników, informujący o jego opuszczeniu. Po rozłączeniu się klienta, aktualizowana jest lista użytkowników w pokoju.
-\begin{lstlisting}[caption=Implementacja zdarzenia rozłączania]
+\begin{lstlisting}[caption=Implementacja zdarzenia rozlaczania]
 socket.on('disconnect', () => {
         const user = removeUser(socket.id)
         if (user) {
@@ -402,12 +402,12 @@ socket.on('disconnect', () => {
 \end{lstlisting}
 
 W celu aktualizacji listy użytkowników zaimplementowano metodę, która pozwoli na wykonanie tej operacji. Funkcja iteruje po tablicy obecnych użytkowników w pokoju, sprawdzając czy nazwa pokoju użytkownika jest zgodna z nazwą pokoju przekazanej do funkcji jako argument. Jeśli tak to użytkownik dodawany jest do nowej tablicy.
-\begin{lstlisting}[caption=Implementacja funkcji aktualizująca listę użytkowników]
+\begin{lstlisting}[caption=Implementacja funkcji aktualizujaca liste uzytkownikow]
 const getUsersInRoom = (room) => users.filter((user) => user.room === room)
 \end{lstlisting}
 
 Żeby zdarzenie rozłączenia mogło być realizowane, potrzebne jest zaimplementowanie operacji usuwania użytkownika. Funkcja w celu sprawdzenia, który użytkownik opuścił czat, przyjmuje parametr identyfikatora, który jest przypisywany każdemu użytkownikowi. Warunkiem jest sprawdzenie czy identyfikator przekazanego argumentu jako argument użytkownika jest równy identyfikatorowi użytkownika z tablicy. Jeśli tak, to zwracany jest indeks tego elementu i dochodzi do usunięcia użytkownika z listy. 
-\begin{lstlisting}[caption=Implementacja funkcji usuwania użytkownika]
+\begin{lstlisting}[caption=Implementacja funkcji usuwania uzytkownika]
 const removeUser = (id) => {
     const index = users.findIndex((user) => user.id === id)
     if (index !== -1) return users.splice(index, 1)[0]
@@ -490,7 +490,7 @@ W celu sprawdzenia działania komunikacji tekstowej poprzez wpisywanie w języku
 UKŁAD
 \subsection{Włączenie diody LED}
 By umożliwić komunikację elementów elektronicznych z mikrokontrolerem należy je podłączyć do odpowiednich wyprowadzeń pinów GPIO. Poprzez zastosowanie biblioteki ‘onOff’ tworzony jest obiekt LED. Dioda o kolorze czerwonym została podłączona do pinu 4 jako wyjście. Sprawdzane jest kolejno czy stworzony obiekt ma wartość 0 co oznacza to, że element nie jest aktywny. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie diody LED. Identyczna funkcja zaimplementowana jest również dla dwóch pozostałych diod.
-\begin{lstlisting}[caption=Implementacja funkcji włączającej diodę]
+\begin{lstlisting}[caption=Implementacja funkcji wlaczajacej diode]
 function tryRed() {
     var LED = new onOff.Gpio(4, 'out')
     return new Promise((resolve) => {
@@ -503,7 +503,7 @@ function tryRed() {
 \end{lstlisting}
 \subsection{Wyłączenie diody LED}
 W celu kontrolowania diody LED, zaimplementowano również funkcję, która pozwoli na jej wyłączenie. Jej sposób działania jest niemal identyczny co do włączenia elementu, tylko w przypadku wyłączenia, stan jest zmieniany z wartości 1 na 0. Element usuwany jest z listy eksportowanych pinów i po odłączeniu obiektu LED, zostaje on wyłączony.
-\begin{lstlisting}[caption=Implementacja funkcji wyłączającej diodę]
+\begin{lstlisting}[caption=Implementacja funkcji wylaczajacej diode]
 function endBlinkRed() {
     var LED = new onOff.Gpio(4, 'out')
     return new Promise((resolve) => {
@@ -516,7 +516,7 @@ function endBlinkRed() {
 \end{lstlisting}
 \subsection{Włączenie wszystkich diod}
 W celu umożliwienia włączenia trzech diod LED stworzono nowe obiekty odpowiadające elementom. Zostały one podłączone do określonych pinów GPIO na wyjście układu. Sprawdzane jest kolejno czy stworzone obiekty mają wartość 0 co oznacza to, że elementy są nieaktywne. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie wszystkich trzech diod.
- \begin{lstlisting}[caption=Implementacja funkcji włączająca wszystkie diody]
+ \begin{lstlisting}[caption=Implementacja funkcji wlaczająca wszystkie diody]
 function turnOnAll() {
     var LED04 = new onOff.Gpio(4, 'out'),
         LED17 = new onOff.Gpio(17, 'out'),
@@ -539,7 +539,7 @@ function turnOnAll() {
 
 \subsection{Wyłączenie wszystkich diod}
 W celu umożliwienia wyłączenia wszystkich trzech diod LED, sprawdzane jest czy zaimplementowane obiekty mają wartość 1 na wyjściu co oznacza to, że elementy są włączone i się świecą. Jeśli tak, to zmieniany jest stan na wyjściu na niski co powoduje wyłączenie wszystkich trzech diod. 
- \begin{lstlisting}[caption=Implementacja funkcji wyłączająca wszystkie diody]
+ \begin{lstlisting}[caption=Implementacja funkcji wylaczajaca wszystkie diody]
 function turnOffAll() {
     var LED04 = new onOff.Gpio(4, 'out'),
         LED17 = new onOff.Gpio(17, 'out'),
@@ -559,157 +559,7 @@ function turnOffAll() {
 
 \subsection{Naprzemienne włączanie diod}
 Aby umożliwić obsługę 3 diod LED, należy je podłączyć do trzech osobnych pinów GPIO. Czynność ta będzie potrzebna do osiągnięcia efektu płynącej diody. Wykonanie tej operacji ma na celu stworzenie wizualnego efektu ruchu. Możliwe jest to do osiągnięcia przy zastosowaniu szeregu diod LED, które są sekwencyjnie zapalane. W celu realizacji takiego efektu tworzone są trzy obiekty LED, które są odpowiedzialne za zarządzanie pinami GPIO o numerach, 4,17 i 27. Obiekty te zapisywane są do tablicy i następnie zerowane. W zależności od aktualnego indeksu utworzonej tablicy, zmieniana jest wartość stanu z 0 na 1 co powoduje włączenie diody. W momencie osiągnięcia pozycji ostatniego elementu tablicy, zmieniany jest kierunek włączania diod. Przy zastosowaniu funkcji interwałowej, możliwe jest powtarzanie się czynności włączania i wyłączania elementów o określony czas co daje efekt wizualnego ruchu diod. Po upływie 5 sekund, elementy usuwane są z listy eksportowanych pinów co powoduje odłączenie obiektu LED i zakończenie procesu.
- \begin{lstlisting}[caption=Implementacja funkcji tworzącej efekt płynącej diody]
-function flowingLeds() {
-    var LED04 = new onOff.Gpio(4, 'out'),
-        LED17 = new onOff.Gpio(17, 'out'),
-        LED27 = new onOff.Gpio(27, 'out')
-    var leds = [LED04, LED17, LED27]
-    var indexCount = 0
-    dir = 'up'
-    return new Promise((resolve) => {
-        var flowInterval = setInterval(flowingLeds, 300)
-        function flowingLeds() {
-            leds.forEach(function (currentValue) {
-                currentValue.writeSync(0)
-            })
-            if (indexCount == 0) dir = 'up'
-            if (indexCount >= leds.length) dir = 'down'
-            if (dir == 'down') indexCount--
-            leds[indexCount].writeSync(1)
-            if (dir == 'up') indexCount++
-        }
-        setTimeout(() => {
-            clearInterval(flowInterval)
-            leds.forEach(function (currentValue) {
-                currentValue.writeSync(0)
-                currentValue.unexport()
-                resolve()
-            })}, 5000)
-    })}
-\end{lstlisting}
 
-\subsection{Miganie diodą LED}
-Aby uzyskać efekt migającej diody LED zaimplementowano funkcję wykorzystująca interwał czasowy. W tym celu utworzono obiekt, który został podłączony do pinu GPIO o numerze 4. Identyczna sekwencja została wykonana dla dwóch kolejnych diod o kolorze zielonym i żółtym. Za pomocą utworzonej funkcji sprawdzany jest stan diody. Jeżeli dioda jest wyłączona to zmieniany jest stan na wartość 1 co powoduje włączenie się elementu. Poprzez zastosowanie interwału czasowego możliwe jest powtarzanie się czynności co 250 milisekund. Powoduje to utworzenie efektu migającej diody LED.
- \begin{lstlisting}[caption=Implementacja funkcji tworząca efekt migania pojedynczej diody LED]
-function blinkRed() {
-    const LED = new onOff.Gpio(4, 'out')
-    return new Promise((resolve) => {
-        const blinkInterval = setInterval(blinkLED, 250)
-        function blinkLED() {
-            if (LED.readSync() === 0) {
-                LED.writeSync(1)
-            } else {
-                LED.writeSync(0)
-            }}
-        setTimeout(() => {
-            clearInterval(blinkInterval)
-            LED.writeSync(0)
-            LED.unexport()
-            resolve()
-        }, 5000)
-    })}
-\end{lstlisting}
-\subsection{Sterowanie serwomechanizmem}
-Serwomechanizm to układ, który pozwala na precyzyjne pozycjonowanie elementu względem określonego punktu. Mechanizm ten składa się z silnika elektrycznego, przekładni i elementu ruchomego. W momencie gdy kontroler serwomechanizmu otrzymuje sygnał o zadanej pozycji, silnik obraca się w odpowiednim kierunku. W celu cyklicznego włączaniu i wyłączaniu sygnału elektrycznego można zastosować technikę modulacji szerokością impulsu. Sterowanie serwomechanizmem przy pomocy sygnałów PWM polega na cyklicznym podawaniu impulsu o zmiennej szerokości. Silnik serwomechanizmu jest wówczas włączany i wyłączany w odpowiednim momencie, co pozwala na uzyskanie pożądanego położenia elementu.
- \begin{lstlisting}[caption=Implementacja funkcji sterująca serwomechanizmem]
-function servo() {
-    return new Promise((resolve) => {
-        let pulseWidth = 1000
-        const threshold = 20
-        let increment = threshold
-        const servoInterval = setInterval(() => {
-            motor.servoWrite(pulseWidth)
-            pulseWidth += increment
-            if (pulseWidth >= 2000) {
-                increment = -1 * threshold
-            } else if (pulseWidth <= 1000) {
-                increment = threshold
-            }
-        }, threshold)
-        setTimeout(() => {
-            clearInterval(servoInterval)
-            resolve()
-        }, 20000)
-    })}
-\end{lstlisting}
-W celu spełnienia założeń przy sterowaniu serwomechanizmem zaimplementowano funkcję. Wykorzystuje ona technikę sterowania sygnałami PWM. Przy zastosowaniu interwałów czasowych, szerokość impulsów zwiększa się co określoną jednostkę czasową. Jeżeli serwomechanizm osiągnie pozycję końcową następuje zmniejszanie się wartości szerokości impulsu przez co serwomechanizm zacznie się cofać do pozycji początkowej. Czynność ta jest powtarzana przez 20 sekund. Po tym czasie następuje wyczyszczenie interwału czasowego co zatrzymuje działanie serwomechanizmu.
-\subsection{Sekwencyjne wykonywanie komend}
-W celu implementacji sekwencyjnego uruchamiania elementów podłączonych do pinów GPIO mikrokontrolera zastosowano asynchroniczne funkcje. Sekwencyjne wywoływanie funkcji to sposób, który umożliwi wykonywanie zaimplementowanych metod po kolei. Kiedy jedna funkcja zostanie zakończona, następuje wywołanie kolejnej. Zastosowanie asynchronicznego mechanizmu pozwoli na zaimplementowanie funkcji, które będą się wykonywały jedna po drugiej. Kiedy pierwsza operacja zrealizuje swoją pracę, informacja o jej zakończeniu zostanie przekazana do kolejnej funkcji, która następnie wykona swoją pracę. Pozwoli to na osiągnięcie efektu sekwencyjnego wykonywania się poleceń. 
- \begin{lstlisting}[caption=Sekwencyjne uruchamianie się funkcji]
-async function sequential() {
-    await turnOnAll()
-    await turnOffAll()
-    await tryRed()
-    await endBlinkRed()
-    await tryGreen()
-    await endBlinkGreen()
-    await tryYellow()
-    await endBlinkYellow()
-    await flowingLeds()
-    await blinkRed()
-    await blinkGreen()
-    await blinkYellow()
-    await servo()
-}
-\end{lstlisting}
-\section{Archiwizacja wpisanych poleceń}
-Archiwizacja wiadomości w aplikacjach opartych o komunikację tekstową jest używana, aby umożliwić użytkownikom przechowywanie i przeglądanie wiadomości, które zostały wysłane lub otrzymane w przeszłości. Jest to szczególnie przydatne, w przypadku osiągnięcia dostępu do ważnych informacji zawartych w konwersacji i możliwości nadzorowania danych zawartych w aplikacji. Archiwizacja pozwala także na lepsze zarządzanie dostępem do wiadomości i uniknięcie sytuacji, w której tracona jest zawartość istotnych danych. Możliwość zachowania archiwum wiadomości znajduje również swoje zastosowanie w zarządzaniu bazami danych, w dziale automatyki. W szczególności archiwizacja pozwala na zachowanie dostępu do poprzednich wersji danych, które zostały zmodyfikowane lub zaktualizowane. W niektórych przypadkach, możliwość zapisania informacji może być również ważna w kontekście utraty danych w wyniku awarii aplikacji lub innych problemów technicznych.
- \begin{lstlisting}[caption=Implementacja funkcji archiwizującej wiadomości w komunikatorze]
-class Archiver {
-    #archivePath = './archivePath.json'
-    #archiveContent = {}
-    start() {
-        if (!fs.existsSync(this.#archivePath)) {
-            return this.#archiveContent
-        }
-        const archive = fs.readFileSync(this.#archivePath, 'utf8')
-        this.#archiveContent = JSON.parse(archive)
-    }
-    fetch(room) {
-        return this.#archiveContent[room] ? this.#archiveContent[room] : []
-    }
-    async archive(text, user, createdTime, room) {
-        if (!this.#archiveContent[room]) {
-            this.#archiveContent[room] = []
-        }
-        this.#archiveContent[room].push({ text, user, createdTime })
-        await fs.promises.writeFile(
-            this.#archivePath,
-            JSON.stringify(this.#archiveContent)
-        )}}}
-\end{lstlisting}
-
-W celu stworzenia archiwum danych zaimplementowano klasę, która pomoże zapisać wiadomości tekstowe w aplikacji. Ważnym aspektem jest sprawdzenie istnienia ścieżki pliku gdzie wiadomości mają być zapisane. Jeśli tak, zwracane jest archiwum dla danego pokoju. Aby móc dokonać archiwizacji wiadomości, potrzebna będzie możliwość dodania nowej wiadomości do archiwum. W tym celu zaimplementowano funkcję asynchroniczną ‘archieve’, która umożliwia wprowadzenie nowej wiadomości do stworzonego archiwum. 
- \begin{lstlisting}[caption=Wykorzystanie zdarzenia dołączenia, aby uzyskać widok zawartości archiwum w aplikacji]
-io.on('connection', (socket) => {
-    socket.on('join', ({ name, room }, callback) => {
-	....
-        const archiveMessages = archive.fetch(user.room)
-        for (const message of archiveMessages) {
-            io.to(user.room).emit('message', message)
-        }
-        ....
-    })
-
-   	....
-    })
-
-  	....
-})
-\end{lstlisting}
-Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik dołącza do pokoju. W przypadku aplikacji, które powinno zawierać archiwizację danych, ta informacja może być wykorzystana do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia archiwizacji danych, a następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
- \begin{lstlisting}[caption=Wykorzystanie zdarzenia wysyłania wiadomości do tworzenia archiwum]
-socket.on('sendMessage', async (message, callback) => {
-        const user = getUser(socket.id)
-
-      	....
-        await archive.archive(message, user.name, createdTime, user.room)
-       	....
-    })
-\end{lstlisting}
-
-Kiedy użytkownik wyśle wiadomość w aplikacji chcemy, aby trafiła do utworzonego archiwum. W tym celu potrzebne jest rejestrowanie tego zdarzenia, które zostanie wywołane gdy klient prześle polecenie do serwera. Kiedy zostanie wysłana wiadomości, zdarzenie zarejestruje tą czynność i zapisze całą zawartość do archiwum. 
 
 
 
