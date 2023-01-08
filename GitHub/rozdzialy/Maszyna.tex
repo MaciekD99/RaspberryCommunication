@@ -1,0 +1,73 @@
+Celem rozdziału jest przedstawienie stanowiska, które pozwoli nam na rozwiązanie problemu zawartego w temacie pracy.
+\section{Raspberry Pi 2 Model B} 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/Raspberry Pi"}
+	\caption{Raspberry Pi 2 Model B.}
+	\label{fig:1}
+\end{figure}
+W aplikacji jako maszynę przyjęto mikrokomputer Raspberry Pi 2 Model B. Model B to druga generacja Raspberry Pi, który opiera się na układzie system-on-chip BCM2836. Raspberry Pi 2 może być używany do przetwarzania tekstu czy programowania. W porównaniu do starszej wersji Modelu B+ ma procesor ARMv7 co oznacza możliwość obsługi pełnej gamy dystrybucji ARM GNU/Linux,  w tym Snappy Ubuntu Core, a także Windows 10. Pi 2 wykorzystuje płytkę drukowaną rozmiaru 3,37 x 2,13 x 0,67 cala ważącą tylko 35 gramów. Są to mniej więcej rozmiary karty kredytowej.
+Obsługa Raspberry Pi ogranicza korzystanie pod względem systemu operacyjnego. Dostępny jest tylko Linux. Obecnie powszechnym i stosowanym systemem operacyjnym jest Windows, dlatego Raspberry Pi zmusza nas do poznania tajników wiersza poleceń Linuxa. W tym celu Fundacja Raspberry Pi stworzyła menadżer instalacji o nazwie NOOBS – New Out Of the Box Software. Instalator NOOBS zawiera również różne systemy operacyjne innych firm, w tym OpenELEC oraz Windows 10 IoT Core firmy Microsoft. Raspberry Pi 2 nie ma wbudowanej pamięci co wiąże się z ograniczeniami do karty microSD i dowolnej dołączonej pamięci. Raspberry Pi 2 ma tylko jeden czytnik karty microSD przez co jest ograniczony do korzystania z tylko jednego systemu operacyjnego.
+
+\begin{table}
+\centering
+\caption{Cechy urządzenia Raspberry Pi}
+\begin{tabular}{|c|}
+\hline
+Czterordzeniowy procesor ARM Cortex-A7 900 MHz \\
+\hline
+1GB RAM \\
+\hline
+Rdzeń graficzny VideoCore IV 3D \\
+\hline
+Port Ethernet \\
+\hline
+Cztery porty USB i możliwość podłączenia klawiatury i myszki \\
+\hline
+Pełnowymiarowe wyjście HDMI i możliwość podłączenia się do monitora \\
+\hline
+Czterobiegunowe gniazdo 3,5mm z wyjściem audio i kompozytowym wyjściem wideo \\
+\hline
+40 stykowe złącze GPIO z męskimi stykami, które są kompatybilne z żeńskimi złączami \\
+\hline
+Interfejs kamery (CSI) \\
+\hline
+Interfejs wyświetlacza (DS1) \\
+\hline
+Gniazdo karty micro SD \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\section{Złącze GPIO}
+
+
+Raspberry Pi jest przystosowane do pracy z napięciem 3,3V oraz z maksymalnym obciążeniem prądowym równym 16mA. Podanie wyższego napięcia może wiązać się z uszkodzeniem mikrokomputera. Płytka zawiera 40-pinowe złącze. Piny numer 2 i 4 podłączone są do 5V. Jeżeli dokonamy zwarcia tych pinów z innymi pinami możemy doprowadzić do uszkodzenia płytki Raspberry Pi. Piny 6,9,14,20,25,30,34 oraz 39 podłączone są do masy. Raspberry Pi posiada dwukierunkowe piny wejście/wyjście. Sterowanie liniami wejście/wyjście wymaga zaprogramowania w wybranym przez nas języku. Istnieją dwa różne schematy numeracji pinów. Piny GPIO są cyfrowymi pinami co znaczy, że posiadają stan on – włączenia oraz off – wyłączenia. Za pomocą pinów masy – GND, jesteśmy w stanie zmierzyć wszystkie napięcia i zakończyć obwód elektryczny. Pin GND traktuje się jako nasz punkt zerowy i podczas projektowania układów ważną jest rzeczą skorzystanie z pinu uziemiającego przed podaniem napięcia na obwód. Dzięki takiej operacji unikniemy uszkodzenie najbardziej wrażliwych elementów w układzie. Przy podłączeniu dowolnego komponentu ze źródłem zasilania i uziemieniem, element staje się częścią naszego obwodu dzięki czemu poprzez przepływ jesteśmy uzyskać wymagany przez nas efekt. W przypadku podłączenia diody LED wytworzymy światło. Piny 3V zapewniają zasilanie naszego układu napięciem 3,3V. Piny te mają specjalne zastosowanie. Przy podłączeniu diody LED do GPIO 3V możemy sprawdzić czy nasz układ został prawidłowo podłączony i czy dioda świeci. Należy również brać pod uwagę fakt, że pin 3V ma ograniczone możliwości prądowe. Wartość prądu jaką można pobrać z tego pinu to około 50mA co oznacza, że nie jesteśmy w stanie obsłużyć naszą płytkę dużymi prądami. Jeżeli chcemy podłączyć elementy, które wymagają większej wartości prądu, należy pomyśleć nad innym sposobem zasilania. Piny 3V zawierają również ochronę przeciwzwarciową co oznacza, że jeżeli zostanie podłączony element, który pobiera większy prąd niż jest wymagany to zabezpieczenie automatycznie zareaguje i odciąży pin przez co unikniemy uszkodzenia naszej płytki Raspberry Pi. Pin GPIO 3V jest zasilany napięciem stałym, a nie zmiennym, dlatego nie nadaje się do sterowania takich urządzeń jak silniki czy przekaźniki. Piny 3V najlepiej sprawdzają się przy zasilaniu takich elementów jak diody LED czy czujniki, ponieważ elementy te charakteryzują się niskim poborem mocy. Piny 5V są typem pinów, które pozwalają na zasilanie urządzeń zewnętrznych za pośrednictwem płytki Raspberry Pi. Piny GPIO 5V są zasilane napięciem stałym o wartości nieprzekraczającej 5V i może dostarczać maksymalnie do 2,5A prądu. Piny 5V są również zasilane napięciem stałym, a nie zmiennym. Za pomocą tych pinów możemy zasilać urządzenia o wyższym poborze mocy. Również w złączu GPIO Raspberry Pi znajdują się piny korzystające z protokołów I2C, SPI lub UART. Magistrala I2C to cyfrowy interfejs komunikacyjny, która pozwala na przesyłanie danych pomiędzy urządzeniami za pomocą linii SDA (Serial Data) oraz SCL (Serial Clock). Pin 3 i pin 5 to dwa piny I2C. Pin SCL jest pinem zegarowym, który umożliwia synchronizację przesyłania danych pomiędzy urządzeniami, zaś pin SDA jest pinem danych, który przesyła dane pomiędzy urządzeniami za pomocą magistrali I2C. Głównym zastosowaniem tych pinów jest możliwość podłączenia takich urządzeń jak ekrany LCD. Magistrala I2C wymaga obecności przynajmniej dwóch urządzeń na magistrali, które jedno będzie jako master, a drugie jako slava. Urządzenie Master będzie wysyłało komendy do slave’a. Pin SPI umożliwiają komunikację między urządzeniami za pomocą magistrali SPI. Raspberry Pi gwarantuje nam cztery piny SPI. Są to MOSI, MISO, SCLK oraz CE0 lub CE1. Pin MOSI umożliwia nam przesyłanie danych od mastera do slave’a. Pin MISO przesyła dane z slave’a do mastera. Pin SCLK jest pinem zegarowym, który umożliwia synchronizację przesyłania danych pomiędzy urządzeniami, zaś pin CE0 lub CE1 służy do włączania lub wyłączania slave’a. Pin SPI znajduje swoje zastosowanie przy zasilaniu ekranów OLED lub modułów GPS. Pin UART pozwala na komunikację między urządzeniami za pomocą portu szeregowego UART. W płytce Raspberry Pi znajdują się dwa piny UART. Pierwszy to RX (Receive), a drugi to TX (Transmit). Pin RX służy do odbierania danych z urządzenia zewnętrznego, zaś pin TX pozwala na wysyłanie danych do urządzenia zewnętrznego. 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"obrazy/GPIO"}
+	\caption{40stykowe złącze GPIO Raspberry Pi 2 Model B.}
+	\label{fig:2}
+\end{figure}
+
+\section{Płytka Prototypowa}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"obrazy/Breadboard"}
+	\caption{Płytka prototypowa}
+	\label{fig:3}
+\end{figure}
+Czerwonym kolorem oznaczona jest szyna zasilania. Zazwyczaj jest ona używana do podłączenia zasilania do płytki prototypowej. Ze względu na to, że cała kolumna jest podłączona, możliwe jest podłączenie zasilania do dowolnie wybranego punktu w kolumnie. Linia ta służy do dostarczania zasilania do elementów elektronicznych umieszczonych na płytce, a także urządzeń zewnętrznych, w tym Raspberry Pi. W płytkach prototypowych szyny zasilania zazwyczaj oznaczone są literami „VCC” lub „+”. Raspberry Pi posiada specjalne gniazdo zasilania przeznaczone dla zasilaczy sieciowych. Następnie po podłączeniu zasilacza dostarczany jest prąd do płyty za pomocą szyn zasilania, które są umieszczone w gnieździe zasilania. Przed podłączeniem ważne jest, żeby się upewnić czy napięcie zasilania na szynie zasilania płytki prototypowej jest zgodne z napięciem zasilania Raspberry Pi oraz czy prąd zasilania nie przekracza maksymalnych wartości dopuszczalnych dla linii zasilania w Raspberry Pi
+Niebieskim kolorem oznaczona jest szyna naziemna. Zazwyczaj jest ona używana do podłączenia uziemienia do płytki prototypowej. Ze względu na to, że cała kolumna jest podłączona, możliwe jest podłączenie zasilania do dowolnie wybranego punktu w kolumnie. Szyna naziemna zwykle oznaczona jest symbolem „GND” lub „-„. W płytce prototypowej, szyna naziemna jest używana do połączenia elementów elektronicznych z masą co pozwala im działać prawidłowo. W momencie gdy rezystor zostanie podłączony do szyny naziemnej i do pinu wejściowego mikrokontrolera, będzie on działał jako dzielnik napięcia co pozwoli mikrokontrolerowi odczytać wartość napięcia na wejściu. Przed podłączeniem ważne jest, żeby się upewnić czy szyna naziemna jest poprawnie podłączona, ponieważ błędne podłączenie może doprowadzić do nieprawidłowego działania elementów elektronicznych lub nawet do ich uszkodzenia.
+Zielonym kolorem oznaczono rzędy połączonych punktów wiązania. Wiązania każdego z tych rzędów są połączone, ale nie cały rząd. Punkty wiązania używana są najczęściej do łączenia elementów i obwodów elektronicznych. Rzędy połączonych punktów wiązania są oznaczone kolumnami liter i cyfr.
+Za pomocą płytki prototypowej z zastosowaniem Raspberry Pi możemy połączyć prosty układ składający się z diody LED i rezystora. Jeśli dioda jest połączona szeregowo z rezystorem, może ona służyć do ograniczenia prądu płynącego przez obwód. Raspberry Pi jest przystosowane do pracy z niskim obciążeniem prądowym. W takim przypadku dioda będzie przepuszczać prąd tylko w jednym kierunku co oznacza, że jeżeli wartość prądu będzie zbyt wysoka to dioda się zablokuje i ograniczy przepływ prądu, chroniąc pozostałe elementy obwodu przed uszkodzeniem. Ważne jest dobranie odpowiedniej wartości rezystora, aby zapobiec uszkodzeniu się diody. Wartość rezystora zależy od napięcia zasilania, napięcia przewodzenia diody LED i jej prądu. Podczas sterowania diodą LED, Raspberry Pi wysyła sygnał sterujący do pinu, który jest połączony z anodą diody LED. Sygnał ten przechodzi przez rezystor ograniczający prąd, który płynie przez diodę LED. Następnie sygnał dotrze do anody diody LED co spowoduje jej zaświecenie.
+Kolejnym podstawowym elementem możliwym do połączenia za pomocą płytki prototypowej z zastosowaniem Raspberry Pi jest serwomechanizm.Element ten służy do precyzyjnego obracania się o określoną wartość kąta. Raspberry Pi wysyła sygnał sterujący do serwomechanizmu za pomocą odpowiedniego interfejsu. Następnie interfejs odbiera sygnał i przetwarza go na sygnał elektryczny, który wysyłany jest do serwomechanizmu dzięki któremu zaczyna się obracać o określony kąt za pomocą silnika elektrycznego i przekładni. W momencie osiągnięcia odpowiedniej wartości kąta, serwomechanizm zatrzymuje się i czeka na kolejny sygnał sterujący.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"obrazy/diodapołączenie"}
+	\caption{Proste połączenie układu diody LED z rezystorem}
+	\label{fig:4}
+\end{figure}
