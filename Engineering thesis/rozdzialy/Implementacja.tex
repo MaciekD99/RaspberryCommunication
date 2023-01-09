@@ -163,7 +163,7 @@ const Messages = ({ messages, name }) => (
 );
 \end{lstlisting}
 
-Komponent Wiadomość wyświetla pojedynczą wiadomość w aplikacji. Element ten otrzymuje 2 argumenty: message i name. Za pomocą funkcji useState tworzony jest stan, który przechowuje aktualną datę i godzinę wysłanej wiadomości. Za pomocą funkcji useEffect ustawiana jest wartość stanu daty i godziny po uruchomieniu komponentu. 
+Komponent Wiadomość wyświetla pojedyncze polecenie wysłane w aplikacji. Do elementu przekazywane są dwa parametry pozwalające na zidentyfikowanie osoby, która przesyła komendy w komunikatorze. Przy użyciu funkcji useState tworzony jest stan, który przechowuje aktualną datę i godzinę wysłanej wiadomości. Za pomocą funkcji useEffect ustawiana jest wartość stanu daty i godziny dla stworzonej wiadomości po uruchomieniu komponentu.  
 \begin{lstlisting}[caption=Implementacja komponentu z pojedyncza wiadomoscia ]
 const Message = ({ message: { text, user }, name }) => {
 const [currentDate, setCurrentDate] = useState('')
@@ -231,7 +231,7 @@ Do interfejsu komunikatora może dołączyć wiele osób, które mogą wysyłać
 	\caption{Widok komunikatora po wpisaniu wiadomości przez dwóch użytkowników}
 	\label{fig:13}
 \end{figure}
-Komponent Czat korzysta z biblioteki Socket.IO do komunikacji z serwerem za pomocą WebSocketów. W komponencie zadeklarowane jest kilka stanów takich jak: name, room, users, message i messages, które zarządzane są przez funkcje useState. Za pomocą metody useEffect parsowane jest zapytanie z adresem URL przy użyciu biblioteki ‘query-string’. Następnie zapytanie te jest przekazywane do komponentu Czatu poprzez parametr `location`. Po parsowaniu zapytania, wartości name i room są używane do nawiązania połączenia z serwerem. Metoda „Join” pozwala na dołączenie do pokoju czatu. Drugim parametrem dla funkcji useEffect jest tablica zależności. Zawiera ona zmienną ENDPOINT oraz location.search. Jeżeli któryś z tych parametrów ulegnie zmianie, następuje ponowne wywołanie funkcji useEffect. 
+Komponent czat korzysta z biblioteki Socket.IO do komunikacji z serwerem przy użyciu WebSocketów. W komponencie zadeklarowano parametry, które zarządzane są przez funkcje useState. Pozwalają one na zidentyfikowanie osoby, która bierze udział w komunikacji, a także określa wszystkie operacje, które wykonała. Za pomocą funkcji useEffect parsowane jest zapytanie z adresem URL przy użyciu biblioteki ‘query-string’. Następnie zapytanie te jest przekazywane do komponentu Czatu poprzez parametr `location`. Po parsowaniu zapytania, wartości parametrów z nazwą użytkownika i pokoju używane są do przekierowania użytkownika na poprawny adres URL. Umożliwia to nawiązanie połączenia z serwerem. Przy zastosowaniu zdarzenia dołączenia, użytkownik zostaje przekierowany do komunikatora.
 \begin{lstlisting}[caption=Implementacja funkcji dolaczenia do komunikatora po stronie klienta]
 useEffect(() => {
         const { name, room } = queryString.parse(location.search)
@@ -244,7 +244,7 @@ useEffect(() => {
             }})}, [ENDPOINT, location.search])
 \end{lstlisting}
 
-W celu nasłuchiwania wiadomości i danych pokoju przychodzących od serwera zaimplementowano kolejną funkcję useEffect. Funkcja socket.on przyjmująca argument ‘message’ nasłuchuje na wiadomości przychodzące od serwera. Używa parametru setMessages do aktualizowania stanu elementu messages przy wprowadzeniu nowej wiadomości. Funkcja socket.on przyjmująca argument ‘roomData’ nasłuchuje na dane pokoju przychodzące od serwera i dokonuje aktualizacji stanu parametru users. 
+Aby użytkownik, który dołączył do czatu miał możliwość przesyłania komend potrzebne jest zaimplementowanie zdarzenia, które pozwoli na wysyłanie wiadomości. Konieczne jest, aby strona klienta mogła nasłuchiwać dane przychodzące z strony serwera. Przy wprowadzeniu nowej wiadomości przez użytkownika aktualizowany jest parametr odpowiadający za przechowywanie listy wysłanych poleceń. Powoduje to uaktualnienie danych klienta, który wysłał komendę w komunikatorze.
 \begin{lstlisting}[caption=Implementacja funkcji nasluchiwania wiadomosci i danych przychodzacych od serwera]
 useEffect(() => {
         socket.on('message', (message) => {
@@ -256,7 +256,7 @@ useEffect(() => {
     }, [])
 \end{lstlisting}
 
-W celu możliwości wysyłania wiadomości do serwera zaimplementowano funkcję sendMessage. Wywoływana jest ona po wypełnieniu pola tekstowego wpisaną wiadomością. Zastosowano również operację przeciw automatycznemu renderowaniu się strony po każdej przesłanej komendzie. Wiadomość zostanie wysłana, za pomocą metody emit, gdzie następnie pole tekstowe zostanie wyczyszczone.
+Aby użytkownik mógł przesłać polecenie, które pojawi się w interfejsie komunikatora, zaimplementowano funkcję odpowiadającą za wysyłanie wiadomości. Po wypełnieniu pola tekstowego i kliknięciu przycisku z symbolem wysłania następuje jej wywołanie. Zastosowano również mechanizm, który zapobiega automatycznemu renderowaniu się strony po przesłanym poleceniu w aplikacji. Serwer nasłuchuje zdarzenia wysłania wiadomości przychodzące z strony klienta i umożliwia wykonanie tej czynności. Kiedy użytkownik prześle komendę w aplikacji, zawartość tekstu jest usuwana umożliwiając ponowne wykonanie tej operacji
 \begin{lstlisting}[caption=Implementacja funkcji do wysylania wiadomosci]
 const sendMessage = (event) => {
         event.preventDefault()
@@ -265,7 +265,7 @@ const sendMessage = (event) => {
        	}}
 \end{lstlisting}
 
-Wszystkie te komponenty wchodzą w skład tworzenia widoku aplikacji, który pełni funkcję komunikatora z urządzeniem Raspberry Pi. Interfejs ten umożliwi nam zdalną komunikację z urządzeniami podłączonymi do mikrokontrolera. Aplikacja pozwala na wysyłanie poleceń i odbieranie informacji z urządzenia za pośrednictwem połączenia sieciowego. Użytkownik może wysyłać wiadomości napisane w języku naturalnym do urządzeń za pomocą interfejsu komunikatora. Poprzez zdalne skonfigurowanie Raspberry Pi, urządzenie będzie odbierało polecenia z aplikacji komunikatora i wykonywało odpowiednie akcje, takie jak włączenie lub wyłączenie urządzeń podłączonych do określonych portów GPIO.
+Wszystkie te komponenty wchodzą w skład tworzenia widoku aplikacji, który pełni funkcję komunikatora z mikrokontrolerem. Interfejs ten umożliwi nam zdalną komunikację z urządzeniem. Aplikacja pozwala na przesyłanie poleceń i odbieranie informacji z mikrokontrolera za pośrednictwem połączenia sieciowego. Użytkownik może wysyłać wiadomości napisane w języku naturalnym do urządzeń za pomocą interfejsu komunikatora. Poprzez zdalne skonfigurowanie Raspberry Pi, urządzenie będzie odbierało polecenia z aplikacji komunikatora i wykonywało odpowiednie akcje odpowiadające między innymi włączenie lub wyłączenie elementów wykonawczych podłączonych do określonych portów GPIO.
 \begin{lstlisting}[caption=Implementacja komponentu czatu]
 const Chat = ({ location }) => {
     const [name, setName] = useState('')
@@ -303,11 +303,11 @@ const App = () => {
   );
 }
 \end{lstlisting}
-Aby móc wędrować pomiędzy komponentami Logowania i Czatu konieczne było stworzenie trasy z wyznaczoną ścieżką docelową. Komponent Nawigacji umożliwia aplikacji reagowanie na zmianę adresu URL w przeglądarce internetowej. Każdy z tych interfejsów zawiera swoją wyznaczoną ścieżkę, która jest potrzebna przy zmianie widoku aplikacji przez użytkownika. Zaimplementowana nawigacja umożliwia nam przechodzenie do interfejsu komunikatora po wprowadzeniu nazwy użytkownika i nazwy pokoju w komponencie Logowania. Znajdując się w interfejsie komunikatora również możemy przejść z powrotem do elementu z formularzem logowania poprzez kliknięcie przycisku zamknięcia. Znajduje się on w prawym górnym rogu okienku czatu.
+Aby móc wędrować pomiędzy komponentami logowania i czatu konieczne było stworzenie trasy z wyznaczoną ścieżką docelową. Komponent nawigacji umożliwia aplikacji reagowanie na zmianę adresu URL w przeglądarce internetowej. Każdy z tych interfejsów zawiera swoją wyznaczoną ścieżkę, która jest potrzebna przy zmianie widoku aplikacji przez użytkownika. Zaimplementowana nawigacja przekierowuje nas do interfejsu komunikatora po wprowadzeniu nazwy użytkownika i nazwy pokoju w komponencie logowania. Znajdując się w interfejsie komunikatora, również możemy wrócić z powrotem do komponentu logowania poprzez kliknięcie przycisku zamknięcia. Znajduje się on w prawym górnym rogu okienku czatu.
 \section{Implementacja strony serwera}
 Strona serwera została zaimplementowana przy użyciu platformy Node.js. Umożliwia ona tworzenie szybkich i skalowalnych aplikacji sieciowych za pomocą języka JavaScript. Node.js używa modelu jednowątkowego do obsługi wielu żądań jednocześnie co oznacza, że jest on idealny do tworzenia aplikacji sieciowych takich jak serwery czy komunikatory tekstowe. Ważnym aspektem przy stosowaniu platformy Node.js jest możliwość tworzenia aplikacji w czasie rzeczywistym. Po stronie serwera zaimplementowany został cały mechanizm komunikacji z naszą maszyną, która umożliwia przede wszystkim przesyłanie oraz odbieranie danych.
 Biblioteka Express.js  jest narzędziem sieciowym dla Node.js, która umożliwia tworzenie aplikacji opartych na serwerze. Express.js umożliwia obsługę żądań oraz mapowanie adresów URL na odpowiednie funkcje obsługujące te żądania. Głównym zastosowaniem biblioteki express.js jest możliwość tworzenia serwera HTTP, który będzie odpowiadał na żądania aplikacji klienckich. Biblioteka express.js znajduje swoje szerokie zastosowanie przy tworzeniu aplikacji serwerowych. Poza możliwością tworzenia serwera http, express.js umożliwia również obsługę różnych żądań czy parsowanie przesyłanych żądań. Możliwa jest również obsługa sesji użytkowników, autoryzację, a także przechowywanie i udostępnianie danych.
-Node.js oferuje nam biblioteki http i express, które umożliwiają stworzenie serwera. Przy pomocy biblioteki Socket.IO tworzymy instancję serwera WebSocket. Następnie serwer nasłuchuje na wybranym porcie i loguje informację o uruchomieniu. Port to numer identyfikujący aplikację. Przy tworzeniu serwera konieczne jest ustalenie numeru portu, na którym możliwe będzie nasłuchiwanie i odbieranie połączeń od klientów. Użytkownicy mogą wysyłać zapytania do serwera poprzez podanie adresu IP serwera i numeru portu. Serwer odpowiada na żądania klientów poprzez wysłanie danych z powrotem do użytkownika poprzez ten sam port. Przy pomocy biblioteki express, serwer będzie nasłuchiwał żądań i odpowiadać na nie. 
+Node.js oferuje nam biblioteki http i express, które umożliwiają stworzenie serwera. Następnie tworzona jest instancja serwera WebSocket. Strona serwera nasłuchuje zdarzenia na wybranym porcie i loguje informację o uruchomieniu. Port to numer identyfikujący aplikację. Przy tworzeniu serwera konieczne jest ustalenie numeru portu, na którym możliwe będzie nasłuchiwanie i odbieranie połączeń od klientów. Użytkownicy mogą wysyłać zapytania do serwera poprzez podanie adresu IP serwera i numeru portu. Serwer odpowiada na żądania klientów poprzez wysłanie danych z powrotem do użytkownika poprzez ten sam port. Przy pomocy biblioteki express, serwer będzie nasłuchiwał żądań i odpowiadać na nie. 
 \begin{lstlisting}[caption=Implementacja serwera]
 const http = require('http')
 const express = require('express')
@@ -333,7 +333,7 @@ module.exports = router;
 Obsługa zdarzeń po stronie serwera to proces reagowania na zdarzenia, które występują w aplikacji. Przykłady takich zdarzeń obejmują żądania HTTP od użytkowników czy otrzymanie danych za pośrednictwem protokołu sieciowego. Aby obsłużyć zdarzenie po stronie serwera należy utworzyć zdarzenia nasłuchiwania, które w odpowiedzi wykonują określone zadania.
 \subsection{Zdarzenia nasłuchiwania}
 W celu odbierania zapytań od klientów i wysyłania odpowiedzi zwrotnych implementuje się zdarzenie nasłuchiwania po stronie serwera. Gdy serwer jest uruchomiony i nasłuchuje na określonym porcie, może otrzymywać zapytania od klientów poprzez wysyłanie danych na ten port. Serwer może obsługiwać wiele różnych żądań od klientów jednocześnie, dlatego implementuje się zdarzenie nasłuchiwania, które jest wywoływane za każdym razem gdy serwer otrzyma nowe żądanie od klienta. Zdarzenie to umożliwia serwerowi reagowanie na żądania klienta poprzez wysyłanie odpowiedzi zwrotnej. 
-Przy pomocy biblioteki Socket.IO rejestrowane jest zdarzenie dołączenia do komunikatora poprzez zastosowanie metody ‘socket.on’. Funkcja ta przyjmuje obiekt z danymi użytkownika i jest ona wywoływana za każdym razem kiedy wyrejestruje zdarzenie dołączenia do czatu. Następnie emitowane jest zdarzenie zawierające obiekt z danymi o pokoju i zalogowanych użytkownikach.
+Przy pomocy biblioteki Socket.IO rejestrowane jest zdarzenie dołączenia do komunikatora. Funkcja ta wywoływana jest za każdym razem kiedy użytkownik wyśle żądanie do serwera z możliwością dołączenia do pokoju czatu. Następnie emitowane jest zdarzenie zawierające obiekt z danymi o pokoju i zalogowanych użytkownikach.
 \begin{lstlisting}[caption=Implementacja zdarzenia dolaczenia i pobierania danych]
 io.on('connection', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
@@ -352,7 +352,7 @@ io.on('connection', (socket) => {
 })
 \end{lstlisting}
 
-Żeby zdarzenie dołączenia mogło być realizowane potrzebne jest zaimplementowanie operacji dodawania nowego użytkownika. Jest to potrzebne, żeby serwer mógł aktualizować listę użytkowników zarejestrowanych w aplikacji oraz sprawdzać wysyłane żądania. Przy pomocy funkcji dodawany jest nowy klient do listy użytkowników. Następnie pobierana jest jego nazwa, nazwa pokoju, w którym się znajduje, a także unikalny klucz identyfikatora.
+Żeby zdarzenie dołączenia mogło być realizowane potrzebne jest zaimplementowanie operacji dodawania nowego klienta. Jest to potrzebne, żeby serwer mógł aktualizować listę użytkowników zarejestrowanych w aplikacji oraz nasłuchiwać wysyłane żądania. Przy pomocy funkcji dodawany jest nowy klient do listy użytkowników. W tym celu pobierana jest jego nazwa, nazwa pokoju, w którym się znajduje, a także unikalny klucz identyfikatora.
 \begin{lstlisting}[caption=Implementacja funkcji dodawania uzytkownika]
 const addUser = ({ id, name, room }) => {
     name = name.trim().toLowerCase()
@@ -365,7 +365,7 @@ const addUser = ({ id, name, room }) => {
     return { user }
 }
 \end{lstlisting}
-W celu umożliwienia wysyłania wiadomości przez użytkowników, implementuje się po stronie serwera zdarzenie wysyłania wiadomości. Funkcja ta jest wywoływana, gdy zdarzenie zostanie wyrejestrowane. Kiedy klient wysyła wiadomość do serwera, ten odbiera to zdarzenie i uruchamiana jest funkcja. Następnie serwer pobiera informacje o użytkowniku, który przesłał polecenie i emituje zdarzenie wiadomości do wszystkich użytkowników znajdujących się w tym samym pokoju. Funkcja ta działa jako most między klientem, a serwerem, umożliwiając im wymianę danych.
+W celu umożliwienia wysyłania wiadomości przez użytkowników, implementuje się po stronie serwera zdarzenie wysyłania wiadomości. Funkcja ta jest wywoływana, gdy żądanie zostanie wyrejestrowane. Kiedy klient wysyła wiadomość do serwera, ten odbiera to zdarzenie i uruchamiana jest funkcja. Następnie serwer pobiera informacje o użytkowniku, który przesłał polecenie i emituje zdarzenie wiadomości do wszystkich użytkowników znajdujących się w tym samym pokoju. Funkcja ta działa jako most między klientem, a serwerem, umożliwiając im wymianę danych.
 \begin{lstlisting}[caption=Implementacja zdarzenia wysylania wiadomosci]
 socket.on('sendMessage', async (message, callback) => {
         const user = getUser(socket.id)
