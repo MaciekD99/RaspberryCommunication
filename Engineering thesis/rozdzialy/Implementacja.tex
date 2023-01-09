@@ -59,7 +59,7 @@ Strona klienta została zaimplementowana przy użyciu biblioteki React.js, któr
 	\label{fig:7}
 \end{figure}
 Komponent Logowania wyświetla formularz, w którym użytkownik może wprowadzić swoją nazwę i nazwę pokoju do którego chce dołączyć. Za pomocą przycisku „Sign In” może on przejść do komunikatora tekstowego. Nazwa użytkownika jest dowolna. Klient może dołączyć do pokoju, z którego korzystają już inni użytkownicy, a także może stworzyć swój własny oddzielny pokój. 
-\begin{lstlisting}[caption=Implementacja komponentu logowania ]
+\begin{lstlisting}[caption=Implementacja komponentu logowania]
 export default function SignIn() {
     const [name, setName] = useState('')
     const [room, setRoom] = useState('')
@@ -227,7 +227,7 @@ const [currentDate, setCurrentDate] = useState('')
 Do interfejsu komunikatora może dołączyć wiele osób, które mogą wysyłać różne komendy. Pojawienie się wiadomości w komunikatorze zależne jest od tego czy została ona wysłana przez bieżącego użytkownika i w zależności od tego wyświetla ją w odpowiednim miejscu na ekranie (po lewej lub po prawej stronie). Wiadomość wysłana przez bieżącego użytkownika wyróżniona jest kolorem niebieskim, zaś wiadomości otrzymane od innych użytkowników wyróżnione są kolorem szarym. Przy wpisanej komendzie widać nazwę użytkownika, która tą wiadomość wysłała.
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/interface2..2"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/interface2.jpg"}
 	\caption{Widok komunikatora po wpisaniu wiadomości przez dwóch użytkowników}
 	\label{fig:13}
 \end{figure}
@@ -516,7 +516,7 @@ function endBlinkRed() {
 \end{lstlisting}
 \subsection{Włączenie wszystkich diod}
 W celu umożliwienia włączenia trzech diod LED stworzono nowe obiekty odpowiadające elementom. Zostały one podłączone do określonych pinów GPIO na wyjście układu. Sprawdzane jest kolejno czy stworzone obiekty mają wartość 0 co oznacza to, że elementy są nieaktywne. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie wszystkich trzech diod.
- \begin{lstlisting}[caption=Implementacja funkcji wlaczająca wszystkie diody]
+\begin{lstlisting}[caption=Implementacja funkcji włączająca wszystkie diody]
 function turnOnAll() {
     var LED04 = new onOff.Gpio(4, 'out'),
         LED17 = new onOff.Gpio(17, 'out'),
@@ -539,7 +539,7 @@ function turnOnAll() {
 
 \subsection{Wyłączenie wszystkich diod}
 W celu umożliwienia wyłączenia wszystkich trzech diod LED, sprawdzane jest czy zaimplementowane obiekty mają wartość 1 na wyjściu co oznacza to, że elementy są włączone i się świecą. Jeśli tak, to zmieniany jest stan na wyjściu na niski co powoduje wyłączenie wszystkich trzech diod. 
- \begin{lstlisting}[caption=Implementacja funkcji wylaczajaca wszystkie diody]
+\begin{lstlisting}[caption=Implementacja funkcji wyłączająca wszystkie diody]
 function turnOffAll() {
     var LED04 = new onOff.Gpio(4, 'out'),
         LED17 = new onOff.Gpio(17, 'out'),
@@ -559,7 +559,157 @@ function turnOffAll() {
 
 \subsection{Naprzemienne włączanie diod}
 Aby umożliwić obsługę 3 diod LED, należy je podłączyć do trzech osobnych pinów GPIO. Czynność ta będzie potrzebna do osiągnięcia efektu płynącej diody. Wykonanie tej operacji ma na celu stworzenie wizualnego efektu ruchu. Możliwe jest to do osiągnięcia przy zastosowaniu szeregu diod LED, które są sekwencyjnie zapalane. W celu realizacji takiego efektu tworzone są trzy obiekty LED, które są odpowiedzialne za zarządzanie pinami GPIO o numerach, 4,17 i 27. Obiekty te zapisywane są do tablicy i następnie zerowane. W zależności od aktualnego indeksu utworzonej tablicy, zmieniana jest wartość stanu z 0 na 1 co powoduje włączenie diody. W momencie osiągnięcia pozycji ostatniego elementu tablicy, zmieniany jest kierunek włączania diod. Przy zastosowaniu funkcji interwałowej, możliwe jest powtarzanie się czynności włączania i wyłączania elementów o określony czas co daje efekt wizualnego ruchu diod. Po upływie 5 sekund, elementy usuwane są z listy eksportowanych pinów co powoduje odłączenie obiektu LED i zakończenie procesu.
+\begin{lstlisting}[caption=Implementacja funkcji tworzącej efekt płynącej diody]
+function flowingLeds() {
+    var LED04 = new onOff.Gpio(4, 'out'),
+        LED17 = new onOff.Gpio(17, 'out'),
+        LED27 = new onOff.Gpio(27, 'out')
+    var leds = [LED04, LED17, LED27]
+    var indexCount = 0
+    dir = 'up'
+    return new Promise((resolve) => {
+        var flowInterval = setInterval(flowingLeds, 300)
+        function flowingLeds() {
+            leds.forEach(function (currentValue) {
+                currentValue.writeSync(0)
+            })
+            if (indexCount == 0) dir = 'up'
+            if (indexCount >= leds.length) dir = 'down'
+            if (dir == 'down') indexCount--
+            leds[indexCount].writeSync(1)
+            if (dir == 'up') indexCount++
+        }
+        setTimeout(() => {
+            clearInterval(flowInterval)
+            leds.forEach(function (currentValue) {
+                currentValue.writeSync(0)
+                currentValue.unexport()
+                resolve()
+            })}, 5000)
+    })}
+\end{lstlisting}
 
+\subsection{Miganie diodą LED}
+Aby uzyskać efekt migającej diody LED zaimplementowano funkcję wykorzystująca interwał czasowy. W tym celu utworzono obiekt, który został podłączony do pinu GPIO o numerze 4. Identyczna sekwencja została wykonana dla dwóch kolejnych diod o kolorze zielonym i żółtym. Za pomocą utworzonej funkcji sprawdzany jest stan diody. Jeżeli dioda jest wyłączona to zmieniany jest stan na wartość 1 co powoduje włączenie się elementu. Poprzez zastosowanie interwału czasowego możliwe jest powtarzanie się czynności co 250 milisekund. Powoduje to utworzenie efektu migającej diody LED.
+\begin{lstlisting}[caption=Implementacja funkcji tworząca efekt migania pojedynczej diody LED]
+function blinkRed() {
+    const LED = new onOff.Gpio(4, 'out')
+    return new Promise((resolve) => {
+        const blinkInterval = setInterval(blinkLED, 250)
+        function blinkLED() {
+            if (LED.readSync() === 0) {
+                LED.writeSync(1)
+            } else {
+                LED.writeSync(0)
+            }}
+        setTimeout(() => {
+            clearInterval(blinkInterval)
+            LED.writeSync(0)
+            LED.unexport()
+            resolve()
+        }, 5000)
+    })}
+\end{lstlisting}
+\subsection{Sterowanie serwomechanizmem}
+Serwomechanizm to układ, który pozwala na precyzyjne pozycjonowanie elementu względem określonego punktu. Mechanizm ten składa się z silnika elektrycznego, przekładni i elementu ruchomego. W momencie gdy kontroler serwomechanizmu otrzymuje sygnał o zadanej pozycji, silnik obraca się w odpowiednim kierunku. W celu cyklicznego włączaniu i wyłączaniu sygnału elektrycznego można zastosować technikę modulacji szerokością impulsu. Sterowanie serwomechanizmem przy pomocy sygnałów PWM polega na cyklicznym podawaniu impulsu o zmiennej szerokości. Silnik serwomechanizmu jest wówczas włączany i wyłączany w odpowiednim momencie, co pozwala na uzyskanie pożądanego położenia elementu.
+\begin{lstlisting}[caption=Implementacja funkcji sterująca serwomechanizmem]
+function servo() {
+    return new Promise((resolve) => {
+        let pulseWidth = 1000
+        const threshold = 20
+        let increment = threshold
+        const servoInterval = setInterval(() => {
+            motor.servoWrite(pulseWidth)
+            pulseWidth += increment
+            if (pulseWidth >= 2000) {
+                increment = -1 * threshold
+            } else if (pulseWidth <= 1000) {
+                increment = threshold
+            }
+        }, threshold)
+        setTimeout(() => {
+            clearInterval(servoInterval)
+            resolve()
+        }, 20000)
+    })}
+\end{lstlisting}
+W celu spełnienia założeń przy sterowaniu serwomechanizmem zaimplementowano funkcję. Wykorzystuje ona technikę sterowania sygnałami PWM. Przy zastosowaniu interwałów czasowych, szerokość impulsów zwiększa się co określoną jednostkę czasową. Jeżeli serwomechanizm osiągnie pozycję końcową następuje zmniejszanie się wartości szerokości impulsu przez co serwomechanizm zacznie się cofać do pozycji początkowej. Czynność ta jest powtarzana przez 20 sekund. Po tym czasie następuje wyczyszczenie interwału czasowego co zatrzymuje działanie serwomechanizmu.
+\subsection{Sekwencyjne wykonywanie komend}
+W celu implementacji sekwencyjnego uruchamiania elementów podłączonych do pinów GPIO mikrokontrolera zastosowano asynchroniczne funkcje. Sekwencyjne wywoływanie funkcji to sposób, który umożliwi wykonywanie zaimplementowanych metod po kolei. Kiedy jedna funkcja zostanie zakończona, następuje wywołanie kolejnej. Zastosowanie asynchronicznego mechanizmu pozwoli na zaimplementowanie funkcji, które będą się wykonywały jedna po drugiej. Kiedy pierwsza operacja zrealizuje swoją pracę, informacja o jej zakończeniu zostanie przekazana do kolejnej funkcji, która następnie wykona swoją pracę. Pozwoli to na osiągnięcie efektu sekwencyjnego wykonywania się poleceń. 
+\begin{lstlisting}[caption=Sekwencyjne uruchamianie się funkcji]
+async function sequential() {
+    await turnOnAll()
+    await turnOffAll()
+    await tryRed()
+    await endBlinkRed()
+    await tryGreen()
+    await endBlinkGreen()
+    await tryYellow()
+    await endBlinkYellow()
+    await flowingLeds()
+    await blinkRed()
+    await blinkGreen()
+    await blinkYellow()
+    await servo()
+}
+\end{lstlisting}
+\section{Archiwizacja wpisanych poleceń}
+Archiwizacja wiadomości w aplikacjach opartych o komunikację tekstową jest używana, aby umożliwić użytkownikom przechowywanie i przeglądanie wiadomości, które zostały wysłane lub otrzymane w przeszłości. Jest to szczególnie przydatne, w przypadku osiągnięcia dostępu do ważnych informacji zawartych w konwersacji i możliwości nadzorowania danych zawartych w aplikacji. Archiwizacja pozwala także na lepsze zarządzanie dostępem do wiadomości i uniknięcie sytuacji, w której tracona jest zawartość istotnych danych. Możliwość zachowania archiwum wiadomości znajduje również swoje zastosowanie w zarządzaniu bazami danych, w dziale automatyki. W szczególności archiwizacja pozwala na zachowanie dostępu do poprzednich wersji danych, które zostały zmodyfikowane lub zaktualizowane. W niektórych przypadkach, możliwość zapisania informacji może być również ważna w kontekście utraty danych w wyniku awarii aplikacji lub innych problemów technicznych.
+\begin{lstlisting}[caption=Implementacja funkcji archiwizującej wiadomości w komunikatorze]
+class Archiver {
+    #archivePath = './archivePath.json'
+    #archiveContent = {}
+    start() {
+        if (!fs.existsSync(this.#archivePath)) {
+            return this.#archiveContent
+        }
+        const archive = fs.readFileSync(this.#archivePath, 'utf8')
+        this.#archiveContent = JSON.parse(archive)
+    }
+    fetch(room) {
+        return this.#archiveContent[room] ? this.#archiveContent[room] : []
+    }
+    async archive(text, user, createdTime, room) {
+        if (!this.#archiveContent[room]) {
+            this.#archiveContent[room] = []
+        }
+        this.#archiveContent[room].push({ text, user, createdTime })
+        await fs.promises.writeFile(
+            this.#archivePath,
+            JSON.stringify(this.#archiveContent)
+        )}}}
+\end{lstlisting}
+
+W celu stworzenia archiwum danych zaimplementowano klasę, która pomoże zapisać wiadomości tekstowe w aplikacji. Ważnym aspektem jest sprawdzenie istnienia ścieżki pliku gdzie wiadomości mają być zapisane. Jeśli tak, zwracane jest archiwum dla danego pokoju. Aby móc dokonać archiwizacji wiadomości, potrzebna będzie możliwość dodania nowej wiadomości do archiwum. W tym celu zaimplementowano funkcję asynchroniczną ‘archieve’, która umożliwia wprowadzenie nowej wiadomości do stworzonego archiwum. 
+\begin{lstlisting}[caption={Wykorzystanie zdarzenia dołączenia, aby uzyskać widok zawartości archiwum w aplikacji}]
+io.on('connection', (socket) => {
+    socket.on('join', ({ name, room }, callback) => {
+	....
+        const archiveMessages = archive.fetch(user.room)
+        for (const message of archiveMessages) {
+            io.to(user.room).emit('message', message)
+        }
+        ....
+    })
+
+   	....
+    })
+
+  	....
+})
+\end{lstlisting}
+Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik dołącza do pokoju. W przypadku aplikacji, które powinno zawierać archiwizację danych, ta informacja może być wykorzystana do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia archiwizacji danych, a następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
+\begin{lstlisting}[caption=Wykorzystanie zdarzenia wysyłania wiadomości do tworzenia archiwum]
+socket.on('sendMessage', async (message, callback) => {
+        const user = getUser(socket.id)
+
+      	....
+        await archive.archive(message, user.name, createdTime, user.room)
+       	....
+    })
+\end{lstlisting}
+
+Kiedy użytkownik wyśle wiadomość w aplikacji chcemy, aby trafiła do utworzonego archiwum. W tym celu potrzebne jest rejestrowanie tego zdarzenia, które zostanie wywołane gdy klient prześle polecenie do serwera. Kiedy zostanie wysłana wiadomości, zdarzenie zarejestruje tą czynność i zapisze całą zawartość do archiwum. 
 
 
 
