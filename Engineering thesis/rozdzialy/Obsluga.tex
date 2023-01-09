@@ -9,8 +9,6 @@ Głównym założeniem projektu była komunikacja z maszyną poprzez wpisywanie 
 	\\
 \item \textbf{yellow on}, komenda ta powoduje włączenie się diody LED i zaświecenie kolorem żółtym
 	\\
-	\item \textbf{Moduł pigpio}, biblioteka ta korzysta z frameworka Node.js. Moduł pigpio może być używana w celu kontrolowania i monitorowania sygnałów z wejść/wyjść cyfrowych oraz modulację szerokości impulsów na Raspberry Pi. Dzięki tej bibliotece jesteśmy w stanie tworzyć projekty z użyciem urządzeń elektronicznych takie jak diody LED czy serwomechanizmy, które są podłączone do portów GPIO urządzenia Raspberry Pi. Biblioteka pigpio znalazła szerokie zastosowanie w aplikacjach gdzie wymagane jest sterowanie urządzeniami elektrycznymi lub elektronicznymi.
-	\\
 \item \textbf{stop red}, komenda ta powoduje wyłączenie diody LED o kolorze czerwonym poprzez zmienienie stanu z wartości 1 na 0
 	\\
 	\item \textbf{stop green}, komenda ta powoduje wyłączenie diody LED o kolorze zielonym poprzez zmienienie stanu z wartości 1 na 0
@@ -34,114 +32,145 @@ Głównym założeniem projektu była komunikacja z maszyną poprzez wpisywanie 
 \item \textbf{turn off all}, komenda powoduje wyłączenie wszystkich trzech diod LED
 	\\
 \end{itemize}
+\newpage
 \section{Zarządzanie komunikatorem}
-\begin{figure}
+W celu możliwości dołączenia do czatu, użytkownik musi wpisać swoją nazwę pod którą będzie widoczny oraz nazwę pokoju. Dane te muszą zostać wypełnione w odpowiednich polach tekstowych. Jeżeli użytkownik zostawi puste pole, w którym musi wpisać swoją nazwę lub nazwę pokoju, nie będzie on miał dostępu do zalogowania się do komunikatora.
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTLOGOWANIE"}
 	\caption{Formularz logowania użytkownika do aplikacji}
 	\label{fig:39}
 \end{figure}
-W celu możliwości dołączenia do czatu, użytkownik musi wpisać swoją nazwę pod którą będzie widoczny oraz nazwę pokoju. Dane te muszą zostać wypełnione w odpowiednich polach tekstowych. Jeżeli użytkownik zostawi puste pole, w którym musi wpisać swoją nazwę lub nazwę pokoju, nie będzie on miał dostępu do zalogowania się do komunikatora.
-\begin{figure}
+\newpage
+W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciałby dołączyć. Pole tekstowe zawierające nazwę użytkownika, pod którą chciałby być wyświetlany zostało pominięte. Przy braku wypełnienia wszystkich danych, nie został uzyskany dostęp do zalogowania się do komunikatora poprzez pojawienie się przycisku, który przekierowałby użytkownika do czatu.
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTnazwapokoju"}
 	\caption{Próba dołączenia do komunikatora}
 	\label{fig:40}
 \end{figure}
-W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciałby dołączyć. Pole tekstowe zawierające nazwę użytkownika, pod którą chciałby być wyświetlany zostało pominięte. Przy braku wypełnienia wszystkich danych, nie został uzyskany dostęp do zalogowania się do komunikatora poprzez pojawienie się przycisku, który przekierowałby użytkownika do czatu.
-\begin{figure}
+\newpage
+W momencie kiedy użytkownik wypełni wszystkie potrzebne dane, w aplikacji pojawi się przycisk umożliwiający zalogowanie się do aplikacji. Poprzez kliknięcie przycisku Zaloguj, użytkownik zostanie przekierowany do komunikatora tekstowego.
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTdolaczenie"}
 	\caption{Logowanie do komunikatora}
 	\label{fig:41}
 \end{figure}
-W momencie kiedy użytkownik wypełni wszystkie potrzebne dane, w aplikacji pojawi się przycisk umożliwiający zalogowanie się do aplikacji. Poprzez kliknięcie przycisku Zaloguj, użytkownik zostanie przekierowany do komunikatora tekstowego.
-\begin{figure}
+\newpage
+Po wypełnieniu wymaganych danych i kliknięciu przycisku logowania, użytkownik zostanie przekierowany do czatu. Tutaj będzie mógł nawiązać komunikację z maszyną poprzez wpisanie odpowiedniego tekstu.
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTczatpodolaczeniu"}
 	\caption{Interfejs użytkownika po zalogowaniu}
 	\label{fig:42}
 \end{figure}
-Po wypełnieniu wymaganych danych i kliknięciu przycisku logowania, użytkownik zostanie przekierowany do czatu. Tutaj będzie mógł nawiązać komunikację z maszyną poprzez wpisanie odpowiedniego tekstu.
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TEST2uzytkownik"}
 	\caption{Tworzenie drugiego użytkownika}
 	\label{fig:43}
 \end{figure}
+\newpage
 W celu przeprowadzenia testów, w której zostały zastosowane dodatkowe technologie frontendu i backendu dla aplikacji webowej, stworzono drugiego użytkownika. Dołączył on do pokoju czatu z tą samą nazwą co poprzedni użytkownik. Wykonanie takiej operacji pozwoli na możliwość korzystania z komunikatora przez kilku zalogowanych klientów.
 W celu sprawdzenia poprawności funkcjonowania aplikacji wykonano testy, które ukazują interfejsy z  dwóch perspektyw. Wiadomość bieżącego użytkownika będzie ukazana po prawej stronie z niebieskim tłem. W przeciwnym razie wysłany komunikat będzie widoczny po lewej stronie wyróżniony szarym kolorem.
-\begin{figure}
+
+
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTpisaniewiadomosci"}
 	\caption{Testowanie komunikacji tekstowej}
 	\label{fig:44}
 \end{figure}
 Na Rysunku \ref{fig:44} została przedstawiona perspektywa użytkownika o nazwie user1. Wiadomości wysłane przez klienta zarejestrowanego pod nazwą user2 wyświetlane są po lewej stronie komunikatora wyróżnione szarym tłem. Drugi użytkownik poprzez wpisanie wpisanie polecenia flowing leds przesłał żądanie do mikrokontrolera co wynikiem było uzyskanie efektu płynącej diody. Wiadomość ta została zapisana w archiwum i użytkownik pod nazwą user1, który również zalogował się do tego samego pokoju może zobaczyć wysłane wiadomości. 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTwidok2interfejsy"}
 	\caption{Wywołanie funkcji umożliwiającej sterowanie serwomechanizmem}
 	\label{fig:45}
 \end{figure}
+\newpage
 Na Rysunku \ref{fig:46} zostały przedstawione obie perspektywy. Ukazują one jak widoczne są wiadomości wpisane przez określonego użytkownika. Oba te polecenia wysłane przez klientów zostały zapisane w archiwum i po ponownym zalogowaniu się do czatu o tej samej nazwie pokoju, klienci czatu będą w stanie odtworzyć wiadomości, które zostały przez nich wysłane. Użytkownik o nazwie user1 wpisał polecenie o nazwie run servo i wiadomość ta pojawiła się w czacie po obu stronach. Komenda ta umożliwia sterowanie serwomechanizmem, który przesuwa się o określony kąt do momentu osiągnięcia zadanej pozycji.
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTwidok2interfejsysequential"}
 	\caption{Sekwencyjnie wykonywanie się zaimplementowanych metod}
 	\label{fig:46}
 \end{figure}
+
 Do przeprowadzenia kolejnego testu funkcjonalności komunikatora, użytkownik o nazwie user2 wpisał polecenie o treści sequential. Powoduje to sekwencyjne wykonywanie się zaimplementowanych metod, które odpowiedzialne są za uruchomienie zainstalowanych elementów elektronicznych przy komunikacji z mikrokontrolerem. Wiadomość ta jest widoczna w obu perspektywach. 
-\begin{figure}
+
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTuser3"}
 	\caption{Widok komunikatu o opuszczeniu czatu przez użytkownika}
 	\label{fig:47}
 \end{figure}
+\newpage
 Dodatkowo zaimplementowano mechanizm, który będzie sygnalizował opuszczenie użytkownika z czatu. W tym celu stworzono kolejnego klienta, który dołączył do czatu, a następnie go opuścił. Komunikat został wysłany do użytkowników, którzy korzystają wciąż z komunikatora. Zostali oni poinformowani o tej sytuacji.
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTflowingleds"}
 	\caption{Interfejs zawierający archiwum wiadomości}
 	\label{fig:48}
 \end{figure}
+\newpage
 Po wpisaniu określonej liczby wiadomości, czat z wiadomościami zacznie się przewijać do dołu ukazując najwcześniejsze wysłane polecenia. Żeby zobaczyć komendy, które zostały wysłane dawniej  i nie mieszczą się w interfejsie użytkownika, konieczne będzie przewijanie czatu. Zastosowano mechanizm, który pozwoli na przewinięcie wiadomości z powrotem do najnowszej poprzez kliknięcie przycisku w kształcie koła znajdującego się nad przyciskiem wysyłania wiadomości. W perspektywie użytkownika o nazwie user2 widoczna jest kropka przy pasku przewijania, która pozwoli na wykonanie takiej czynności.
-\begin{figure}
+
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTLOGOWANIE"}
 	\caption{Interfejs logowania użytkownika}
 	\label{fig:49}
 \end{figure}
-Poprzez kliknięcie przycisku zamykającego komunikator znajdujący się w pasku nawigacyjnym po prawej stronie zostaniemy przeniesieni ponownie do formularza.  Będziemy musieli wypełnić ponownie pola tekstowego wymagające podanie nazwę użytkownika i pokoju by móc dołączyć do czatu.
-\begin{figure}
+\newpage
+Poprzez kliknięcie przycisku zamykającego komunikator znajdujący się w pasku nawigacyjnym po prawej stronie zostaniemy przeniesieni ponownie do formularza.  Będziemy musieli wypełnić ponownie pola tekstowego wymagające podanie nazwę użytkownika i pokoju by móc dołączyć do czatu.Po wpisaniu ponownie danych i zalogowaniu się jako użytkownik o nazwie user1 jesteśmy ponownie przekierowani do komunikatora w raz z całym archiwum wysłanych dotychczas wiadomości.
+\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/model"}
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTostatniscreen"}
 	\caption{Interfejs przedstawiający zawartość konwersacji}
 	\label{fig:50}
 \end{figure}
-Po wpisaniu ponownie danych i zalogowaniu się jako użytkownik o nazwie user1 jesteśmy ponownie przekierowani do komunikatora w raz z całym archiwum wysłanych dotychczas wiadomości.
+\newpage
 \section{Przedstawienie uzyskanych wyników}
 Poprzez wpisanie określonych komend w komunikatorze, użytkownik dostawał odpowiedzi od urządzenia w postaci działania poszczególnych elementów wykonawczych. Poniżej przedstawiono uzyskane wyniki przy wpisaniu polecenia:
-\begin{itemize}  
-	\item \textbf{red on}, komenda ta powoduje włączenie się diody LED i zaświecenie kolorem czerwonym
-	\\
-	\item \textbf{green on}, komenda ta powoduje włączenie się diody LED i zaświecenie kolorem zielonym
-	\\
-\item \textbf{yellow on}, komenda ta powoduje włączenie się diody LED i zaświecenie kolorem żółtym
-	\\
-	\item \textbf{Moduł pigpio}, biblioteka ta korzysta z frameworka Node.js. Moduł pigpio może być używana w celu kontrolowania i monitorowania sygnałów z wejść/wyjść cyfrowych oraz modulację szerokości impulsów na Raspberry Pi. Dzięki tej bibliotece jesteśmy w stanie tworzyć projekty z użyciem urządzeń elektronicznych takie jak diody LED czy serwomechanizmy, które są podłączone do portów GPIO urządzenia Raspberry Pi. Biblioteka pigpio znalazła szerokie zastosowanie w aplikacjach gdzie wymagane jest sterowanie urządzeniami elektrycznymi lub elektronicznymi.
-	\\
-\item \textbf{turn on all}
-	\\
-	\item \textbf{stop green}
-	\\
-\item \textbf{turn off all}
-	\\
-	\item \textbf{yellow on i green on}
-	\\
-\item \textbf{run servo}, komenda ta powoduje efekt migania diody LED o kolorze zielonym
-	\\
-\end{itemize}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/turnonall.jpg"}
+	\caption{Wywołanie komendy turn on all powodująca włączenie wszystkich diod}
+	\label{fig:51}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/stopgreen.jpg"}
+	\caption{Wywołanie komendy stop green powodująca wyłączenie diody o kolorze zielonym}
+	\label{fig:52}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/turnoffall.jpg"}
+	\caption{Wywołanie komendy turn off all powodująca wyłączenie wszystkich diod}
+	\label{fig:53}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/yellowgreen.jpg"}
+	\caption{Wywołanie komend yellow on i green on powodująca włączenie diody o kolorze żółtym i zielonym}
+	\label{fig:54}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/servo1.jpg"}
+	\caption{Pozycja początkowa serwomechanizmu}
+	\label{fig:55}
+\end{figure}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/servo2.jpg"}
+	\caption{Wywołanie komendy run servo umożliwiająca sterowanie serwomechanizmem }
+	\label{fig:56}
+\end{figure}
+
 
 
 
