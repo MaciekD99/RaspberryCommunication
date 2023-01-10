@@ -35,7 +35,7 @@ Głównym założeniem projektu była komunikacja z maszyną poprzez wpisywanie 
 \end{itemize}
 \newpage
 \section{Zarządzanie komunikatorem}
-W celu możliwości dołączenia do czatu, użytkownik musi wpisać swoją nazwę pod którą będzie widoczny oraz nazwę pokoju. Dane te muszą zostać wypełnione w odpowiednich polach tekstowych. Jeżeli użytkownik zostawi puste pole, w którym musi wpisać swoją nazwę lub nazwę pokoju, nie będzie on miał dostępu do zalogowania się do komunikatora.
+W celu możliwości dołączenia do czatu, użytkownik musi wpisać swoją nazwę pod którą będzie widoczny oraz nazwę pokoju. Dane te muszą zostać wypełnione w odpowiednich polach tekstowych. Jeżeli użytkownik zostawi puste pole, w którym musi wpisać swoją nazwę lub nazwę pokoju, nie będzie on miał dostępu zalogowania się do komunikatora.
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{"obrazy/TESTLOGOWANIE"}
@@ -49,7 +49,7 @@ W celu możliwości dołączenia do czatu, użytkownik musi wpisać swoją nazw�
 	\label{fig:40}
 \end{figure}
 \newpage
-W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciałby dołączyć. Pole tekstowe zawierające nazwę użytkownika, pod którą chciałby być wyświetlany zostało pominięte. Przy braku wypełnienia wszystkich danych, nie został uzyskany dostęp do zalogowania się do komunikatora poprzez pojawienie się przycisku, który przekierowałby użytkownika do czatu.
+W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciałby dołączyć. Pole tekstowe zawierające nazwę użytkownika, pod którą chciałby być wyświetlany zostało pominięte. Przy braku wypełnienia wszystkich danych, nie został uzyskany dostęp zalogowania się do komunikatora poprzez pojawienie się przycisku, który przekierowałby użytkownika do czatu.
 W momencie kiedy użytkownik wypełni wszystkie potrzebne dane, w aplikacji pojawi się przycisk umożliwiający zalogowanie się do aplikacji. Poprzez kliknięcie przycisku Zaloguj, użytkownik zostanie przekierowany do komunikatora tekstowego.
 
 \begin{figure}[htbp]
@@ -110,21 +110,21 @@ Dodatkowo zaimplementowano mechanizm, który będzie sygnalizował opuszczenie u
 
 Po wpisaniu większej liczby wiadomości, okno komunikatora zacznie się przewijać ukazując najwcześniejsze wysłane polecenia. Zaimplementowano mechanizm, który pozwoli na przewijanie wiadomości interfejsu czatu.
 \newpage
-Kliknięcie przycisku zamykającego komunikator znajdujący się po prawej stronie paska nawigacyjnego przekieruje nas ponownie do formularza.  Będziemy musieli wypełnić ponownie pola tekstowego wymagające podanie nazwę użytkownika i pokoju by móc dołączyć do czatu. Po wpisaniu ponownie danych i zalogowaniu się jako użytkownik o nazwie user1 jesteśmy ponownie przekierowani do komunikatora w raz z całym archiwum wysłanych dotychczas wiadomości.
+Kliknięcie przycisku zamykającego komunikator znajdujący się po prawej stronie paska nawigacyjnego przekieruje nas ponownie do formularza.  Będziemy musieli wypełnić na nowo pola tekstowego wymagające podanie nazwę użytkownika i pokoju by móc dołączyć do czatu. Po wpisaniu danych i zalogowaniu się jako użytkownik o nazwie user1 jesteśmy ponownie przekierowani do komunikatora w raz z całym archiwum wysłanych dotychczas wiadomości.
 \begin{figure}[h]
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=0.9\linewidth, height=6cm]{"obrazy/TESTLOGOWANIE"} 
-\caption{Caption1}
-\label{fig:subim1}
+
+
 \end{subfigure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=0.9\linewidth, height=6cm]{"obrazy/TESTostatniscreen"}
-\caption{Caption 2}
-\label{fig:subim2}
+
+
 \end{subfigure}
 
-\caption{Caption for this figure with two images}
-\label{fig:image2}
+\caption{Ponowne zalogowanie do komunikatora}
+\label{fig49}
 \end{figure}
 
 
@@ -150,14 +150,6 @@ Poprzez wpisanie określonych komend w komunikatorze, użytkownik dostawał odpo
 	\end{figure}
 	\\
 \newpage
-\item \textbf{yellow on}
-	\begin{figure}[htbp]
-		\centering
-		\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/yellowgreen.jpg"}
-		\caption{Wywołanie komend  powodujących włączenie diod o kolorze żółtym i zielonym}
-		\label{fig:54}
-	\end{figure}
-	\\
 \item \textbf{turn off all}
 	\begin{figure}[htbp]
 	\centering
@@ -166,6 +158,15 @@ Poprzez wpisanie określonych komend w komunikatorze, użytkownik dostawał odpo
 	\label{fig:53}
 \end{figure}
 	\\
+\item \textbf{yellow on i green on}
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/yellowgreen.jpg"}
+		\caption{Wywołanie komend  powodujących włączenie diod o kolorze żółtym i zielonym}
+		\label{fig:54}
+	\end{figure}
+	\\
+
 \newpage
 \item \textbf{run servo}
 	\begin{figure}[htbp]
