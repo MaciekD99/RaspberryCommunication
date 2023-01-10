@@ -127,7 +127,7 @@ Komponent czatu wyświetla komunikator tekstowy, w którym użytkownik może wpr
 \item \textbf{ Wiadomość}
 	\\
 \end{itemize}
-Każdy z tych fragmentów interfejsu spełnia swoje założenia co pozwala na wyrenderowanie widoku komunikatora. Komponent Nawigacji renderuje widok paska zawierającego nazwę pokoju oraz ikony z aktywnością pokoju i zamknięcia. Pierwsza z tych ikon wyświetlana jest zawsze i oznacza status dostępny w postaci zielonego koła. Po kliknięciu ikony zamknięcia zostaniemy ponownie przekierowany do komponentu logowania.
+Każdy z tych fragmentów interfejsu spełnia swoje założenia co pozwala na stworzenie widoku komunikatora. Komponent Nawigacji renderuje widok paska zawierającego nazwę pokoju oraz ikony z aktywnością pokoju i zamknięcia. Pierwsza z tych ikon wyświetlana jest zawsze i oznacza status dostępny w postaci zielonego koła. Po kliknięciu ikony zamknięcia zostaniemy ponownie przekierowany do komponentu logowania.
 \begin{lstlisting}[caption=Implementacja komponentu nawigacji ]
 const InfoBar = ({ room }) => (
   <div className="infoBar">
@@ -264,7 +264,7 @@ Aby użytkownik mógł przesłać polecenie, które pojawi się w interfejsie ko
 const sendMessage = (event) => {
         event.preventDefault()
         if (message) {
-            socket.emit('sendMessage', message, () => setMessage(''))
+          socket.emit('sendMessage',message,()=>setMessage(''))
        	}}
 \end{lstlisting}
 
@@ -407,7 +407,8 @@ socket.on('disconnect', () => {
 
 W celu aktualizacji listy użytkowników zaimplementowano metodę, która pozwoli na wykonanie tej operacji. Funkcja iteruje po tablicy obecnych użytkowników w pokoju, sprawdzając czy nazwa pokoju użytkownika jest zgodna z nazwą pokoju przekazanej do funkcji jako argument. Jeśli tak to użytkownik dodawany jest do nowej tablicy.
 \begin{lstlisting}[caption=Implementacja funkcji aktualizujaca liste uzytkownikow]
-const getUsersInRoom = (room) => users.filter((user) => user.room === room)
+const getUsersInRoom = (room) => users.filter((user) => 
+user.room === room)
 \end{lstlisting}
 
 Żeby zdarzenie rozłączenia mogło być realizowane, potrzebne jest zaimplementowanie operacji usuwania użytkownika. Funkcja w celu sprawdzenia, który użytkownik opuścił czat, przyjmuje parametr identyfikatora, który jest przypisywany każdemu użytkownikowi. Warunkiem jest sprawdzenie czy identyfikator przekazanego argumentu jako argument użytkownika jest równy identyfikatorowi użytkownika z tablicy. Jeśli tak, to zwracany jest indeks tego elementu i dochodzi do usunięcia użytkownika z listy. 

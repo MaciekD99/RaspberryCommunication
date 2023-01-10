@@ -41,8 +41,6 @@ W celu możliwości dołączenia do czatu, użytkownik musi wpisać swoją nazw�
 	\caption{Formularz logowania użytkownika do aplikacji}
 	\label{fig:39}
 \end{figure}
-\newpage
-W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciałby dołączyć. Pole tekstowe zawierające nazwę użytkownika, pod którą chciałby być wyświetlany zostało pominięte. Przy braku wypełnienia wszystkich danych, nie został uzyskany dostęp do zalogowania się do komunikatora poprzez pojawienie się przycisku, który przekierowałby użytkownika do czatu.
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{"obrazy/TESTnazwapokoju"}
@@ -50,55 +48,49 @@ W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciał
 	\label{fig:40}
 \end{figure}
 \newpage
+W celach testowych wpisano jedynie nazwę pokoju do którego użytkownik chciałby dołączyć. Pole tekstowe zawierające nazwę użytkownika, pod którą chciałby być wyświetlany zostało pominięte. Przy braku wypełnienia wszystkich danych, nie został uzyskany dostęp do zalogowania się do komunikatora poprzez pojawienie się przycisku, który przekierowałby użytkownika do czatu.
 W momencie kiedy użytkownik wypełni wszystkie potrzebne dane, w aplikacji pojawi się przycisk umożliwiający zalogowanie się do aplikacji. Poprzez kliknięcie przycisku Zaloguj, użytkownik zostanie przekierowany do komunikatora tekstowego.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{"obrazy/TESTdolaczenie"}
 	\caption{Logowanie do komunikatora}
 	\label{fig:41}
 \end{figure}
-\newpage
 Po wypełnieniu wymaganych danych i kliknięciu przycisku logowania, użytkownik zostanie przekierowany do czatu. Tutaj będzie mógł nawiązać komunikację z maszyną poprzez wpisanie odpowiedniego tekstu.
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/TESTczatpodolaczeniu"}
-	\caption{Interfejs użytkownika po zalogowaniu}
-	\label{fig:42}
-\end{figure}
+W celu przeprowadzenia dodatkowych testów stworzono drugiego użytkownika. Dołączył on do pokoju czatu z tą samą nazwą co poprzedni użytkownik. Wykonanie takiej operacji pozwoli na możliwość korzystania z komunikatora przez kilku zalogowanych klientów.
+\newpage
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{"obrazy/TEST2uzytkownik"}
 	\caption{Tworzenie drugiego użytkownika}
 	\label{fig:43}
 \end{figure}
-\newpage
-W celu przeprowadzenia testów, w której zostały zastosowane dodatkowe technologie frontendu i backendu dla aplikacji webowej, stworzono drugiego użytkownika. Dołączył on do pokoju czatu z tą samą nazwą co poprzedni użytkownik. Wykonanie takiej operacji pozwoli na możliwość korzystania z komunikatora przez kilku zalogowanych klientów.
-W celu sprawdzenia poprawności funkcjonowania aplikacji wykonano testy, które ukazują interfejsy z  dwóch perspektyw. Wiadomość bieżącego użytkownika będzie ukazana po prawej stronie z niebieskim tłem. W przeciwnym razie wysłany komunikat będzie widoczny po lewej stronie wyróżniony szarym kolorem.
-
-
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"obrazy/TESTczatpodolaczeniu"}
+	\caption{Interfejs użytkownika po zalogowaniu}
+	\label{fig:42}
+\end{figure}
+Na Rysunku \ref{fig:44} została przedstawiona perspektywa użytkownika o nazwie user1. Wiadomości wysłane przez klienta user2 wyświetlane są po lewej stronie interfejsu wyróżnione szarym tłem. Drugi użytkownik wpisując polecenie flowing leds przesłał żądanie do mikrokontrolera co wynikiem było uzyskanie efektu płynącej diody. Wiadomość ta została zapisana w archiwum i użytkownik pod nazwą user1, który zalogował się do tego samego pokoju może zobaczyć wysłane wiadomości. 
+\newpage.
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{"obrazy/TESTpisaniewiadomosci"}
 	\caption{Testowanie komunikacji tekstowej}
 	\label{fig:44}
 \end{figure}
-Na Rysunku \ref{fig:44} została przedstawiona perspektywa użytkownika o nazwie user1. Wiadomości wysłane przez klienta zarejestrowanego pod nazwą user2 wyświetlane są po lewej stronie komunikatora wyróżnione szarym tłem. Drugi użytkownik poprzez wpisanie wpisanie polecenia flowing leds przesłał żądanie do mikrokontrolera co wynikiem było uzyskanie efektu płynącej diody. Wiadomość ta została zapisana w archiwum i użytkownik pod nazwą user1, który również zalogował się do tego samego pokoju może zobaczyć wysłane wiadomości. 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/TESTwidok2interfejsy"}
-	\caption{Wywołanie funkcji umożliwiającej sterowanie serwomechanizmem}
-	\label{fig:45}
-\end{figure}
-\newpage
+
 Na Rysunku \ref{fig:46} zostały przedstawione obie perspektywy. Ukazują one jak widoczne są wiadomości wpisane przez określonego użytkownika. Oba te polecenia wysłane przez klientów zostały zapisane w archiwum i po ponownym zalogowaniu się do czatu o tej samej nazwie pokoju, klienci czatu będą w stanie odtworzyć wiadomości, które zostały przez nich wysłane. Użytkownik o nazwie user1 wpisał polecenie o nazwie run servo i wiadomość ta pojawiła się w czacie po obu stronach. Komenda ta umożliwia sterowanie serwomechanizmem, który przesuwa się o określony kąt do momentu osiągnięcia zadanej pozycji.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.5\linewidth]{"obrazy/TESTwidok2interfejsysequential"}
 	\caption{Sekwencyjnie wykonywanie się zaimplementowanych metod}
 	\label{fig:46}
 \end{figure}
-
-Do przeprowadzenia kolejnego testu funkcjonalności komunikatora, użytkownik o nazwie user2 wpisał polecenie o treści sequential. Powoduje to sekwencyjne wykonywanie się zaimplementowanych metod, które odpowiedzialne są za uruchomienie zainstalowanych elementów elektronicznych przy komunikacji z mikrokontrolerem. Wiadomość ta jest widoczna w obu perspektywach. 
+\newpage
+Użytkownik o nazwie user2 wpisał polecenie o treści sequential. Powoduje to sekwencyjne wykonywanie się zaimplementowanych metod, które odpowiedzialne są za uruchomienie zainstalowanych elementów elektronicznych przy komunikacji z mikrokontrolerem. Wiadomość ta jest widoczna w obu perspektywach. 
 
 \begin{figure}[htbp]
 	\centering
@@ -106,7 +98,7 @@ Do przeprowadzenia kolejnego testu funkcjonalności komunikatora, użytkownik o 
 	\caption{Widok komunikatu o opuszczeniu czatu przez użytkownika}
 	\label{fig:47}
 \end{figure}
-\newpage
+
 Dodatkowo zaimplementowano mechanizm, który będzie sygnalizował opuszczenie użytkownika z czatu. W tym celu stworzono kolejnego klienta, który dołączył do czatu, a następnie go opuścił. Komunikat został wysłany do użytkowników, którzy korzystają wciąż z komunikatora. Zostali oni poinformowani o tej sytuacji.
 \begin{figure}[htbp]
 	\centering
@@ -114,62 +106,86 @@ Dodatkowo zaimplementowano mechanizm, który będzie sygnalizował opuszczenie u
 	\caption{Interfejs zawierający archiwum wiadomości}
 	\label{fig:48}
 \end{figure}
-\newpage
-Po wpisaniu określonej liczby wiadomości, czat z wiadomościami zacznie się przewijać do dołu ukazując najwcześniejsze wysłane polecenia. Żeby zobaczyć komendy, które zostały wysłane dawniej  i nie mieszczą się w interfejsie użytkownika, konieczne będzie przewijanie czatu. Zastosowano mechanizm, który pozwoli na przewinięcie wiadomości z powrotem do najnowszej poprzez kliknięcie przycisku w kształcie koła znajdującego się nad przyciskiem wysyłania wiadomości. W perspektywie użytkownika o nazwie user2 widoczna jest kropka przy pasku przewijania, która pozwoli na wykonanie takiej czynności.
 
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/TESTLOGOWANIE"}
-	\caption{Interfejs logowania użytkownika}
-	\label{fig:49}
-\end{figure}
+Po wpisaniu większej liczby wiadomości, okno komunikatora zacznie się przewijać ukazując najwcześniejsze wysłane polecenia. Zaimplementowano mechanizm, który pozwoli na przewijanie wiadomości interfejsu czatu.
 \newpage
-Poprzez kliknięcie przycisku zamykającego komunikator znajdujący się w pasku nawigacyjnym po prawej stronie zostaniemy przeniesieni ponownie do formularza.  Będziemy musieli wypełnić ponownie pola tekstowego wymagające podanie nazwę użytkownika i pokoju by móc dołączyć do czatu.Po wpisaniu ponownie danych i zalogowaniu się jako użytkownik o nazwie user1 jesteśmy ponownie przekierowani do komunikatora w raz z całym archiwum wysłanych dotychczas wiadomości.
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/TESTostatniscreen"}
-	\caption{Interfejs przedstawiający zawartość konwersacji}
-	\label{fig:50}
+Kliknięcie przycisku zamykającego komunikator znajdujący się po prawej stronie paska nawigacyjnego przekieruje nas ponownie do formularza.  Będziemy musieli wypełnić ponownie pola tekstowego wymagające podanie nazwę użytkownika i pokoju by móc dołączyć do czatu. Po wpisaniu ponownie danych i zalogowaniu się jako użytkownik o nazwie user1 jesteśmy ponownie przekierowani do komunikatora w raz z całym archiwum wysłanych dotychczas wiadomości.
+\begin{figure}[h]
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth, height=6cm]{"obrazy/TESTLOGOWANIE"} 
+\caption{Caption1}
+\label{fig:subim1}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=0.9\linewidth, height=6cm]{"obrazy/TESTostatniscreen"}
+\caption{Caption 2}
+\label{fig:subim2}
+\end{subfigure}
+
+\caption{Caption for this figure with two images}
+\label{fig:image2}
 \end{figure}
+
+
+
 \newpage
 \section{Przedstawienie uzyskanych wyników}
 Poprzez wpisanie określonych komend w komunikatorze, użytkownik dostawał odpowiedzi od urządzenia w postaci działania poszczególnych elementów wykonawczych. Poniżej przedstawiono uzyskane wyniki przy wpisaniu polecenia:
-\begin{figure}[htbp]
+\begin{itemize}  
+	\item \textbf{turn on all}
+	\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/turnonall.jpg"}
-	\caption{Wywołanie komendy turn on all powodująca włączenie wszystkich diod}
+	\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/turnonall.jpg"}
+	\caption{Wywołanie komendy powodująca włączenie wszystkich diod}
 	\label{fig:51}
 \end{figure}
-\begin{figure}[htbp]
+	\\
+	\item \textbf{stop green}
+	\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/stopgreen.jpg"}
-	\caption{Wywołanie komendy stop green powodująca wyłączenie diody o kolorze zielonym}
+	\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/stopgreen.jpg"}
+	\caption{Wywołanie komendy powodująca wyłączenie diody o kolorze zielonym}
 	\label{fig:52}
-\end{figure}
-\begin{figure}[htbp]
+	\end{figure}
+	\\
+\newpage
+\item \textbf{yellow on}
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/yellowgreen.jpg"}
+		\caption{Wywołanie komend  powodujących włączenie diod o kolorze żółtym i zielonym}
+		\label{fig:54}
+	\end{figure}
+	\\
+\item \textbf{turn off all}
+	\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/turnoffall.jpg"}
-	\caption{Wywołanie komendy turn off all powodująca wyłączenie wszystkich diod}
+	\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/turnoffall.jpg"}
+	\caption{Wywołanie komendy powodująca wyłączenie wszystkich diod}
 	\label{fig:53}
 \end{figure}
-\begin{figure}[htbp]
+	\\
+\newpage
+\item \textbf{run servo}
+	\begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/yellowgreen.jpg"}
-	\caption{Wywołanie komend yellow on i green on powodująca włączenie diody o kolorze żółtym i zielonym}
-	\label{fig:54}
-\end{figure}
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/servo1.jpg"}
+	\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/servo1.jpg"}
 	\caption{Pozycja początkowa serwomechanizmu}
 	\label{fig:55}
 \end{figure}
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.5\linewidth]{"obrazy/servo2.jpg"}
-	\caption{Wywołanie komendy run servo umożliwiająca sterowanie serwomechanizmem }
+	\includegraphics[width=0.4\linewidth, height=6cm]{"obrazy/servo2.jpg"}
+	\caption{Wywołanie komendy umożliwiająca sterowanie serwomechanizmem }
 	\label{fig:56}
 \end{figure}
+\\
+\end{itemize}
+
+
+
+
+
 
 
 
