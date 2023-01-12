@@ -1,4 +1,4 @@
-Celem rozdziału jest przedstawienie środowiska programowania i bibliotek umożliwiających implementację kodu potrzebnych do stworzenia aplikacji webowej z zastosowaniem urządzenia Raspberry Pi.
+Celem rozdziału jest przedstawienie środowiska programowania i bibliotek umożliwiających implementację kodu potrzebnych do stworzenia aplikacji internetowej z zastosowaniem urządzenia Raspberry Pi.
 
 \section{Edytor kodu źródłowego}
 W celu realizacji założeń projektowych, program został wykonany przy użyciu edytora kodu źródłowego Visual Studio Code. JavaScript jest językiem programowym, który znalazł uznanie wśród programistów. Udostępnia wiele gotowych bibliotek i frameworków, które można wykorzystać do tworzenia aplikacji. Visual Studio Code jest środowiskiem, które gwarantuje dobrą obsługę JavaScriptu i Node.js. Zapewnia narzędzia do podpowiadania składni i automatycznego uzupełniania kodu IntelliSense, a także narzędzia do debugowania i testowania aplikacji. Visual Studio Code również umożliwia korzystanie z niego na różnych systemach operacyjnych takich jak Linux czy Windows. Raspberry Pi ma wbudowany system operacyjny Linux dzięki czemu środowisko to idealnie się wkomponuje w tworzeniu aplikacji na tym urządzeniu. Aplikacja składa się z dwóch głównych elementów. Jest to serwer i klient. Część serwerowa to część aplikacji, która działa na serwerze i odpowiada za przetwarzanie i przechowywanie danych oraz obsługę żądań użytkowników. Została napisana w języku programowania JavaScript przy użyciu Node.js. Strona klienta to część aplikacji, która działa na urządzeniu użytkownika i odpowiada za wyświetlenie interfejsu użytkownika oraz komunikację z serwerem. Została ona napisana również w języku programowania JavaScript przy użyciu biblioteki React.js. Visual Studio Code pozwala na łatwą obsługę i zarządzanie strukturą plików co będzie pomocne przy tak dużych zasobach drzewa programu.
@@ -38,7 +38,7 @@ Struktura programu składa się z dwóch katalogów:
 	\\
 \end{itemize}
 \section{Implementacja strony klienta}
-Strona klienta została zaimplementowana przy użyciu biblioteki React.js, która służy przede wszystkim do tworzenia interfejsu użytkownika dla aplikacji webowych. Główną zaletą korzystania z tego modułu jest możliwość tworzenia komponentów. Odpowiadają one za wyrenderowanie i zarządzanie fragmentem stworzonego widoku. Komponenty pozwalają na przedstawienie sposobu działania i wyglądu aplikacji. Są one w pełni niezależne od siebie co umożliwia ich wielokrotne użytkowanie w różnych miejscach aplikacji. Dzięki temu kod staje się bardziej modularny i łatwiejszy do zarządzania. Komponenty są tworzone za pomocą składni JSX, która umożliwia zapisanie kodu HTML w plikach JavaScript. W celu łatwiejszej implementacji interfejsów użytkownika zostało stworzone 6 komponentów:
+Strona klienta została zaimplementowana przy użyciu biblioteki React.js, która służy przede wszystkim do tworzenia interfejsu użytkownika dla aplikacji internetowej. Główną zaletą korzystania z tego modułu jest możliwość tworzenia komponentów. Odpowiadają one za wyrenderowanie i zarządzanie fragmentem stworzonego widoku. Komponenty pozwalają na przedstawienie sposobu działania i wyglądu aplikacji. Są one w pełni niezależne od siebie co umożliwia ich wielokrotne użytkowanie w różnych miejscach aplikacji. Dzięki temu kod staje się bardziej modularny i łatwiejszy do zarządzania. Komponenty są tworzone za pomocą składni JSX, która umożliwia zapisanie kodu HTML w plikach JavaScript. W celu łatwiejszej implementacji interfejsów użytkownika zostało stworzone 6 komponentów:
 \begin{itemize}  
 	\item \textbf{ Logowanie}, komponent ten zwraca widok dołączenia użytkownika do komunikatora tekstowego. Jest on pierwszym interfejsem użytkownika podczas włączenia aplikacji.
 	\\
@@ -165,7 +165,7 @@ const Input = ({message,setMessage, sendMessage }) => (
 )
 \end{lstlisting}
 
-Komponent o nazwie zbiór wiadomości renderuje nam widok, który wyświetla listę wysłanych poleceń w aplikacji. Do elementu przekazywane są 2 parametry, które pozwalają na przekazywanie informacji o użytkowniku, który wysłał wiadomość. W komponencie zaimplementowany został element ScrollToBottom, który automatycznie przewija stronę do dołu, gdy dodawane są nowe wiadomości. Jest to wbudowana funkcja, udostępniana przez bibliotekę React.js. Za pomocą funkcji mapowania tworzone są  komponenty pojedynczej wiadomości dla każdego nowego wysłanego polecenia. Do wyrenderowanych elementów przekazywane są dwa parametry z komponentu zbioru wiadomości. Przypisywanie unikalnego klucza identyfikacji dla elementu pomaga systemowi w efektywnym zarządzaniu stanem aplikacji i wykrywaniu ewentualnych zmian w komponencie. 
+Komponent o nazwie zbiór wiadomości renderuje nam widok wyświetlający listę wysłanych poleceń w aplikacji. Do elementu przekazywane są 2 parametry, które pozwalają na przekazywanie informacji o użytkowniku, który wysłał wiadomość. W komponencie zaimplementowany został element ScrollToBottom, który automatycznie przewija stronę do dołu, gdy dodawane są nowe wiadomości. Jest to wbudowana funkcja, udostępniana przez bibliotekę React.js. Za pomocą funkcji mapowania tworzone są  komponenty pojedynczej wiadomości dla każdego nowego wysłanego polecenia. Do wyrenderowanych elementów przekazywane są dwa parametry z komponentu zbioru wiadomości. Przypisywanie unikalnego klucza identyfikacji dla elementu pomaga systemowi w efektywnym zarządzaniu stanem aplikacji i wykrywaniu ewentualnych zmian w komponencie. 
 \begin{lstlisting}[caption=Implementacja komponentu zbior wiadomosci ]
 import ScrollToBottom from 'react-scroll-to-bottom';
 const Messages = ({ messages, name }) => (
@@ -177,7 +177,7 @@ const Messages = ({ messages, name }) => (
 );
 \end{lstlisting}
 
-Komponent Wiadomość wyświetla pojedyncze polecenie wysłane w aplikacji. Do elementu przekazywane są dwa parametry pozwalające na zidentyfikowanie osoby, która przesyła komendy w komunikatorze. Również zaimplementowano mechanizm, który pozwala zdefiniować czas i datę wysłania wiadomości przez użytkownika.
+Komponent Wiadomość wyświetla pojedyncze polecenie wysłane w aplikacji. Do elementu przekazywane są dwa parametry. Pozwalają one na zidentyfikowanie osoby, która przesyła komendy w komunikatorze. Również zaimplementowano mechanizm, który umożliwia zdefiniować czas i datę wysłania wiadomości przez użytkownika.
 \newpage
 \begin{lstlisting}[caption=Implementacja komponentu z pojedyncza wiadomoscia ]
 const Message = ({ message: { text, user }, name }) => {
@@ -199,9 +199,9 @@ const [currentDate, setCurrentDate] = useState('')
             'December']
         let monthIndex = new Date().getMonth()
         let monthName = monthNames[monthIndex]
-        var year = new Date().getFullYear() //Current Year
-        var hours = new Date().getHours() //Current Hours
-        var min = new Date().getMinutes() //Current Minutes
+        var year = new Date().getFullYear() 
+        var hours = new Date().getHours() 
+        var min = new Date().getMinutes() 
         setCurrentDate(
             date+ ' '+ monthName+' '+year+', '+ hours+':'+min )
     }, [currentDate])
@@ -233,9 +233,9 @@ const [currentDate, setCurrentDate] = useState('')
 	\caption{Widok komunikatora po wpisaniu wiadomości przez dwóch użytkowników}
 	\label{fig:13}
 \end{figure}
-Do interfejsu komunikatora może dołączyć wiele osób, które mogą wysyłać różne komendy. Pojawienie się wiadomości w komunikatorze zależne jest od tego czy została ona wysłana przez bieżącego użytkownika. W zależności od tego wyświetla ją w odpowiednim miejscu na ekranie (po lewej lub po prawej stronie). Wiadomość wysłana przez bieżącego użytkownika wyróżniona jest kolorem niebieskim. Komendy otrzymane od innych użytkowników wyróżnione są kolorem szarym. Przy wpisanym poleceniu widać nazwę użytkownika, która tą wiadomość wysłała.
+Do interfejsu komunikatora może dołączyć wiele osób. Mogą one wysyłać różne komendy. Pojawienie się wiadomości w komunikatorze podporządzkowane jest od tego czy została ona wysłana przez bieżącego użytkownika. W zależności od tego wyświetla ją w odpowiednim miejscu na ekranie - po lewej lub po prawej stronie. Wiadomość wysłana przez bieżącego użytkownika wyróżniona jest kolorem niebieskim. Komendy otrzymane od pozostałych klientów wyróżnione są kolorem szarym. Przy wpisanym poleceniu widać nazwę użytkownika, która tą wiadomość wysłała.
 
-Komponent czat korzysta z biblioteki Socket.IO, która umożliwia komunikację z serwerem przy użyciu WebSocketów. W komponencie zadeklarowano parametry, które zarządzane są przez funkcje useState. Pozwalają one na zidentyfikowanie osoby, która bierze udział w komunikacji, a także określa wszystkie operacje, które wykonała. Za pomocą funkcji useEffect parsowane jest zapytanie z adresem URL. Następnie zapytanie te jest przekazywane do komponentu czatu poprzez parametr `location`. Po parsowaniu zapytania, wartości parametrów z nazwą użytkownika i pokoju używane są do przekierowania użytkownika na poprawny adres URL. Umożliwia to nawiązanie połączenia z serwerem. Przy zastosowaniu zdarzenia dołączenia, użytkownik zostaje przekierowany do komunikatora.
+Komponent czat z użyciem Socket.IO umożliwia komunikację z mikrokontrolerem. W komponencie zadeklarowano parametry, które zarządzane są przez funkcje useState. Pozwalają one na zidentyfikowanie osoby, która bierze udział w komunikacji, a także określa wszystkie operacje, które wykonała. Za pomocą funkcji useEffect parsowane jest zapytanie z adresem URL. Następnie zapytanie te jest przekazywane do komponentu czatu poprzez parametr `location`. Po parsowaniu zapytania, wartości parametrów z nazwą użytkownika i pokoju używane są do przekierowania użytkownika na poprawny adres URL. Umożliwia to nawiązanie połączenia z serwerem. Przy zastosowaniu zdarzenia dołączenia, użytkownik zostaje przekierowany do komunikatora. Tam może nawiązywać komunikację tekstową z urządzeniem.
 
 \begin{lstlisting}[caption=Implementacja funkcji dolaczenia do komunikatora po stronie klienta]
 useEffect(() => {
@@ -249,7 +249,7 @@ useEffect(() => {
             }})}, [ENDPOINT, location.search])
 \end{lstlisting}
 
-Aby użytkownik, który dołączył do czatu miał możliwość przesyłania komend potrzebne jest zaimplementowanie zdarzenia, które pozwoli na wysyłanie wiadomości. Konieczne jest, aby strona klienta mogła nasłuchiwać dane przychodzące z strony serwera. Przy wprowadzeniu nowej wiadomości przez użytkownika aktualizowany jest parametr odpowiadający za przechowywanie listy wysłanych poleceń. Powoduje to uaktualnienie danych klienta, który wysłał komendę w komunikatorze.
+Aby użytkownik miał możliwość przesyłania komend do urządzenia potrzebne jest zaimplementowanie zdarzenia, które pozwoli na wysyłanie wiadomości. Konieczne jest, aby strona klienta mogła nasłuchiwać dane przychodzące z strony serwera. Przy wprowadzeniu nowej wiadomości przez użytkownika aktualizowany jest parametr odpowiadający za przechowywanie listy wysłanych poleceń. Powoduje to uaktualnienie danych klienta, który wysłał komendę w komunikatorze.
 \begin{lstlisting}[caption=Implementacja funkcji nasluchiwania wiadomosci i danych przychodzacych od serwera]
 useEffect(() => {
         socket.on('message', (message) => {
@@ -270,7 +270,7 @@ const sendMessage = (event) => {
        	}}
 \end{lstlisting}
 
-Wszystkie te komponenty wchodzą w skład tworzenia widoku aplikacji, który pełni funkcję komunikatora z mikrokontrolerem. Interfejs ten umożliwi nam zdalną komunikację z urządzeniem. Aplikacja pozwala na przesyłanie poleceń i odbieranie informacji z mikrokontrolera za pośrednictwem połączenia sieciowego. Użytkownik może wysyłać wiadomości napisane w języku naturalnym do urządzeń za pomocą interfejsu komunikatora. Poprzez zdalne skonfigurowanie Raspberry Pi, urządzenie będzie odbierało polecenia z aplikacji komunikatora i wykonywało odpowiednie akcje odpowiadające między innymi włączenie lub wyłączenie elementów wykonawczych podłączonych do określonych portów GPIO.
+Wszystkie te komponenty wchodzą w skład tworzenia interfejsu użytkownika. Widok ten pełni funkcję komunikatora z mikrokontrolerem. Użytkownik może wysyłać wiadomości napisane w języku naturalnym do urządzeń za pomocą interfejsu komunikatora. Poprzez zdalne skonfigurowanie Raspberry Pi, mikrokontroler będzie odbierał polecenia z aplikacji czatu i wykonywał będzie operacje odpowiadające między innymi za włączenie lub wyłączenie elementów wykonawczych podłączonych do określonych portów GPIO.
 \newpage
 \begin{lstlisting}[caption=Implementacja komponentu czatu]
 const Chat = ({ location }) => {
@@ -311,7 +311,7 @@ const App = () => {
 \end{lstlisting}
 Aby móc wędrować pomiędzy komponentami logowania i czatu konieczne było stworzenie trasy z wyznaczoną ścieżką docelową. Komponent nawigacji umożliwia aplikacji reagowanie na zmianę adresu URL w przeglądarce internetowej. Każdy z tych interfejsów zawiera swoją wyznaczoną ścieżkę, która jest potrzebna przy zmianie widoku aplikacji przez użytkownika. Zaimplementowana nawigacja przekierowuje nas do interfejsu komunikatora po wprowadzeniu nazwy użytkownika i nazwy pokoju w komponencie logowania. Znajdując się w interfejsie komunikatora, również możemy wrócić z powrotem do komponentu logowania poprzez kliknięcie przycisku zamknięcia. Znajduje się on w prawym górnym rogu okienku czatu.
 \section{Implementacja strony serwera}
-Strona serwera została zaimplementowana przy użyciu środowiska uruchomieniowego Node.js. Umożliwia ona tworzenie szybkich i skalowalnych aplikacji sieciowych za pomocą języka JavaScript. Node.js używa modelu jednowątkowego do obsługi wielu żądań jednocześnie co oznacza, że jest on idealny do tworzenia aplikacji sieciowych takich jak serwery czy komunikatory tekstowe. Ważnym aspektem przy korzystaniu z środowiska uruchomieniowego Node.js jest możliwość tworzenia aplikacji w czasie rzeczywistym. Po stronie serwera zaimplementowany został cały mechanizm komunikacji z naszą maszyną, która umożliwia przede wszystkim przesyłanie oraz odbieranie danych.
+Strona serwera została zaimplementowana przy użyciu środowiska uruchomieniowego Node.js. Umożliwia ono tworzenie szybkich i skalowalnych aplikacji sieciowych za pomocą języka JavaScript. Node.js używa modelu jednowątkowego do obsługi wielu żądań jednocześnie co oznacza, że jest on idealny do tworzenia aplikacji sieciowych takich jak serwery czy komunikatory tekstowe. Ważnym aspektem przy korzystaniu z środowiska uruchomieniowego Node.js jest możliwość tworzenia aplikacji w czasie rzeczywistym. Po stronie serwera zaimplementowany został cały mechanizm komunikacji z naszą maszyną, która umożliwia przede wszystkim przesyłanie oraz odbieranie danych.
 Biblioteka Express.js  jest narzędziem sieciowym dla Node.js, która umożliwia tworzenie aplikacji opartych na serwerze. Express.js umożliwia obsługę żądań oraz mapowanie adresów URL na odpowiednie funkcje obsługujące te żądania. Głównym zastosowaniem biblioteki express.js jest możliwość tworzenia serwera HTTP, który będzie odpowiadał na żądania aplikacji klienckich. Biblioteka express.js znajduje swoje szerokie zastosowanie przy tworzeniu aplikacji serwerowych. Poza możliwością tworzenia serwera http, express.js umożliwia również obsługę różnych żądań czy parsowanie przesyłanych żądań. Możliwa jest również obsługa sesji użytkowników, autoryzację, a także przechowywanie i udostępnianie danych.
 Node.js oferuje nam biblioteki http i express, które umożliwiają stworzenie serwera. Przy użyciu protokołu sieciowego tworzona jest jego instancja. Strona serwera nasłuchuje zdarzenia na wybranym porcie i loguje informację o uruchomieniu. Port to numer identyfikujący aplikację. Przy tworzeniu serwera konieczne jest ustalenie numeru portu, na którym możliwe będzie nasłuchiwanie i odbieranie połączeń od klientów. Użytkownicy mogą wysyłać zapytania do serwera poprzez podanie adresu IP serwera i numeru portu. Serwer odpowiada na żądania klientów poprzez wysłanie danych z powrotem do użytkownika poprzez ten sam port. Przy pomocy biblioteki express, serwer będzie nasłuchiwał żądań i odpowiadać na nie. 
 \begin{lstlisting}[caption=Implementacja serwera]
@@ -667,7 +667,7 @@ async function sequential() {
 \end{lstlisting}
 \newpage
 \section{Projektowanie układu działania}
- Płytka prototypowa umożliwia połączenie elementów elektronicznych do pinów GPIO mikrokontrolera. Poprzez wpisanie określonych komend w aplikacji, możliwe będzie wysyłanie poleceń do Raspberry Pi. Będą one odpowiedzialne za wykonywanie operacji na podłączonych urządzeniach wykonawczych. W celu sprawdzenia funkcjonalności komunikacji tekstowej zaprojektowano stanowisko układu, w którego skład wchodzą elementy takie jak: 
+Płytka prototypowa umożliwia połączenie elementów elektronicznych do pinów GPIO mikrokontrolera. Poprzez wpisanie określonych komend w aplikacji, możliwe będzie wysyłanie poleceń do Raspberry Pi. Będą one odpowiedzialne za wykonywanie operacji na podłączonych urządzeniach wykonawczych. W celu sprawdzenia funkcjonalności komunikacji tekstowej zaprojektowano stanowisko układu, w którego skład wchodzą elementy takie jak: 
 \begin{itemize}  
 	\item \textbf{Dioda LED koloru czerwonego}, anoda tego elementu została podłączona do pinu GPIO 4, zaś katoda do pinu GND
 	\\
@@ -675,7 +675,7 @@ async function sequential() {
 	\\
 \item \textbf{Dioda LED koloru żółtego}, anoda tego elementu została podłączona do pinu GPIO 27, zaś katoda do pinu GND
 	\\
-	\item \textbf{Serwomechanizm}, zasilanie tego elementu zostało podłączone do pinów +5V i GND.Pin sygnałowy został podłączony do pinu MOSI
+	\item \textbf{Serwomechanizm}, zasilanie tego elementu zostało podłączone do pinów +5V i GND. Pin sygnałowy został podłączony do pinu MOSI
 	\\
 \end{itemize}
 Wraz z diodą LED szerogowo podłączono rezystor. Służy on do ogarniczenia prądu płynącego przez obwód. Raspberry Pi jest przystosowane do pracy z niskim obciążeniem prądowym. W takim przypadku dioda będzie przepuszczać prąd tylko w jednym kierunku. Oznacza to, że jeżeli wartość prądu będzie zbyt wysoka to dioda się zablokuje i ograniczy jego przepływ. Uchroni pozostałe elementy obwodu przed uszkodzeniem. Ważne jest dobranie odpowiedniej wartości rezystora. Zależna jest od napięcia zasilania, napięcia przewodzenia i od prądu elementu. Podczas sterowania diodą LED, Raspberry Pi wysyła sygnał sterujący do pinu, który jest połączony z anodą elementu. Sygnał ten przechodzi przez rezystor ograniczający prąd. Następnie płynie przez obiekt powodując jego zaświecenie.
