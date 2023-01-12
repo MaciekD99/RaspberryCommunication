@@ -1,0 +1,107 @@
+\documentclass[12pt,a4paper,leqno,oneside,titlepage]{mwrep}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{subcaption}
+\usepackage{polski}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{tabularx,ragged2e,booktabs,caption}
+\usepackage{listings}
+\usepackage[dvipsnames,svgnames]{xcolor}
+\usepackage{import}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{ucs}
+\usepackage{blindtext}
+\usepackage{enumitem}
+\setlength{\oddsidemargin}{0.5in}
+\setlength{\textwidth}{5.7in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+\linespread{1.05}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  sensitive=true
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+{\large ZACHODNIOPOMORSKI UNIWERSYTET TECHNOLOGICZNY\\ WYDZIAŁ ELEKTRYCZNY\\ INSTYTUT AUTOMATYKI I ROBOTYKI\par}
+\end{center}
+\vspace{1.5cm plus 1fill}
+\begin{center}
+{\bf \Large MACIEJ DYSPUT\par}
+\end{center}
+\vspace{1.5cm plus 1mm minus 2mm}
+\begin{center}
+{\large PRACA DYPLOMOWA INŻYNIERSKA\par}
+\end{center}
+\vspace{1.5cm plus 1mm minus 2mm}
+\begin{center}
+{\huge\textbf{Aplikacja webowa do komunikacji tekstowej człowiek-maszyna}\par}
+\vspace{1.5cm plus 1.5fill}
+\begin{flushright}
+{\large Promotor: dr Przemysław Włodarski}
+\end{flushright}
+\vspace{4cm plus .1fill}
+{\large Szczecin,\space 2023\par}
+\end{center}
+\end{titlepage}
+\tableofcontents
+\chapter{Wstęp}
+\import{rozdzialy/}{Wstep.tex}
+
+\chapter{Maszyna do komunikacji}
+\import{rozdzialy/}{Maszyna.tex}
+
+\chapter{Konfiguracja Raspberry Pi z komputerem}
+\import{rozdzialy/}{Konfiguracja.tex}
+
+\chapter{Komunikacja klient-serwer}
+\import{rozdzialy/}{Komunikacja.tex}
+
+\chapter{Implementacja}
+\import{rozdzialy/}{Implementacja.tex}
+
+\chapter{Obsługa}
+\import{rozdzialy/}{Obsluga.tex}
+
+\chapter{Zakończenie}
+\import{rozdzialy/}{Zakonczenie.tex}
+
+\import{rozdzialy/}{Bibliografia.tex}
+\end{document}
