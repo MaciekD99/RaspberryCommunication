@@ -678,6 +678,13 @@ async function sequential() {
 	\item \textbf{Serwomechanizm}, zasilanie tego elementu zostało podłączone do pinów +5V i GND.Pin sygnałowy został podłączony do pinu MOSI
 	\\
 \end{itemize}
+Wraz z diodą LED szerogowo podłączono rezystor. Służy on do ogarniczenia prądu płynącego przez obwód. Raspberry Pi jest przystosowane do pracy z niskim obciążeniem prądowym. W takim przypadku dioda będzie przepuszczać prąd tylko w jednym kierunku. Oznacza to, że jeżeli wartość prądu będzie zbyt wysoka to dioda się zablokuje i ograniczy jego przepływ. Uchroni pozostałe elementy obwodu przed uszkodzeniem. Ważne jest dobranie odpowiedniej wartości rezystora. Zależna jest od napięcia zasilania, napięcia przewodzenia i od prądu elementu. Podczas sterowania diodą LED, Raspberry Pi wysyła sygnał sterujący do pinu, który jest połączony z anodą elementu. Sygnał ten przechodzi przez rezystor ograniczający prąd. Następnie płynie przez obiekt powodując jego zaświecenie.
+
+Serwomechanizm służy do precyzyjnego sterowania położeniem obrotowego elementu. Raspberry Pi wysyła sygnał sterujący do serwomechanizmu za pomocą odpowiedniego interfejsu takiego jak PWM. Pozwala on na regulację prędkości i położenia silnika. Wysyłany sygnał odpowiada za ruch elementu i generowany jest na podstawie informacji o pozycji zadanej. Mikrokontroler monitoruje położenie silnika i dostosowuje sygnał sterujący, aby zapewnić precyzyjne położenie elementu.
+
+
+
+
 \begin{figure}[h]
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=0.9\linewidth, height=6cm]{"obrazy/ukladpolaczenia3"} 
@@ -691,7 +698,7 @@ async function sequential() {
 \caption{Układ połączenia elementów wykonawczych}
 \label{fig49}
 \end{figure}
-\newpage
+
 \section{Archiwizacja wpisanych poleceń}
 Celem archiwizacji wiadomości jest możliwość przeglądania przez użytkownika historii komend wykonanych w aktualnej lub poprzedniej sesji. Z ich pomocą użytkownik wie, czy dana komenda została już wykonana, a jeżeli tak to kiedy oraz kto ja wykonał. Historia wiadomości może okazać się ważna w przypadku nieoczkiwanego przerwania pracy z systemem, jak na przykład restart komputera lub usunięcie karty z przeglądarki.
 
@@ -699,10 +706,10 @@ W celu przygotowania archiwizacji, stworzono plik o formacie .JSON, który przec
 
 W ramach stworzenia archiwum danych zaimplementowano klasę, która pomoże zapisać wiadomości tekstowe w aplikacji. Domyślnie, obiekt posiada zdefiniowaną ścieżkę do pliku JSON przechowującego dane archiwum. W trakcie pierwszego uruchomienia aplikacji, jeżeli plik nie istnieje, zostanie on automatycznie utworzony. W innym przypadku, zostanie wczytana jego zawartość oraz załadowana do pamięci aplikacji.
 
-Zastosowanie kolekcji danych typu rekord, umożliwia łatwe przeglądanie zapisanych danych przy użyciu funkcji fetch. Parametrem metody jest nazwa pokoju. Jeżeli takowa nie istniej w pamięci, wówczas zostanie zwrócona wartość "undefined" lub pusta tablica danych.
+Zastosowanie kolekcji danych typu rekord, umożliwia łatwe przeglądanie zapisanych danych przy użyciu funkcji fetch. Parametrem metody jest nazwa pokoju. Jeżeli takowa nie istnieje w pamięci, wówczas zostanie zwrócona wartość "undefined" lub pusta tablica danych.
 
 Każda wiadomość przesłana przez użytkownika, może zostać dodana do archiwum przy użyciu metody "archive". Jej parametrami są kolejno - tekst wpisany przez użytkownika, jego nazwa, data oraz identyfikator pokoju. Wszystkie z wymienionych argumentów znajdują się w archiwum danych. Każdorazowo kolekcja jest poddana serializacji do formatu JSON, a następnie zapisana na dysku twardym.
-\newpage
+
 \begin{lstlisting}[caption=Implementacja funkcji archiwizującej wiadomości w komunikatorze]
 class Archiver {
     #archivePath = './archivePath.json'
@@ -728,8 +735,8 @@ class Archiver {
            JSON.stringify(this.#archiveContent)
         )}}}
 \end{lstlisting}
-
-
+Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik się zaloguje. W przypadku aplikacji, które powinno zawierać archiwizację danych, informacja ta wykorzystana jest do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia zapisanych danych i  następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
+\newpage
 \begin{lstlisting}[caption={Wykorzystanie zdarzenia dołączenia, aby uzyskać widok zawartości archiwum w aplikacji}]
 io.on('connection', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
@@ -744,7 +751,7 @@ io.on('connection', (socket) => {
     })
 })
 \end{lstlisting}
-Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik dołącza do pokoju. W przypadku aplikacji, które powinno zawierać archiwizację danych, informacja ta wykorzystana jest do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia zapisanych danych, a następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
+Kiedy użytkownik wyśle wiadomość w aplikacji chcemy, aby trafiła do utworzonego archiwum. W tym celu potrzebne jest rejestrowanie tego zdarzenia, które zostanie wywołane gdy klient prześle polecenie do serwera. Kiedy zostanie wysłana wiadomości, zdarzenie zarejestruje tą czynność i zapisze całą zawartość do archiwum. 
 \begin{lstlisting}[caption=Wykorzystanie zdarzenia wysyłania wiadomości do tworzenia archiwum]
 socket.on('sendMessage', async (message, callback) => {
         const user = getUser(socket.id)
@@ -756,7 +763,7 @@ socket.on('sendMessage', async (message, callback) => {
     })
 \end{lstlisting}
 
-Kiedy użytkownik wyśle wiadomość w aplikacji chcemy, aby trafiła do utworzonego archiwum. W tym celu potrzebne jest rejestrowanie tego zdarzenia, które zostanie wywołane gdy klient prześle polecenie do serwera. Kiedy zostanie wysłana wiadomości, zdarzenie zarejestruje tą czynność i zapisze całą zawartość do archiwum. 
+
 
 
 
