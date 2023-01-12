@@ -17,12 +17,10 @@ JavaScript jest językiem skryptowym. Jest on interpretowany przez środowisko u
 
 \section{React.js}
 React.js to biblioteka Javascript, która swoje główne zastosowanie ma przy tworzeniu interfejsów użytkownika po stronie front-endu. Pozwala tworzyć dynamiczne aplikacje, w których interfejs użytkownika reaguje na zmiany wprowadzone w aplikacji. Swoje szerokie zastosowanie znajduje tam gdzie aplikacje opierają swoje funkcjonowanie na interakcjach użytkownika z elementami interfejsu użytkownika. React.js może idealnie współpracować z urządzeniem Raspberry Pi poprzez kontrolowanie urządzeń zewnętrznych podłączonych do tego urządzenia lub wyświetlania danych za pomocą stworzonego interfejsu. Umożliwia tworzenie interfejsu użytkownika za pomocą komponentów, które mogą być stosowane wielokrotnie przy projektowaniu różnych elementów. Główną zaletą stosowania React.js przy programowaniu z użyciem urządzenia Raspberry Pi jest tworzenie aplikacji, które muszą reagować na zmiany danych w czasie rzeczywistym.  
+\newpage
 \section{Wdrożenie aplikacji}
 Relacja klient-serwer jest podstawowym modelem architektury systemów komputerowych, w którym oba te podmioty są różnymi urządzeniami bądź programami. Współpracują one ze sobą w celu umożliwienia użytkownikowi wymiany danych bądź korzystania z określonych usług. Aplikacje czasu rzeczywistego mają to do siebie, że serwer zazwyczaj odpowiada za przetwarzanie i przechowywanie danych oraz udostępnianie ich klientom. Klienci są odpowiedzialni za wyświetlenie tych danych i wykorzystanie ich według własnych założeń. Strona klienta i serwera komunikują się przy użyciu protokołów sieciowych takich jak WebSockets, aby umożliwić przepływ danych pomiędzy nimi. Aplikacje czasu rzeczywistego są często wykorzystywane w komunikacji tekstowej, aby pozwolić użytkownikom na szybką i efektywną wymianę informacji. Klienci mogą szybko uzyskać oczekiwaną odpowiedź z strony serwera po przesłaniu danego żądania, nie tracąc czasu na opóźnienia w przesyłaniu informacji. Takie aplikacje często znajdują swoje zastosowanie w sytuacjach, w których szybka i dokładna wymiana danych jest istotna. W stworzonej aplikacji, kluczowym elementem przesyłania żądania do mikrokontrolera jest uzyskanie jak najszybszej odpowiedzi urządzenia poprzez działanie elementów zainstalowanych po stronie mikrokomputera. Komunikacja przy pomocy relacji klient-serwer idealnie odnajduje swoje zastosowanie.
-\newpage
 
-
-Każdy z tych elementów wykonawczych nawiązuje komunikację z Raspberry Pi poprzez podłączenie do odpowiednich pinów GPIO mikrokontrolera. Zastosowano również dodatkowe rezystory w połączeniu szeregowym z diodą LED w celu ograniczenia przepływu prądu. 
 \newpage
 \section{Model drzewa programu}
 \begin{figure}[htbp]
@@ -273,6 +271,7 @@ const sendMessage = (event) => {
 \end{lstlisting}
 
 Wszystkie te komponenty wchodzą w skład tworzenia widoku aplikacji, który pełni funkcję komunikatora z mikrokontrolerem. Interfejs ten umożliwi nam zdalną komunikację z urządzeniem. Aplikacja pozwala na przesyłanie poleceń i odbieranie informacji z mikrokontrolera za pośrednictwem połączenia sieciowego. Użytkownik może wysyłać wiadomości napisane w języku naturalnym do urządzeń za pomocą interfejsu komunikatora. Poprzez zdalne skonfigurowanie Raspberry Pi, urządzenie będzie odbierało polecenia z aplikacji komunikatora i wykonywało odpowiednie akcje odpowiadające między innymi włączenie lub wyłączenie elementów wykonawczych podłączonych do określonych portów GPIO.
+\newpage
 \begin{lstlisting}[caption=Implementacja komponentu czatu]
 const Chat = ({ location }) => {
     const [name, setName] = useState('')
@@ -345,7 +344,7 @@ Przy pomocy biblioteki Socket.IO rejestrowane jest zdarzenie dołączenia do kom
 \begin{lstlisting}[caption=Implementacja zdarzenia dolaczenia i pobierania danych]
 io.on('connection', (socket) => {
   socket.on('join', ({ name, room }, callback) => {
-    const { error, user } = addUser({ id: socket.id, name, room })
+    const { error, user } = addUser({ id: socket.id, name, room})
     if (error) return callback(error)
     socket.join(user.room)
     io.to(user.room).emit('roomData', {
@@ -495,7 +494,7 @@ socket.on('sendMessage', async (message, callback) => {
 \end{lstlisting}
 
 Gdy serwer otrzyma polecenie od klienta, sprawdzi co ta wiadomość zawiera i wywoła odpowiednią funkcję. Do implementacji określonych akcji w zależności od wprowadzonego wyrażenia zastosowano instrukcję switch-case. Jest to konstrukcja decyzyjna, która umożliwia dokonanie wyboru spośród przypisanych opcji. Jeśli znaleziono pasującą wartość, kod zostanie wykonany dla tego przypadku. Instrukcja „switch” sprawdza przypisaną zmienną i porównuje ją z poszczególnymi przypadkami. Gdy zostanie odnaleziona pasująca opcja, realizowane będzie działanie dla tego przypadku. Instrukcja ta ma nieograniczony wybór opcji i zależna jest od projektanta. Dla parametru odpowiedzialnego za przechowywanie wartości wpisanej wiadomości, zostały przypisane komendy napisane w języku naturalnym. Przy pomocy zastosowanej instrukcji sprawdzana jest pasująca wiadomość, która odpowiedzialna jest za wywołanie danej funkcji. Następnie serwer nasłuchuje zdarzenie wysyłania wiadomości i przy komunikacji z urządzeniem Raspberry Pi, uruchamiany jest dany element elektroniczny. Jeżeli zostanie wpisana komenda, która nie znajduje się ujęta w instrukcji to zostanie zwrócona bez jakichkolwiek działań.
-\newpage
+
 \subsection{Włączenie diody LED}
 By umożliwić komunikację elementów elektronicznych z mikrokontrolerem należy je podłączyć do odpowiednich wyprowadzeń pinów GPIO. Poprzez zastosowanie biblioteki ‘onOff’ tworzony jest obiekt LED. Dioda o kolorze czerwonym została podłączona do pinu 4 jako wyjście. Sprawdzane jest kolejno czy stworzony obiekt ma wartość 0 co oznacza to, że element nie jest aktywny. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie diody LED. Identyczna funkcja zaimplementowana jest również dla dwóch pozostałych diod.
 \begin{lstlisting}[caption=Implementacja funkcji wlaczajacej diode]
@@ -525,7 +524,7 @@ function endBlinkRed() {
 \end{lstlisting}
 \newpage
 \subsection{Włączenie wszystkich diod}
-W celu umożliwienia włączenia trzech diod LED stworzono nowe obiekty odpowiadające elementom. Zostały one podłączone do określonych pinów GPIO na wyjście układu. Sprawdzane jest kolejno czy stworzone obiekty mają wartość 0 co oznacza to, że elementy są nieaktywne. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1 co powoduje zaświecenie wszystkich trzech diod.
+W celu umożliwienia włączenia trzech diod LED stworzono nowe obiekty odpowiadające elementom. Zostały one podłączone do określonych pinów GPIO na wyjście układu. Sprawdzane jest kolejno czy stworzone obiekty mają wartość 0. Oznacza to, że elementy są nieaktywne. Jeśli tak, to zmieniany jest stan na wyjściu na wartość równą 1. Powoduje to zaświecenie wszystkich trzech diod.
 \begin{lstlisting}[caption=Implementacja funkcji włączająca wszystkie diody]
 function turnOnAll() {
     var LED04 = new onOff.Gpio(4, 'out'),
@@ -543,12 +542,12 @@ function turnOnAll() {
                 LED27.writeSync(1)
             }}, 1)
         resolve()
-    })
-}
+})}
 \end{lstlisting}
 
 \subsection{Wyłączenie wszystkich diod}
-W celu umożliwienia wyłączenia wszystkich trzech diod LED, sprawdzane jest czy zaimplementowane obiekty mają wartość 1 na wyjściu co oznacza to, że elementy są włączone i się świecą. Jeśli tak, to zmieniany jest stan na wyjściu na niski co powoduje wyłączenie wszystkich trzech diod. 
+W celu umożliwienia wyłączenia wszystkich trzech diod LED, sprawdzane jest czy zaimplementowane obiekty mają wartość 1 na wyjściu. Oznacza to, że elementy są włączone i się świecą. Jeśli tak, to zmieniany jest stan na wyjściu na niski co powoduje wyłączenie wszystkich trzech diod. 
+\newpage
 \begin{lstlisting}[caption=Implementacja funkcji wyłączająca wszystkie diody]
 function turnOffAll() {
     var LED04 = new onOff.Gpio(4, 'out'),
@@ -563,12 +562,11 @@ function turnOffAll() {
 	            LED17.unexport()
 	            LED27.unexport()
 	            resolve()
-        }, 3000)
-    })}
+        }, 3000)})}
 \end{lstlisting}
 
 \subsection{Naprzemienne włączanie diod}
-Aby umożliwić obsługę 3 diod LED, należy je podłączyć do trzech osobnych pinów GPIO. Czynność ta będzie potrzebna do osiągnięcia efektu płynącej diody. Wykonanie tej operacji ma na celu stworzenie wizualnego efektu ruchu. Możliwe jest to do osiągnięcia przy zastosowaniu szeregu diod LED, które są sekwencyjnie zapalane. W celu realizacji takiego efektu tworzone są trzy obiekty LED, które są odpowiedzialne za zarządzanie pinami GPIO o numerach, 4,17 i 27. Obiekty te zapisywane są do tablicy i następnie zerowane. W zależności od aktualnego indeksu utworzonej tablicy, zmieniana jest wartość stanu z 0 na 1 co powoduje włączenie diody. W momencie osiągnięcia pozycji ostatniego elementu tablicy, zmieniany jest kierunek włączania diod. Przy zastosowaniu funkcji interwałowej, możliwe jest powtarzanie się czynności włączania i wyłączania elementów o określony czas co daje efekt wizualnego ruchu diod. Po upływie 5 sekund, elementy usuwane są z listy eksportowanych pinów co powoduje odłączenie obiektu LED i zakończenie procesu.
+Aby umożliwić obsługę 3 diod LED, należy je podłączyć do trzech osobnych pinów GPIO. Czynność ta będzie potrzebna do osiągnięcia efektu płynącej diody. Wykonanie tej operacji ma na celu stworzenie wizualnego efektu ruchu elementów. Możliwe jest to do osiągnięcia przy zastosowaniu szeregu diod LED, które są sekwencyjnie zapalane. W celu realizacji takiego efektu tworzone są trzy obiekty, które odpowiedzialne będą za zarządzanie pinami GPIO o numerach, 4,17 i 27. Następnie zapisywane są do tablicy i zerowany jest ich stan. W zależności od aktualnego indeksu utworzonej tablicy, zmieniana jest wartość stanu z 0 na 1 co powoduje włączenie diody. W momencie osiągnięcia pozycji ostatniego elementu tablicy, zmieniany jest kierunek włączania diod. Przy zastosowaniu funkcji interwałowej, możliwe jest powtarzanie się czynności włączania i wyłączania elementów o określony czas. Daje to efekt wizualnego ruchu diod. Po upływie 5 sekund, elementy usuwane są z listy eksportowanych pinów co powoduje odłączenie obiektu i zakończenie procesu.
 \newpage
 \begin{lstlisting}[caption=Implementacja funkcji tworzącej efekt płynącej diody]
 function flowingLeds() {
@@ -669,15 +667,15 @@ async function sequential() {
 \end{lstlisting}
 \newpage
 \section{Projektowanie układu działania}
- Płytka prototypowa umożliwia połączenie elementów elektronicznych do określonych pinów GPIO na płycie mikrokontrolera. Poprzez wpisanie określonych komend w aplikacji, możliwe będzie wysyłanie poleceń do Raspberry Pi. Będą one odpowiedzialne za wykonywanie operacji na podłączonych urządzeniach wykonawczych. W celu sprawdzenia funkcjonalności komunikacji tekstowej zaprojektowano stanowisko układu, w którego skład wchodzą elementy takie jak: 
+ Płytka prototypowa umożliwia połączenie elementów elektronicznych do pinów GPIO mikrokontrolera. Poprzez wpisanie określonych komend w aplikacji, możliwe będzie wysyłanie poleceń do Raspberry Pi. Będą one odpowiedzialne za wykonywanie operacji na podłączonych urządzeniach wykonawczych. W celu sprawdzenia funkcjonalności komunikacji tekstowej zaprojektowano stanowisko układu, w którego skład wchodzą elementy takie jak: 
 \begin{itemize}  
-	\item \textbf{Dioda LED koloru czerwonego},
+	\item \textbf{Dioda LED koloru czerwonego}, anoda tego elementu została podłączona do pinu GPIO 4, zaś katoda do pinu GND
 	\\
-\item \textbf{Dioda LED koloru zielonego}, 
+\item \textbf{Dioda LED koloru zielonego}, anoda tego elementu została podłączona do pinu GPIO 17, zaś katoda do pinu GND
 	\\
-\item \textbf{Dioda LED koloru żółtego}, 
+\item \textbf{Dioda LED koloru żółtego}, anoda tego elementu została podłączona do pinu GPIO 27, zaś katoda do pinu GND
 	\\
-	\item \textbf{Serwomechanizm}
+	\item \textbf{Serwomechanizm}, zasilanie tego elementu zostało podłączone do pinów +5V i GND.Pin sygnałowy został podłączony do pinu MOSI
 	\\
 \end{itemize}
 \begin{figure}[h]
@@ -690,13 +688,20 @@ async function sequential() {
 
 \end{subfigure}
 
-\caption{Układ połączenia z zastosowaniem mikrokontrolera}
+\caption{Układ połączenia elementów wykonawczych}
 \label{fig49}
 \end{figure}
+\newpage
 \section{Archiwizacja wpisanych poleceń}
 Celem archiwizacji wiadomości jest możliwość przeglądania przez użytkownika historii komend wykonanych w aktualnej lub poprzedniej sesji. Z ich pomocą użytkownik wie, czy dana komenda została już wykonana, a jeżeli tak to kiedy oraz kto ja wykonał. Historia wiadomości może okazać się ważna w przypadku nieoczkiwanego przerwania pracy z systemem, jak na przykład restart komputera lub usunięcie karty z przeglądarki.
 
 W celu przygotowania archiwizacji, stworzono plik o formacie .JSON, który przechowuje kolejne wpisane komendy użytkownika. Wiadomości nie muszą zawierać komend do wykonania przez maszynę. Mogą być komunikatem do innego użytkownika znajdującego się w pokoju. Wykorzystanie pliku JSON zamiast bazy danych pozwoliło uniknąć dodatkowej złożoności aplikacji. Jednocześnie, operacje wykonywane na pliku są równie szybkie jak te bazodanowe. Same zarządzanie plikiem nie wymaga instalacji dodatkowych bibliotek, a jest możliwe dzięki wykorzystanie modułów dostępnych w środowisku uruchomieniowym Node.js. Dodatkowo, aplikacja nie wymaga posiadania serwera bazodanowego, co stanowczo ułatwia tworzenia jak i zarządzanie aplikacją.
+
+W ramach stworzenia archiwum danych zaimplementowano klasę, która pomoże zapisać wiadomości tekstowe w aplikacji. Domyślnie, obiekt posiada zdefiniowaną ścieżkę do pliku JSON przechowującego dane archiwum. W trakcie pierwszego uruchomienia aplikacji, jeżeli plik nie istnieje, zostanie on automatycznie utworzony. W innym przypadku, zostanie wczytana jego zawartość oraz załadowana do pamięci aplikacji.
+
+Zastosowanie kolekcji danych typu rekord, umożliwia łatwe przeglądanie zapisanych danych przy użyciu funkcji fetch. Parametrem metody jest nazwa pokoju. Jeżeli takowa nie istniej w pamięci, wówczas zostanie zwrócona wartość "undefined" lub pusta tablica danych.
+
+Każda wiadomość przesłana przez użytkownika, może zostać dodana do archiwum przy użyciu metody "archive". Jej parametrami są kolejno - tekst wpisany przez użytkownika, jego nazwa, data oraz identyfikator pokoju. Wszystkie z wymienionych argumentów znajdują się w archiwum danych. Każdorazowo kolekcja jest poddana serializacji do formatu JSON, a następnie zapisana na dysku twardym.
 \newpage
 \begin{lstlisting}[caption=Implementacja funkcji archiwizującej wiadomości w komunikatorze]
 class Archiver {
@@ -724,11 +729,7 @@ class Archiver {
         )}}}
 \end{lstlisting}
 
-W celu stworzenia archiwum danych zaimplementowano klasę, która pomoże zapisać wiadomości tekstowe w aplikacji. Domyślnie, obiekt posiada zdefiniowaną ścieżkę do pliku JSON przechowującego dane archiwum. W trakcie pierwszego uruchomienia aplikacji, jeżeli plik nie istnieje, zostanie on automatycznie utworzony. W innym przypadku, zostanie wczytana jego zawartość oraz załadowana do pamięci aplikacji.
 
-Zastosowanie kolekcji danych typu rekord, umożliwia łatwe przeglądanie zapisanych danych przy użyciu funkcji fetch. Parametrem metody jest nazwa pokoju. Jeżeli takowa nie istniej w pamięci, wówczas zostanie zwrócona wartość "undefined" lub pusta tablica danych.
-
-Każda wiadomość przesłana przez użytkownika, może zostać dodana do archiwum przy użyciu metody "archive". Jej parametrami są kolejno - tekst wpisany przez użytkownika, jego nazwa, data oraz identyfikator pokoju. Wszystkie z wymienionych argumentów znajdują się w archiwum danych. Każdorazowo kolekcja jest poddana serializacji do formatu JSON, a następnie zapisana na dysku twardym.
 \begin{lstlisting}[caption={Wykorzystanie zdarzenia dołączenia, aby uzyskać widok zawartości archiwum w aplikacji}]
 io.on('connection', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
@@ -743,7 +744,7 @@ io.on('connection', (socket) => {
     })
 })
 \end{lstlisting}
-Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik dołącza do pokoju. W przypadku aplikacji, które powinno zawierać archiwizację danych, ta informacja może być wykorzystana do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia archiwizacji danych, a następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
+Zdarzenie dołączenia do komunikatora jest emitowane, gdy użytkownik dołącza do pokoju. W przypadku aplikacji, które powinno zawierać archiwizację danych, informacja ta wykorzystana jest do zainicjowania procesu uzyskania archiwum wiadomości dla użytkownika. Poprzez rejestrowanie zdarzenia dołączania, pobierana jest historia zapisanych danych, a następnie wysyłana do pokoju. W ten sposób użytkownik uzyskuje wgląd do archiwum wiadomości w pokoju, do którego dołączył.
 \begin{lstlisting}[caption=Wykorzystanie zdarzenia wysyłania wiadomości do tworzenia archiwum]
 socket.on('sendMessage', async (message, callback) => {
         const user = getUser(socket.id)
